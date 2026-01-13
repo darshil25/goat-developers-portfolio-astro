@@ -1,0 +1,52 @@
+---
+import { cn } from "../../lib/utils"; // Assuming you have a standard cn utility
+
+interface Props {
+  colors: string[];
+  class?: string;
+}
+
+const { colors, class: className } = Astro.props;
+---
+
+<div
+  class={cn(
+    "absolute left-1/2 -translate-x-1/2 -z-10 flex -rotate-90 pointer-events-none",
+    // Mobile styles
+    "top-[-120px] blur-[68px]", 
+    // Tablet (700px+)
+    "min-[700px]:top-[-360px] min-[700px]:blur-[80px]",
+    // Desktop (Default/Large) - matching your -574px top
+    "min-[1260px]:top-[-574px] min-[1260px]:blur-[218px]",
+    className
+  )}
+>
+  {/* Circle 1 */}
+  <span 
+    class="rounded-full aspect-[0.5663] w-[205px] min-[700px]:w-[420px] min-[1260px]:w-[658px]" 
+    style={{ background: colors[0] }} 
+  />
+  
+  {/* Circle 2 */}
+  <span 
+    class="rounded-full aspect-[0.5663] w-[205px] min-[700px]:w-[420px] min-[1260px]:w-[658px] -ml-[137px] min-[700px]:-ml-[300px] min-[1260px]:-ml-[437px]" 
+    style={{ background: colors[1] }} 
+  />
+  
+  {/* Circle 3 (White) */}
+  <span 
+    class="rounded-full bg-white aspect-[0.5663] w-[205px] min-[700px]:w-[420px] min-[1260px]:w-[658px] -ml-[137px] min-[700px]:-ml-[300px] min-[1260px]:-ml-[437px]" 
+  />
+  
+  {/* Circle 4 */}
+  <span 
+    class="rounded-full aspect-[0.5663] w-[205px] min-[700px]:w-[420px] min-[1260px]:w-[658px] -ml-[137px] min-[700px]:-ml-[300px] min-[1260px]:-ml-[437px]" 
+    style={{ background: colors[2] }} 
+  />
+  
+  {/* Circle 5 */}
+  <span 
+    class="rounded-full aspect-[0.5663] w-[205px] min-[700px]:w-[420px] min-[1260px]:w-[658px] -ml-[137px] min-[700px]:-ml-[300px] min-[1260px]:-ml-[437px]" 
+    style={{ background: colors[3] }} 
+  />
+</div>

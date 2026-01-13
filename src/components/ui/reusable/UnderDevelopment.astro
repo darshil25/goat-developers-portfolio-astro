@@ -1,0 +1,16 @@
+---
+import { cn } from "@/lib/utils";
+import CodeIcon from "../../svg/Code.astro";
+
+interface Props {
+  class?: string;
+  className?: string;
+}
+
+const { class: classProp, className }: Props = Astro.props;
+---
+
+<div class={cn("px-2 py-1 flex items-center gap-2 rounded-lg bg-black/10", classProp, className)}>
+  <p class="opacity-50 text-white text-[11px] leading-tight">Under Development</p>
+  <CodeIcon className="text-white" />
+</div>

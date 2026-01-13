@@ -1,0 +1,12 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={["flex items-center rounded-sm bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-medium tracking-wide", className]}>
+  <div class="w-1.5 h-1.5 rounded-full bg-purple-400 mr-1"></div>
+  NDA Protected
+</div>

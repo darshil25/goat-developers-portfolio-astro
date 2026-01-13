@@ -1,0 +1,99 @@
+---
+import TopGradient from './TopGradient.astro';
+import CaseStudyCard from './CaseStudyCard.astro';
+import GradientText from '../../components/ui/gradient-text/gradient-text.astro'; // Assuming generic wrapper
+import { cn } from "../../lib/utils";
+
+// Data Array
+const cards = [
+  {
+    status: 'live',
+    link: '/design/anant-radio',
+    logo: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/front-end-static/anant-radio-logo.svg',
+    logoSize: { width: 118, height: 20 },
+    title: 'Radiologist Clinic Management Software',
+    tags: ['UX Research', 'Wireframing', 'Prototyping', 'User testing'],
+    description: 'The design of Anant Radio emphasizes innovation at its core. By leveraging AI and the latest technological advancements, we have crafted a contemporary and intuitive platform.',
+    thumbnail: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/aradio-thumbnail.png',
+    imageTags: ['ERP', 'CRM'],
+  },
+  {
+    status: 'under-development',
+    link: '/design/vanquish-solutions',
+    isVanquish: true, // Special flag for the component logo
+    logoSize: { width: 56, height: 56 },
+    title: 'Unlock Your Trading Potential',
+    tags: ['AI', 'UX Design', 'Full Stack', 'E-learning', 'Fintech Platform'],
+    description: 'Vanquish is a cutting-edge copytrading platform for mobile and web, allowing retail investors to easily replicate top trader strategies.',
+    thumbnail: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-8.png',
+  },
+  // ... add other cards here
+];
+
+const titleColors = ['#8A7FE0', '#FFFFFF', '#DCB477', '#FFFFFF', '#DD8CA2', '#E7B5BB', '#FFFFFF', '#FFFFFF', '#8A7FE0'];
+---
+
+<section class={cn(
+  "relative flex flex-col items-center w-full mx-auto gap-[120px] pt-[184px]",
+  // Tablet (700-1023)
+  "min-[700px]:gap-[320px] min-[700px]:pt-[200px] min-[700px]:max-w-[90%]",
+  // Desktop (1024-1260)
+  "min-[1024px]:pt-[240px] min-[1024px]:max-w-[80%]",
+  // Large Desktop (1260+)
+  "min-[1260px]:pt-[396px] min-[1260px]:max-w-[1080px]"
+)}>
+
+  {/* Background Gradient */}
+  <TopGradient colors={['#EA87A2', '#E3B26D', '#8C7FE6', '#F0B3BA']} />
+
+  {/* Title Section */}
+  <div class="flex flex-col items-center gap-5 w-full max-w-[90%] min-[700px]:max-w-[793px]">
+    
+    {/* Gradient Text Title */}
+    <div class="text-center">
+      {/* Assuming GradientText handles its own internal styles, simplified here: */}
+      <h1 class="font-bold text-[32px] min-[700px]:text-[64px] bg-clip-text text-transparent bg-gradient-to-r from-[#8A7FE0] via-[#DCB477] to-[#DD8CA2]">
+        Design. GOAT
+      </h1>
+    </div>
+
+    <p class="text-[#fbfbfb] text-center text-[14px] min-[700px]:text-[20px] leading-[1.25]">
+      At <strong>Design.Goat</strong>, we breathe life into ideas. From
+      intuitive product design to compelling visual stories, we craft
+      experiences that resonate and convert.
+    </p>
+
+    {/* Tags Row */}
+    <div class="flex items-center whitespace-nowrap gap-2 min-[700px]:gap-4">
+      {['UX', 'Product Design', 'User Research', 'Visual design'].map(tag => (
+        <p class="p-1 rounded-sm bg-[#2E1A12] text-[#E2C5C2] leading-tight text-[12px] min-[700px]:text-[14px]">
+          {tag}
+        </p>
+      ))}
+    </div>
+  </div>
+
+  {/* Cards Wrapper */}
+  <div class={cn(
+    "flex flex-col w-[90%] mx-auto gap-16",
+    "min-[700px]:w-auto min-[700px]:gap-[80px]",
+    "min-[1260px]:w-[1080px]"
+  )}>
+    
+    {/* Section Header */}
+    <div class="flex flex-col items-center justify-center text-[#fbfbfb]">
+      <h2 class="font-semibold text-[24px] min-[700px]:text-[44px]">The Case Studies</h2>
+      <p class="text-center text-[12px] min-[700px]:text-base leading-[1.25]">
+        Innovative solutions crafted for tackling real-world challenges.
+      </p>
+    </div>
+
+    {/* Card Group */}
+    <div class="flex flex-col gap-12 min-[700px]:gap-20">
+      {cards.map((card) => (
+        // @ts-ignore
+        <CaseStudyCard {...card} />
+      ))}
+    </div>
+  </div>
+</section>

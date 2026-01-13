@@ -1,0 +1,75 @@
+---
+import Broadcast from "@/components/svg/Broadcast.astro";
+import ArrowSvg from "@/components/svg/ArrowSvg.astro";
+
+interface Props {
+  link?: string;
+  class?: string;
+  showArrow?: boolean;
+  text?: string;
+  asDiv?: boolean;
+}
+
+const {
+  link = "#",
+  class: className = "",
+  showArrow = true,
+  text = "Live",
+  asDiv = false,
+} = Astro.props;
+---
+
+{!asDiv ? (
+  <a
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
+    class={`live-link flex items-center rounded-lg ${className}`}
+  >
+    <div class="text-icon flex items-center rounded-lg bg-black/10 text-white">
+      <p class="text-sm font-medium">{text}</p>
+      {/* <Broadcast /> */}
+    </div>
+
+    {showArrow && <ArrowSvg />}
+  </a>
+) : (
+  <div class={`live-link flex items-center rounded-lg ${className}`}>
+    <div class="text-icon flex items-center rounded-lg bg-black/10 text-white">
+      <p class="text-sm font-medium">{text}</p>
+      {/* <Broadcast /> */}
+    </div>
+
+    {showArrow && <ArrowSvg />}
+  </div>
+)}
+
+<style>
+/* Vanilla CSS ONLY where Tailwind becomes unclear */
+
+/* Smooth hover interaction */
+.live-link {
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Slight hover feedback */
+.live-link:hover {
+  opacity: 0.9;
+}
+
+/* Icon + text spacing */
+.text-icon {
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  opacity: 0.5;
+}
+
+/* Mobile fine-tuning */
+@media (max-width: 480px) {
+  .text-icon p {
+    font-size: 0.75rem;
+  }
+}
+</style>
