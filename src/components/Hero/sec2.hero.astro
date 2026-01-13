@@ -1,0 +1,147 @@
+---
+// Import shared assets renderer
+import Assets from '../../utils/Assets.astro';
+
+const HeroSec2Cards = [
+  {
+    category: 'Ideate',
+    title: 'Product Strategy',
+    // Adjusted coordinates to match video "float" positions
+    svg: { top: '0px', left: '0px', right: 'auto', bottom: 'auto' },
+    description: 'We start with your “why” — understanding goals, users, and the business case before we write a line of code.',
+  },
+  {
+    category: 'Full stack',
+    title: 'Growth Mindset',
+    svg: { top: '0px', left: 'auto', right: '0px', bottom: 'auto' },
+    description: 'SEO, analytics, DevOps, and launch support — we make sure what we ship is built to grow with you.',
+  },
+  {
+    category: 'Full Roadmap',
+    title: 'Design-Led Development',
+    svg: { top: 'auto', left: 'auto', right: '0px', bottom: '0px' },
+    description: 'Our builds follow design systems and real user insight. Clean, modern, accessible — design that drives function.',
+  },
+  {
+    category: 'Future Ready',
+    title: 'AI-Ready Thinking',
+    svg: { top: '0px', left: '50%', right: 'auto', bottom: 'auto' }, // Centered glow for AI
+    description: 'AI isn’t an add-on. From day one, we architect apps that can learn, respond, and scale intelligence with your users.',
+  },
+];
+
+const Gradients = ["BgGradient1", "BgGradient2", "BgGradient4", "BgGradient3"];
+const Icons = ['rocket', 'stack', 'schedule', 'plant-ico'];
+---
+
+<section class="relative flex flex-col items-center mt-24 z-10 w-full px-4">
+  <h3 class="text-xl md:text-2xl font-semibold text-[#818181] whitespace-nowrap">
+    What We Do Best
+  </h3>
+  <h2 class="text-3xl md:text-5xl font-semibold text-white whitespace-nowrap leading-tight mt-2">
+    More Than Just Devs
+  </h2>
+  
+  <p class="text-sm md:text-base font-light leading-relaxed text-center text-[#d4d4d4] mt-6 max-w-[420px]">
+    We partner with you to design, validate, and launch products people actually want — 
+    <strong class="text-white font-medium">not just ship code.</strong>
+  </p>
+
+  <div class="mt-12 md:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-[1080px]">
+    {HeroSec2Cards.map((card, index) => {
+      const gradientName = Gradients[index];
+      return (
+        <article 
+          class="relative group overflow-hidden p-4 flex flex-col justify-between rounded-xl bg-[#0f0f11] border border-white/10 hover:border-white/20 transition-colors duration-300"
+          style={{ minHeight: "340px" }}
+        >
+          <div class="z-20">
+            <span class="inline-block bg-[#1a1a1a] text-[#a1a1a1] text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded border border-white/5">
+              {card.category}
+            </span>
+          </div>
+          
+          <img 
+            src={`https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/${Icons[index]}.png`} 
+            alt={card.title}
+            class="absolute top-0 right-0 w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-lighten opacity-80 z-10 pointer-events-none transition-transform duration-500 group-hover:scale-110"
+          />
+
+          <div 
+            class="absolute z-0 opacity-40 pointer-events-none" 
+            style={{ 
+              top: card.svg?.top, 
+              bottom: card.svg?.bottom, 
+              left: card.svg?.left, 
+              right: card.svg?.right,
+              transform: card.svg?.left === '50%' ? 'translateX(-50%)' : 'none'
+            }}
+          >
+            <Assets component={gradientName} />
+          </div>
+
+          <div class="z-20 mt-auto pt-8">
+            <h4 class="text-lg md:text-xl font-medium text-white mb-3">
+              {card.title}
+            </h4>
+            <p class="text-xs md:text-sm font-light leading-relaxed text-[#a3a3a3]">
+              {card.description}
+            </p>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  <div class="mt-16 flex flex-col items-center justify-center gap-4 text-center">
+    <p class="text-sm text-[#a3a3a3]">Want a tech partner who thinks like a founder?</p>
+    
+    <button 
+      id="cta-build-btn"
+      class="gradient-border-btn relative group cursor-pointer"
+    >
+      <div class="relative z-10 flex items-center gap-2 py-2 px-4 text-white text-sm font-medium transition-opacity hover:opacity-90">
+        <span>Let's Build Together</span>
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 8h14M9 1l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </button>
+  </div>
+</section>
+
+<script>
+  const ctaBtn = document.getElementById('cta-build-btn');
+  ctaBtn?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('toggle-contact-form'));
+  });
+</script>
+
+<style>
+  /* Custom Button Styling 
+    Creates the "Border Top & Bottom Only" effect seen in the video
+  */
+  .gradient-border-btn {
+    background: transparent;
+  }
+
+  .gradient-border-btn::before,
+  .gradient-border-btn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+    transition: opacity 0.3s ease;
+  }
+
+  .gradient-border-btn::before { top: 0; }
+  .gradient-border-btn::after { bottom: 0; }
+
+  /* SVG Sizing Override for Assets */
+  :global(.bg-gradient-svg) {
+    width: 100px;
+    height: auto;
+  }
+</style>

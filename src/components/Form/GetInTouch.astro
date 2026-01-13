@@ -1,0 +1,58 @@
+---
+interface Props {
+  forHeader?: boolean;
+  id?: string;
+}
+
+const { forHeader = false, id = "get-in-touch-btn" } = Astro.props;
+---
+
+<button
+  type="button"
+  id={id}
+  class:list={[
+    "get-in-touch-btn relative overflow-hidden cursor-pointer whitespace-nowrap px-2 py-1 leading-relaxed rounded border-none bg-transparent text-[#fbfbfb] text-[14px] z-10",
+    { "for-body": !forHeader }
+  ]}
+  aria-label="Open contact form"
+>
+  <span class="relative z-10">Get in touch</span>
+  <div class="star-top absolute opacity-70 w-[300%] h-[50%] top-[-11px] left-[-250%] rounded-full z-0"></div>
+  <div class="star-bottom absolute opacity-70 w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full z-0"></div>
+</button>
+
+<script>
+  // Simple logic to dispatch a global event when clicked
+  const btn = document.getElementById('get-in-touch-btn');
+  btn?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('toggle-contact-form'));
+  });
+</script>
+
+<style>
+  /* Base size override for non-header usage */
+  .for-body {
+    font-size: 20px;
+  }
+
+  /* Complex Radial Gradients & Animations */
+  .star-top {
+    background: radial-gradient(circle, #86ac97, transparent 10%);
+    animation: star-movement-top 2s linear infinite alternate;
+  }
+
+  .star-bottom {
+    background: radial-gradient(circle, #86ac97, transparent 10%);
+    animation: star-movement-bottom 2s linear infinite alternate;
+  }
+
+  @keyframes star-movement-top {
+    0% { transform: translate(0%, 0%); opacity: 1; }
+    100% { transform: translate(100%, 0%); opacity: 0; }
+  }
+
+  @keyframes star-movement-bottom {
+    0% { transform: translate(0%, 0%); opacity: 1; }
+    100% { transform: translate(-100%, 0%); opacity: 0; }
+  }
+</style>

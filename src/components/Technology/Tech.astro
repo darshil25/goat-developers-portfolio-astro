@@ -1,0 +1,156 @@
+---
+// Data Definitions
+const cardData = [
+  {
+    title: 'Frontend & Mobile',
+    description: 'Flutter, SwiftUI, React, Next.js, Vue, HTML5, CSS3',
+  },
+  {
+    title: 'Backend & APIs',
+    description: 'Node.js, Express, Django, Firebase, Supabase, PostgreSQL',
+  },
+  {
+    title: 'AI & Data',
+    description:
+      'OpenAI, LangChain, Pinecone, Weaviate, HuggingFace, GPT-4o, Gemini, Anthropic',
+  },
+  {
+    title: 'DevOps & Infra',
+    description: 'AWS, Vercel, Render, Docker, GitHub Actions',
+  },
+  {
+    title: 'Design & Prototyping',
+    description: 'Figma, Framer, Lottie, webflow, Spline, Rive, Illustrator',
+  },
+];
+
+const tagsData = [
+  'AI Copilots',
+  'Flutter Experts',
+  'Realtime Dashboards',
+  'SaaS Builders',
+  'Design Systems',
+  'Vector Databases',
+  'FinTech Infra',
+  'HealthTech Infra',
+  'LangChain',
+];
+---
+
+<section id="service" class="w-[90%] max-w-[1080px] mx-auto mt-[120px] md:mt-[140px] lg:mt-[160px] xl:mt-[200px] flex flex-col gap-16 text-[#fbfbfb]">
+  
+  {/* Title Section */}
+  <div class="flex flex-col items-center gap-2 md:gap-6">
+    <h2 class="text-[20px] md:text-[40px] font-semibold text-center">
+      Our Technology & Expertise
+    </h2>
+    <p class="text-[14px] leading-[1.25] text-center max-w-[314px] md:max-w-[517px]">
+      From building cross-platform apps in Flutter to training custom AI
+      copilots — we’re fluent in the stacks that power the future.
+    </p>
+  </div>
+
+  {/* Cards Grid */}
+  <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-10 [&>*:last-child]:md:col-span-2 [&>*:last-child]:xl:col-span-1">
+    {cardData.map((card, index) => (
+      /* SingleStaticWrapper equivalent: Gradient Border Container */
+      <div 
+        class="rounded-lg p-[1px] h-full"
+        style={{
+          background: "linear-gradient(180deg, #C0FDFF40 0%, #00000000 17%, #00000000 88%, #FFE3C340 100%)"
+        }}
+      >
+        <div class="card-inner relative flex h-full flex-col items-start overflow-hidden rounded-lg bg-[#000000] p-2 gap-2 md:p-6 md:gap-4">
+          <h3 class="h-auto md:h-7 text-sm leading-[1.1] font-medium text-left z-10">
+            {card.title}
+          </h3>
+          <p class="text-xs leading-tight font-light text-left z-10">
+            {card.description}
+          </p>
+          
+          {/* Decorative Blur Blob */}
+          <span
+            data-card={index + 1}
+            class="blob absolute aspect-square rounded-full blur-[20px] opacity-20 pointer-events-none"
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {/* Tags Section */}
+  <div class="flex items-center justify-center flex-wrap gap-3 md:gap-4 max-w-[680px] mx-auto">
+    {tagsData.map((tag) => (
+      <span class="py-1 px-2 bg-[#110E15] rounded-sm">
+        <p class="leading-tight text-[12px] md:text-sm bg-clip-text text-transparent bg-gradient-to-r from-[#4b3e59] via-[#f1e1ff] to-[#4b3f59]">
+          {tag}
+        </p>
+      </span>
+    ))}
+  </div>
+
+</section>
+
+<style>
+  /* * Complex positioning logic for the blobs.
+   * Kept in vanilla CSS because mapping these specific magic numbers 
+   * to Tailwind arbitrary values would reduce readability.
+   */
+  
+  .blob {
+    width: 81px;
+    background: conic-gradient(
+      from 56deg at 50% 50%,
+      #fff 0deg,
+      #90abff 360deg
+    );
+  }
+
+  /* Desktop/Tablet Positioning (Defaulting to the SCSS desktop logic) */
+  @media (min-width: 700px) {
+    .blob[data-card='1'] {
+      left: 0%;
+      top: 0%;
+      transform: translateY(-50%);
+    }
+    .blob[data-card='2'] {
+      top: 5%;
+      right: -30%;
+    }
+    .blob[data-card='3'] {
+      top: 5%;
+      left: -5%;
+    }
+    .blob[data-card='4'] {
+      top: 90%;
+      width: 121px;
+      left: 25%;
+    }
+    .blob[data-card='5'] {
+      top: -20%;
+      left: 10%;
+    }
+  }
+
+  /* Mobile Positioning (< 700px) */
+  @media (max-width: 699px) {
+    .blob[data-card='1'] {
+      left: 20%;
+    }
+    .blob[data-card='2'] {
+      right: 5%;
+    }
+    .blob[data-card='3'] {
+      left: 0%;
+    }
+    .blob[data-card='4'] {
+      width: 81px;
+      top: 5%;
+      left: auto;
+      right: 10%;
+    }
+    .blob[data-card='5'] {
+      top: -30%;
+    }
+  }
+</style>

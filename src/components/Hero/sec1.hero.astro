@@ -1,0 +1,233 @@
+---
+import Assets from '../../utils/Assets.astro';
+
+const HeroCategoryChip = [
+  "AI-powered", "Results", "Growth", "Scale","Success"
+];
+---
+
+<section class="section1 flex flex-col items-center gap-6 relative overflow-visible" style="margin-top: 175px;">
+  
+  <header class="section1_content_text relative flex flex-col items-center justify-center gap-2 mb-11">
+    <div class="star-glow-wrapper absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[30%]">
+        <Assets component="StarGlow" />
+    </div>
+    
+    <h1 class="text-[28px] md:text-[44px] font-semibold text-center text-white leading-tight">
+        We Build What Others Don’t Dare
+    </h1>
+    
+    <p class="text-sm md:text-base text-center text-[#fbfbfb]/80 leading-relaxed mt-4" style="max-width: clamp(80vw, 550px, 100%);">
+      We create AI-driven products and scalable digital systems that excel.
+    </p>
+
+    <div class="flex items-center gap-4 md:gap-10 mt-8">
+      
+      <button 
+        id="hero-work-btn"
+        class="gradient-border-btn group relative overflow-hidden cursor-pointer bg-transparent border-none" style="padding: 1px;"
+      >
+        <div class="flex items-center gap-1 py-1 px-2 rounded-sm bg-white/5 text-[#fbfbfb] text-sm md:text-base transition-colors hover:bg-white/10">
+          <span>Work With Us</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 8h14M9 1l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+
+      <button 
+        id="scroll-to-work"
+        class="flex items-center gap-1 py-1 px-2 rounded-sm bg-white/5 text-[#fbfbfb] text-sm md:text-base cursor-pointer hover:bg-white/10 transition-colors border-none"
+      >
+        <span>Our Work</span>
+        <div class="rotate-135">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 8h14M9 1l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <div class="section1_content_seed flex items-center justify-between z-10 w-full px-4">
+    
+    <div class="glowing-circle circle-1 relative flex items-center justify-center aspect-square rounded-full bg-[#171717]">
+      <img 
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/seed.png" 
+        alt="seed" 
+        class="seed-img relative z-10 mix-blend-color-dodge object-cover"
+      />
+    </div>
+
+    <div class="midline-wrapper flex-1 px-2 md:px-4">
+        <Assets component="Midline" />
+    </div>
+
+    <div class="glowing-circle circle-2 relative flex items-center justify-center aspect-square rounded-full bg-[#171717]">
+      <img 
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/plant.png" 
+        alt="plant" 
+        class="seed-img relative z-10 mix-blend-color-dodge object-cover"
+      />
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <div class="gradient-square-wrapper opacity-10" style={{ filter: "blur(9.5px)" }}>
+            <Assets component="GradientSquare" />
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="plant_line text-center text-[#fbfbfb] leading-tight text-base md:text-lg max-w-none mt-6" style="max-width: 288px;">
+    We cultivate ideas from conception to successful solutions.
+  </p>
+
+  <ul class="flex flex-wrap justify-center items-center gap-2 mt-4 relative list-none p-0 z-20">
+    {HeroCategoryChip.map((category) => (
+      <li class="px-2 py-1 rounded bg-[#1b1424] text-[#867998] text-[10px] md:text-[12px]">
+        {category}
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script>
+  // Interaction Logic (Vanilla JS replacement for onClick handlers)
+  
+  // 1. Toggle Contact Form
+  const workBtn = document.getElementById('hero-work-btn');
+  workBtn?.addEventListener('click', () => {
+    // Dispatches the event caught by your ContactForm component
+    window.dispatchEvent(new CustomEvent('toggle-contact-form'));
+  });
+
+  // 2. Scroll to Work Section
+  const scrollBtn = document.getElementById('scroll-to-work');
+  scrollBtn?.addEventListener('click', () => {
+    const target = document.getElementById('work');
+    if (target) {
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = target.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+  });
+</script>
+
+<style>
+  /* --- Keyframes for Glowing Animation --- */
+  @keyframes glowing_circle {
+    0% { box-shadow: 0px 0px 0px 0px transparent; }
+    20% { box-shadow: 0px 4px 30px 0px rgba(101, 13, 224, 0.25), 0px 0px 30px 0px rgba(101, 13, 224, 0.3); }
+    40%, 100% { box-shadow: 0px 0px 0px 0px transparent; }
+  }
+
+  @keyframes glowing_img_bg {
+    0% { opacity: 0.4; }
+    20% { opacity: 1; }
+    40%, 100% { opacity: 0.4; }
+  }
+
+  /* --- Animation Application --- */
+  .circle-1 { animation: glowing_circle 5s linear infinite; }
+  .circle-1 .gradient-square-wrapper { animation: glowing_img_bg 5s linear infinite; }
+
+  .circle-2 { animation: glowing_circle 5s linear 3s infinite; }
+  .circle-2 .gradient-square-wrapper { animation: glowing_img_bg 5s linear 3s infinite; }
+
+  /* --- Gradient Border Trick (SingleStaticWrapper replacement) --- */
+  .gradient-border-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2px; /* rounded-sm */
+    padding: 1px; /* border width */
+    background: linear-gradient(90deg, #00000000 0%, #eeeeee 17%, #a6a6a6 88%, #00000000 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* --- Responsive Sizing Logic (Ported from SCSS) --- */
+  
+  /* Seed Container Width */
+  .section1_content_seed {
+    width: 576px; /* Desktop Default */
+  }
+
+  /* Image Sizing */
+  .seed-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Midline SVG Sizing */
+  .midline-wrapper :global(svg) {
+    width: 304px; /* Max width */
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Gradient Square Sizing */
+  .gradient-square-wrapper :global(svg) {
+    width: 64px;
+    height: 64px;
+  }
+
+  .rotate-135 { transform: rotate(135deg); }
+
+  /* --- Media Queries (Matching your exact breakpoints) --- */
+  
+  /* 790px - 1023px */
+  @media (min-width: 790px) and (max-width: 1023px) {
+    .section1_content_seed {
+      width: 516px;
+    }
+  }
+
+  /* 700px - 790px */
+  @media (min-width: 700px) and (max-width: 790px) {
+    .section1_content_seed {
+      width: 499px;
+    }
+  }
+
+  /* 700px - 1023px (Tablet Range) */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .seed-img {
+      width: 90px;
+      height: 90px;
+    }
+    .gradient-square-wrapper :global(svg) {
+      width: 50px;
+      height: 50px;
+    }
+    .midline-wrapper :global(svg) {
+      width: 40vw; /* Responsive SVG width */
+    }
+  }
+
+  /* Max Width 700px (Mobile) */
+  @media (max-width: 700px) {
+    .section1_content_seed {
+      width: calc(40vw + 184px); /* Complex calcs from SCSS */
+    }
+    .seed-img {
+      width: 76px;
+      height: 76px;
+    }
+    .gradient-square-wrapper :global(svg) {
+      width: 40px;
+      height: 40px;
+    }
+    .midline-wrapper :global(svg) {
+      width: 40vw;
+    }
+  }
+</style>

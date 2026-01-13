@@ -1,0 +1,61 @@
+---
+// area-hidden="true" is used to hide the SVG from screen readers, as it is decorative and does not convey any meaningful information.
+
+interface Props {
+  className?: string;
+  style?: any;
+  onClick?: () => void;
+  component: string;
+}
+
+const { className, style, onClick, component } = Astro.props;
+const componentName = component;
+
+const svgUrls: Record<string, string> = {
+  HeroBg: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/sec_1_bg.svg",
+  Midline: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/midline.svg",
+  StarGlow: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/circle_glow_star.svg",
+  BgGradient1: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_1.svg",
+  BgGradient2: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_2.svg",
+  BgGradient3: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_3.svg",
+  BgGradient4: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_4.svg",
+  Twincle: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/twincle-icon.svg",
+  SquareGrid: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/square-grid.svg",
+  SquareTwincle: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/square-twincle.svg",
+  Code: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/code_icon.svg",
+  CustomCircle: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/custom-circle.svg",
+  Cloud: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/cloud.svg",
+  IOT: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/iot.svg",
+  CyberCloud: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/cyber-cloud.svg",
+  SquareDot: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/square-dot.svg",
+  Cube: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/blockchain-cube.svg",
+  PageSetting: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/qa-tech-icon.svg",
+  CloudApi: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/cloud-api.svg",
+  IndustriesBg: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/industries_bg_grd.svg",
+  GradientSquare: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vision_card_bg.svg",
+  Logo: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/goat-developers-icon.svg",
+};
+
+const glowingClasses: Record<string, string> = {
+  Twincle: "glowing-twincle",
+  SquareGrid: "glowing-grid",
+  SquareTwincle: "glowing-square",
+  Code: "glowing-code",
+  CustomCircle: "glowing-grid",
+  Cloud: "glowing-cloud",
+  IOT: "glowing-square",
+  CyberCloud: "glowing-cybercloud",
+  SquareDot: "glowing-cybercloud",
+  Cube: "glowing-cube",
+  PageSetting: "glowing-code",
+  CloudApi: "glowing-twincle",
+};
+
+const srcUrl = svgUrls[componentName];
+const glowClass = glowingClasses[componentName] || "";
+const combinedClass = `${className || ""} ${glowClass}`.trim();
+---
+
+<span class={combinedClass} style={style} aria-hidden="true">
+  <img src={srcUrl} alt="" />
+</span>

@@ -1,0 +1,103 @@
+---
+// Data Definition
+const cardData = [
+  {
+    title: 'Discovery',
+    description:
+      'We start by listening — deep dives into your idea, goals, users, and pain points.',
+    img: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/discover_icon.png',
+    bgimg: 'sec_1_bg',
+  },
+  {
+    title: 'Define',
+    description:
+      'We outline core features, flows, and success metrics — turning vision into a product roadmap.',
+    img: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/define_icon.png',
+    bgimg: 'bg_grd_1',
+  },
+  {
+    title: 'Design',
+    description:
+      'UX wireframes to pixel-perfect UIs, we craft a clean, modern experience ready to build.',
+    img: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/design_icon_2.png',
+    bgimg: 'bg_grd_1',
+  },
+  {
+    title: 'Develop',
+    description:
+      'Agile sprints, real-time demos, and testable builds — our engineers ship early and often.',
+    img: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/development_icon.png',
+    bgimg: 'bg_grd_1',
+  },
+  {
+    title: 'Deliver & Scale',
+    description:
+      'Go live with confidence. We support launch, onboarding, and scale — AI, infra, and analytics included.',
+    img: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/qa-icon.png',
+    bgimg: 'sec_1_bg',
+  },
+];
+---
+
+<section class="w-[90%] max-w-[1080px] mx-auto mt-[120px] md:mt-[140px] xl:mt-[200px] flex flex-col gap-16">
+  
+  {/* Title Section */}
+  <div class="flex flex-col items-center gap-2 md:gap-6 text-[#fbfbfb]">
+    <h2 class="text-[20px] md:text-[40px] font-semibold text-center">
+      Our Process, Your Product
+    </h2>
+    <p class="text-[14px] leading-[1.25] text-center max-w-[314px] md:max-w-[517px]">
+      From napkin sketch to live product — we co-build with you at every step.
+      Here's how we make it happen.
+    </p>
+  </div>
+
+  {/* Cards Grid */}
+  <div class="grid grid-cols-1 xl:grid-cols-5 gap-4 md:gap-10 mx-auto xl:mx-0 w-full md:w-fit xl:w-full">
+    {cardData.map((card) => (
+      /* Gradient Border Wrapper */
+      <div 
+        class="rounded-lg p-[1px] h-full"
+        style={{
+          background: "linear-gradient(180deg, #A4E4FF26 0%, #000000 47%, #CF8CDA40 100%)"
+        }}
+      >
+        {/* Card Inner Content */}
+        <div class="h-full rounded-lg bg-[#0f0e11cc] flex flex-col items-start xl:items-center py-2 px-4 gap-3 xl:gap-4 shadow-[0_0_0_0_rgba(241,254,255,0.25)]">
+          
+          {/* Header: Icon + Title */}
+          <div class="flex flex-row xl:flex-col items-center gap-3 w-full xl:w-auto">
+            {/* Image Container */}
+            <div class="relative aspect-square w-[56px] xl:w-[80px] flex-shrink-0">
+              {/* Main Icon */}
+              <img
+                src={card.img}
+                alt={card.title}
+                class="w-full h-full object-cover mix-blend-color-dodge z-10 relative"
+              />
+              
+              {/* Glow Background Image */}
+              <div class="absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                <img
+                  src={`https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/${card.bgimg}.svg`}
+                  alt=""
+                  class="w-[34px] h-[84px] object-cover blur-[3px] opacity-25"
+                />
+              </div>
+            </div>
+
+            <h3 class="font-medium text-[#fbfbfb] text-center text-base xl:text-lg">
+              {card.title}
+            </h3>
+          </div>
+
+          {/* Description */}
+          <p class="text-[14px] xl:text-xs text-[#c2c2c2] leading-tight text-left md:text-center xl:text-left md:max-w-[420px] xl:max-w-none">
+            {card.description}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+</section>

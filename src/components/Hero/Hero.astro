@@ -1,0 +1,178 @@
+---
+import Section1 from './sec1.hero.astro';
+import Section2 from './sec2.hero.astro';
+
+const cardData = [
+  {
+    title: 'Applied AI & LLMs',
+    description: 'Chatbots, copilots, RAG systems, LangChain apps, OpenAI integrations — we turn LLMs into usable tools.',
+  },
+  {
+    title: 'AI Dashboards & Reports',
+    description: 'Personalized analytics, auto-generated insights, and GPT-assisted UIs that explain your data clearly.',
+  },
+  {
+    title: 'Infra & Scaling AI',
+    description: 'From embeddings to vector DBs, we handle the backend ops — Pinecone, Weaviate, serverless deployment, secure hosting.',
+  },
+  {
+    title: 'Launch & Adoption Strategy',
+    description: 'From beta onboarding to prompt tuning and analytics, we guide your team to use AI products effectively.',
+  },
+];
+---
+
+<main
+  class="hero-main min-h-screen flex flex-col items-center bg-[url('https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/sec_1_bg.svg')] bg-no-repeat bg-top bg-contain"
+>
+  
+  <section class="hero-section w-full flex flex-col items-center justify-center relative" style={{ marginTop: "55px" }}>
+    
+    <Section1 />
+
+    <div class="hero-container relative flex flex-col items-center justify-center overflow-hidden w-full mt-40 py-10">
+      
+      <header class="ai-capability-wrapper flex flex-col items-center gap-6">
+        <div class="ai-capability flex flex-col md:flex-row items-center gap-6">
+          <img 
+            src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/two_stars.png" 
+            alt="stars" 
+            class="ai-cap-img w-20 h-20 object-cover"
+          />
+          <div class="flex items-center gap-1 flex-wrap justify-center">
+            <h2 class="text-2xl md:text-4xl font-semibold text-white">Build Bold.</h2>
+            <h2 class="text-2xl md:text-4xl font-semibold text-white">Ship Smart.</h2>
+            <h2 class="text-2xl md:text-4xl font-semibold text-white">
+              Powered by <span class="ai-text">AI.</span>
+            </h2>
+          </div>
+        </div>
+
+        <p class="text-sm leading-tight text-[#fbfbfb] text-center font-light px-4" style={{ maxWidth: "586px" }}>
+          Our team specializes in harnessing AI technology to help you identify your objectives and develop a straightforward, effective strategy for your digital evolution.
+        </p>
+
+        <div class="ai-capability-button flex md:hidden px-4 items-end gap-1 w-full justify-end">
+          <button id="toggle-cards-btn" class="static-wrapper cursor-pointer p-px rounded-sm bg-transparent border-none">
+            <div class="inner-icon-box rounded-sm flex items-center justify-center w-8 h-8 bg-white/5 relative">
+              <span id="arrow-icon" class="absolute transition-all duration-300 opacity-100 rotate-45">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 8h14M9 1l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span id="minus-icon" class="absolute transition-all duration-300 opacity-0 scale-75">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+          </button>
+        </div>
+      </header>
+
+      <div id="header-cards-grid" class="header-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto overflow-hidden gap-4 lg:gap-10 mt-16 px-6" style={{ maxWidth: "1080px" }}>
+        {cardData.map((card, index) => (
+          <div class="card p-4 lg:p-6 rounded-lg bg-[#171717] gap-8 text-[#fbfbfb] flex flex-col relative overflow-hidden border border-white/5">
+            <h4 class="leading-[1.1] font-medium text-base lg:text-lg">{card.title}</h4>
+            <p class="text-xs leading-tight font-light opacity-80">{card.description}</p>
+            <span class={`card-glow glow-${index + 1} absolute aspect-square rounded-full blur-[20px] pointer-events-none`}></span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <Section2 />
+  </section>
+</main>
+
+<script>
+  const toggleBtn = document.getElementById('toggle-cards-btn');
+  const grid = document.getElementById('header-cards-grid');
+  const arrow = document.getElementById('arrow-icon');
+  const minus = document.getElementById('minus-icon');
+  let isOpen = false;
+
+  toggleBtn?.addEventListener('click', () => {
+    isOpen = !isOpen;
+    
+    // Toggle grid visibility (max-height transition)
+    if (isOpen) {
+      grid?.style.setProperty('max-height', '2000px'); // High enough for all cards
+      arrow?.style.setProperty('opacity', '0');
+      arrow?.style.setProperty('transform', 'rotate(0deg)');
+      minus?.style.setProperty('opacity', '1');
+      minus?.style.setProperty('transform', 'scale(1)');
+    } else {
+      grid?.style.setProperty('max-height', '0');
+      arrow?.style.setProperty('opacity', '1');
+      arrow?.style.setProperty('transform', 'rotate(45deg)');
+      minus?.style.setProperty('opacity', '0');
+      minus?.style.setProperty('transform', 'scale(0.75)');
+    }
+  });
+</script>
+
+<style>
+  /* Hero background sizing & gap */
+  .hero-main {
+    gap: 120px;
+    background-size: 65% auto;
+    background-position: center 4vh;
+  }
+
+  @media (max-width: 768px) {
+    .hero-main {
+      gap: 96px;
+      background-size: 95% auto;
+      background-position: center 6vh;
+    }
+  }
+
+  /* AI Text Gradient Effect */
+  .ai-text {
+    background: linear-gradient(90deg, #caa5ff 0%, #8290ff 17%, #ff8385 27%, #fff693 43%, #9effff 54%, #8086ff 67%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glowing AI Image Animation */
+  .ai-cap-img {
+    animation: glowing_ai 2s infinite ease-in-out;
+  }
+
+  @keyframes glowing_ai {
+    0%, 100% { filter: drop-shadow(0px 0px 20px #609ce0); }
+    30% { filter: drop-shadow(0px 0px 20px #87f6a4); }
+    90% { filter: drop-shadow(0px 0px 20px #fff); }
+  }
+
+  /* Header Cards Container Logic */
+  .header-cards {
+    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Responsive Grid overrides from your SCSS */
+  @media (max-width: 700px) {
+    .header-cards {
+      max-height: 0; /* Hidden by default on mobile */
+      margin-top: 24px;
+    }
+  }
+
+  /* Custom Border Gradient for Toggle Button */
+  .static-wrapper {
+    background: linear-gradient(90deg, #000000 0%, #7E7E7E 17%, #7E7E7E 88%, #000000 100%);
+  }
+
+  /* Card Glow Positions (Reproducing your data-card logic) */
+  .card-glow { width: 64px; }
+  
+  .glow-1 { top: 50%; left: -5%; transform: translateY(-50%); background: conic-gradient(from 56deg at 50% 50%, #fff, #ffbb8f); }
+  .glow-2 { bottom: -10%; left: 50%; transform: translateX(-50%); width: 102px; background: conic-gradient(from 56deg at 50% 50%, #fff, #ffbb8f); }
+  .glow-3 { top: -5%; left: 5%; transform: translateY(-50%); width: 102px; background: conic-gradient(from 56deg at 50% 50%, #fff, #90abff); }
+  .glow-4 { top: 50%; right: -10%; transform: translateY(-50%); width: 102px; background: conic-gradient(from 56deg at 50% 50%, #fff, #f291ff); }
+
+  @media (max-width: 700px) {
+    .card-glow { transform: scale(0.6); }
+  }
+</style>

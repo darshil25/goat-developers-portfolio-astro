@@ -1,0 +1,106 @@
+---
+import Navbar from '../components/ui/navbar/Navbar.astro';
+import '../styles/global.css';
+---
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Basic Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>G.O.A.T. Developers - AI SaaS & Custom Software Solutions</title>
+    <meta
+      name="description"
+      content="GOAT Developer for AI-powered SaaS, CRM, ERP, and custom software. G.O.A.T. Developers helps businesses scale with tailored tech solutions."
+    />
+    <meta
+      name="keywords"
+      content="goat developers, goat developer, AI SaaS development, CRM solutions, ERP systems, custom software development, software development company"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://goatdevelopers.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="G.O.A.T. Developers - AI SaaS & Custom Software Solutions" />
+    <meta
+      property="og:description"
+      content="Discover how G.O.A.T. Developers transforms businesses with AI-driven SaaS platforms, CRM, ERP, and custom software solutions."
+    />
+    <meta property="og:url" content="https://goatdevelopers.com/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/goat-developers-banner.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="628" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="G.O.A.T. Developers - AI SaaS & Custom Software Solutions"
+    />
+    <meta
+      name="twitter:description"
+      content="Discover how G.O.A.T. Developers transforms businesses with AI-driven SaaS platforms."
+    />
+    <meta
+      name="twitter:image"
+      content="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/goat-developers-banner.png"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/goat-developers-light-favicon.png?v=4"
+    />
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "G.O.A.T. Developers",
+        "url": "https://goatdevelopers.com/",
+        "image": "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/goat-developers-banner.png",
+        "description": "G.O.A.T. Developers is a leading software development company specializing in AI-powered SaaS platforms, CRM, ERP, and custom software solutions.",
+        "foundingDate": "2025-03-31",
+        "founders": [
+          { "@type": "Person", "name": "Darshil Thummar" },
+          { "@type": "Person", "name": "Anant Kataria" },
+          { "@type": "Person", "name": "Rahul Upadhyay" }
+        ]
+      }
+    </script>
+  </head>
+
+  <body style="font-family: 'Poppins', sans-serif;">
+     <header>
+      <slot name="navbar" />
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <slot name="footer" />
+    </footer>
+  </body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #000000;
+	}
+</style>
