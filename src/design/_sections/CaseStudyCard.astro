@@ -16,25 +16,29 @@ interface Props {
   description: string;
   thumbnail: string;
   imageTags?: string[];
-  isVanquish?: boolean; // Helper to detect if we need the component logo
+  isVanquish?: boolean; 
 }
 
 const { status, logo, link, logoSize, title, tags, description, thumbnail, imageTags, isVanquish } = Astro.props;
-
-// Gradient for the small tags inside the card
 const textGradientClass = "bg-[linear-gradient(92deg,rgba(255,255,255,0.02)_0.69%,rgba(255,255,255,0.5)_15.59%,#f7dcff_49.39%,rgba(255,255,255,0.5)_85.1%,rgba(255,255,255,0.02)_100%)] bg-clip-text text-transparent";
 ---
 
 <CurvedCard
   link={link}
   class={cn(
-    "flex bg-[#100f13] rounded-[20px] border border-white/5 overflow-hidden transition-all duration-300",
+    "flex relative bg-[#100f13] rounded-[20px] border border-white/5 overflow-hidden transition-all duration-300",
     // Mobile: Padding & Column
-    "flex-col p-5 pb-12 gap-4",
+    "w-full flex-col p-5 pb-12 gap-4",
     // Tablet/Desktop: Row & Padding
-    "min-[700px]:flex-row min-[700px]:p-6 min-[700px]:pb-12 min-[700px]:gap-4"
+    "max-w-6xl min-[700px]:flex-row min-[700px]:p-6 min-[700px]:pb-12 min-[700px]:gap-4"
   )}
 >
+{/* --- CORNER TAGS --- */}
+    <div class="absolute top-0 right-5">
+      {status === 'live' && <LiveLinkDiv class="" />}
+      {status === 'under-development' && <UnderDevelopment class="py-1 px-2 gap-2" />}
+      {status === 'nda' && <NDA class="py-1 px-2 gap-2" />}
+    </div>
     
     {/* --- LEFT SECTION --- */}
     <div class="flex flex-col justify-between gap-4">
@@ -46,7 +50,7 @@ const textGradientClass = "bg-[linear-gradient(92deg,rgba(255,255,255,0.02)_0.69
           {isVanquish ? (
             <div class="flex items-center gap-1">
               {/* Using our migrated BrandLogo component */}
-              <BrandLogo brand="vanquish" class="size-6" />
+              <BrandLogo brand="vanquish" class="size-6 text-white" />
               <p class="text-[20px] text-[#fbfbfb]">Vanquish Solutions</p>
             </div>
           ) : (
@@ -65,13 +69,11 @@ const textGradientClass = "bg-[linear-gradient(92deg,rgba(255,255,255,0.02)_0.69
         </div>
       </div>
 
-      {/* Description */}
       <p class="text-[12px] leading-tight max-w-sm text-gray-400">
         {description}
       </p>
     </div>
 
-    {/* --- RIGHT SECTION (Image) --- */}
     <div class="relative flex items-center justify-center overflow-hidden rounded-[10px] bg-[#0a0a0a] w-full min-[700px]:w-auto min-[700px]:max-w-sm">
       <img 
         src={thumbnail} 
@@ -92,11 +94,6 @@ const textGradientClass = "bg-[linear-gradient(92deg,rgba(255,255,255,0.02)_0.69
       )}
     </div>
 
-    {/* --- CORNER TAGS --- */}
-    <!-- <div class="absolute top-0 right-5">
-      {status === 'live' && <LiveLinkDiv class="gap-2" />}
-      {status === 'under-development' && <UnderDevelopment class="py-1 px-2 gap-2" />}
-      {status === 'nda' && <NDA class="py-1 px-2 gap-2" />}
-    </div> -->
+    
 
   </CurvedCard>

@@ -19,7 +19,7 @@ const HeroSec2Cards = [
   {
     category: 'Full Roadmap',
     title: 'Design-Led Development',
-    svg: { top: 'auto', left: 'auto', right: '0px', bottom: '0px' },
+    svg: { top: '0px', left: 'auto', right: '0px', bottom: '0px' },
     description: 'Our builds follow design systems and real user insight. Clean, modern, accessible — design that drives function.',
   },
   {
@@ -47,16 +47,16 @@ const Icons = ['rocket', 'stack', 'schedule', 'plant-ico'];
     <strong class="text-white font-medium">not just ship code.</strong>
   </p>
 
-  <div class="mt-12 md:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-[1080px]">
+  <div class="mt-12 md:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-9 w-full max-w-[1080px]">
     {HeroSec2Cards.map((card, index) => {
       const gradientName = Gradients[index];
       return (
         <article 
-          class="relative group overflow-hidden p-4 flex flex-col justify-between rounded-xl bg-[#0f0f11] border border-white/10 hover:border-white/20 transition-colors duration-300"
-          style={{ minHeight: "340px" }}
+          class="relative group overflow-hidden p-4 flex flex-col justify-between rounded-xl bg-[#100f13] border-none hover:border-white/20 transition-colors duration-300"
+          style={{ minHeight: "315px" }}
         >
           <div class="z-20">
-            <span class="inline-block bg-[#1a1a1a] text-[#a1a1a1] text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded border border-white/5">
+            <span class="inline-block bg-[#100c15] text-[#a1a1a1] text-[10px] rounded-[4px] uppercase tracking-wider font-semibold px-1 py-1.2 rounded border-none font-thin">
               {card.category}
             </span>
           </div>
@@ -68,7 +68,7 @@ const Icons = ['rocket', 'stack', 'schedule', 'plant-ico'];
           />
 
           <div 
-            class="absolute z-0 opacity-40 pointer-events-none" 
+            class="absolute z-0 opacity-60 pointer-events-none"
             style={{ 
               top: card.svg?.top, 
               bottom: card.svg?.bottom, 
@@ -77,14 +77,14 @@ const Icons = ['rocket', 'stack', 'schedule', 'plant-ico'];
               transform: card.svg?.left === '50%' ? 'translateX(-50%)' : 'none'
             }}
           >
-            <Assets component={gradientName} />
+            <Assets component={gradientName} className="bg-gradient-svg" />
           </div>
 
           <div class="z-20 mt-auto pt-8">
-            <h4 class="text-lg md:text-xl font-medium text-white mb-3">
+            <h4 class="text-[20px] md:text-xl font-medium text-white mb-3">
               {card.title}
             </h4>
-            <p class="text-xs md:text-sm font-light leading-relaxed text-[#a3a3a3]">
+            <p class="text-xs md:text-xs font-light leading-relaxed text-white/80">
               {card.description}
             </p>
           </div>
@@ -141,7 +141,11 @@ const Icons = ['rocket', 'stack', 'schedule', 'plant-ico'];
 
   /* SVG Sizing Override for Assets */
   :global(.bg-gradient-svg) {
-    width: 100px;
-    height: auto;
+    width: 120px;
+    height: 120px;
+    display: block;
+    filter: blur(0px) brightness(1.1) saturate(1.2);
+    pointer-events: none;
+    user-select: none;
   }
 </style>

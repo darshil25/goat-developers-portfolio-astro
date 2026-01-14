@@ -1,0 +1,119 @@
+---
+import { cn } from "@/lib/utils";
+// Imports for components we previously migrated or placeholders
+import GradientText from '../ui/gradient-text/gradient-text.astro';
+import SectionSwitch from '../ui/reusable/section-switcher/section-switch.astro';
+import BorderWrapper from '../../components/ui/reusable/BoardWrapper.astro';
+
+---
+
+<section 
+  id="design" 
+  class={cn(
+    "flex flex-col items-center justify-center px-4",
+    // Margins & Gaps
+    "mt-[140px] mb-[100px] gap-[80px]", // Mobile (Default)
+    "min-[700px]:mt-[120px] min-[700px]:mb-[120px]", // Tablet
+    "min-[1024px]:mt-[140px] min-[1024px]:mb-[224px] min-[1024px]:gap-[140px]" // Desktop
+  )}
+>
+
+  {/* --- BUILD SECTION --- */}
+  <div id="contact" class="flex flex-col items-center justify-center gap-6 w-full">
+    
+    {/* Upper Text */}
+    <div class="flex flex-col items-center gap-2 text-center min-[700px]:gap-6">
+      <h3 class="font-semibold text-white/80 leading-[1.1] text-[20px] min-[700px]:text-[40px]">
+        Let's Build Something Great Together
+      </h3>
+      <p class="text-[14px] max-w-[298px] min-[700px]:max-w-none text-white/80">
+        Whether you're building your first MVP or scaling your product
+        with AI, we'd love to be your design + dev partner.
+      </p>
+    </div>
+
+    {/* Discovery Call Button (Replaces SingleStaticWrapper with onClick) */}
+    <button id="discovery-trigger" class="group">
+      <BorderWrapper class="cursor-pointer">
+        <p class="bg-[#0a0a0a] text-white/80 rounded-[4px] px-2 py-1 text-[14px]">
+          Schedule a Free Discovery Call
+        </p>
+      </BorderWrapper>
+    </button>
+
+    {/* Contact Links */}
+    <div class="flex flex-wrap items-center justify-center gap-3 min-[700px]:gap-6">
+      {/* Email Link */}
+      <a 
+        href="mailto:contact@goatdevelopers.com?subject=Inquiry&body=Hello,%20%20I%20would%20like%20to%20inquire%20about%20your%20services."
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <BorderWrapper 
+          class="cursor-pointer"
+          gradient="linear-gradient(170deg, #a4e4ff40 0%, #000000 47%, #cf8cda40 100%)"
+        >
+          <p class="bg-[#0a0a0a] text-white/80 rounded-[4px] p-1 text-[14px]">
+            contact@goatdevelopers.com
+          </p>
+        </BorderWrapper>
+      </a>
+    </div>
+
+  </div>
+
+  {/* --- DESIGN SECTION --- */}
+  <div class="flex flex-col items-center justify-center gap-8">
+    
+    {/* Header */}
+    <div class="flex flex-col items-center justify-center gap-1 min-[700px]:gap-3">
+      <p class="text-[#fbfbfb]">Meet</p>
+      
+      {/* Gradient Text Wrapper */}
+      <GradientText 
+        colors={['#8A7FE0', '#DCB477', '#DD8CA2', '#E7B5BB', '#FFFFFF', '#FFFFFF', "#8A7FE0"]}
+        animationSpeed={30}
+      >
+        <h2 class="font-bold text-[32px] min-[700px]:text-[46px]">
+          Design. GOAT
+        </h2>
+      </GradientText>
+
+      <h3 class="text-[20px] text-white min-[700px]:text-[24px] leading-[1.25]">
+        Where ideas get their look.
+      </h3>
+    </div>
+
+    {/* Description */}
+    <p class="text-[#fbfbfb] text-[14px] leading-[1.25] text-center max-w-[442px] px-4">
+      Our design studio crafts intuitive, beautiful, and user-focused digital
+      experiences — from branding to product UI/UX.
+    </p>
+
+    {/* Tags */}
+    <div class="flex items-center gap-2">
+      {['UX', 'Product Design', 'User Research', 'Visual design'].map((tag) => (
+        <p class="p-1 rounded-[4px] bg-[#1c1425] text-[#89789a] text-[12px]">
+          {tag}
+        </p>
+      ))}
+    </div>
+
+    {/* Section Switcher Component */}
+    <SectionSwitch />
+    
+  </div>
+</section>
+
+{/* Client-Side Logic for the "Discovery Call" Button */}
+<script>
+  const btn = document.getElementById('discovery-trigger');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      // Logic to toggle your contact form.
+      // E.g., dispatch an event that your Layout listens to, or open a dialog.
+      document.dispatchEvent(new CustomEvent('toggle-contact-form'));
+      console.log('Discovery Call Clicked');
+    });
+  }
+</script>

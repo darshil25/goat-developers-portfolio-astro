@@ -17,7 +17,7 @@ const HeroCategoryChip = [
         We Build What Others Don’t Dare
     </h1>
     
-    <p class="text-sm md:text-base text-center text-[#fbfbfb]/80 leading-relaxed mt-4" style="max-width: clamp(80vw, 550px, 100%);">
+    <p class="text-sm md:text-base text-center text-[#fbfbfb]/80 leading-tight  mt-4" style="max-width: clamp(80vw, 550px, 100%);">
       We create AI-driven products and scalable digital systems that excel.
     </p>
 
@@ -49,7 +49,7 @@ const HeroCategoryChip = [
     </div>
   </header>
 
-  <div class="section1_content_seed flex items-center justify-between z-10 w-full px-4">
+  <div class="section1_content_seed flex items-center justify-center z-10 w-full px-4 ">
     
     <div class="glowing-circle circle-1 relative flex items-center justify-center aspect-square rounded-full bg-[#171717]">
       <img 
@@ -59,7 +59,7 @@ const HeroCategoryChip = [
       />
     </div>
 
-    <div class="midline-wrapper flex-1 px-2 md:px-4">
+    <div class="midline-wrapper flex-1">
         <Assets component="Midline" />
     </div>
 
@@ -88,6 +88,14 @@ const HeroCategoryChip = [
       </li>
     ))}
   </ul>
+  <!-- <div class="flex absolute -bottom-12 sm:-bottom-16 md:-bottom-18  left-1/2 -translate-x-1/2 -z-1">
+          <div class="relative inline-block w-[150svw] aspect-[2/1] rounded-[50%] opacity-30 bg-[linear-gradient(90deg,_#fff_0%,_#fff_1%,_#7D6376_16%,_#650DE0_46%,_#7D6376_81%,_#fff_100%)]">
+            <span
+              class="absolute -top-[1px] w-full h-full rounded-[50%] bg-black"
+              aria-hidden="true"
+            />
+          </div>
+        </div> -->
 </section>
 
 <script>
@@ -142,7 +150,7 @@ const HeroCategoryChip = [
 
   /* --- Gradient Border Trick (SingleStaticWrapper replacement) --- */
   .gradient-border-btn::before {
-    content: '';
+
     position: absolute;
     inset: 0;
     border-radius: 2px; /* rounded-sm */

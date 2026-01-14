@@ -5,7 +5,7 @@ import BrandLogo from '@/components/BrandLogo.astro';
 
 const projects = [
   {
-    status: 'under-development',
+    status: 'under-development' as const,
     link: '/case-study/vanquish-solutions',
     // We use a custom flag or just logic in the template to handle the "logoNode" equivalent
     brand: 'vanquish', 
@@ -16,7 +16,7 @@ const projects = [
     thumbnail: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-8.png',
   },
   {
-    status: 'live',
+    status: 'live' as const,
     link: '/case-study/analytical-investments',
     logo: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/analytical-investments/analytical-investment-logo.png',
     logoSize: { width: 56, height: 56 },
@@ -27,7 +27,7 @@ const projects = [
     imageTags: ['AI-Chat', 'Real Time Dashboard', 'E-Learning'],
   },
   {
-    status: 'live',
+    status: 'live' as const,
     link: '/case-study/anant-radio',
     logo: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/front-end-static/anant-radio-logo.svg',
     logoSize: { width: 118, height: 20 },
@@ -44,26 +44,22 @@ const projects = [
   id="work" 
   class={cn(
     "flex flex-col items-center w-full",
-    "mt-[140px] min-[700px]:mt-[60px] min-[1024px]:mt-[120px]",
-    "gap-[32px] min-[700px]:gap-[40px] min-[1024px]:gap-[80px]"
+    "mt-35 min-[700px]:mt-15 min-[1024px]:mt-30",
+    "gap-8 min-[700px]:gap-10 min-[1024px]:gap-20"
   )}
 >
   
-  {/* --- Header Section --- */}
   <div class="flex flex-col items-center text-center gap-2">
     <h2 class={cn(
-      "font-semibold leading-[1.2]",
-      // Font Sizes
+      "font-semibold leading-[1.2] text-[#fbfbfb]",
       "text-[20px] min-[700px]:text-[36px] min-[1024px]:text-[44px]"
     )}>
       Real Work. Real Results.
     </h2>
     
     <p class={cn(
-      "text-center text-[#fbfbfb]/80", // Assuming a slight opacity or color for body text
-      // Font Size
+      "text-center text-[#fbfbfb]/80", 
       "text-[14px]",
-      // Width constraints
       "w-[85%] min-[700px]:w-[70%]"
     )}>
       We don't just talk product — we ship it. Here's a look at
@@ -71,18 +67,16 @@ const projects = [
     </p>
   </div>
 
-  {/* --- Cards Wrapper --- */}
   <div class={cn(
     "flex flex-col w-full items-center",
-    // Wrapper Width & Gap
-    "w-[90%] gap-[32px]", // Mobile
-    "min-[700px]:w-auto min-[700px]:gap-[64px]", // Tablet
-    "min-[1260px]:w-[1080px]" // Desktop limit
+    "w-[90%] gap-8", 
+    "min-[700px]:w-auto min-[700px]:gap-16", 
+    "min-[1260px]:w-270 p-5" 
   )}>
     {projects.map((project) => (
       <CaseStudyCard 
         {...project} 
-        isVanquish={project.brand === 'vanquish'}
+        isVanquish={('brand' in project) && project.brand === 'vanquish'}
       />
     ))}
   </div>

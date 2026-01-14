@@ -5,6 +5,8 @@ import Hero from '../components/Hero/Hero.astro';
 import Tech from '../components/Technology/Tech.astro';
 import Vision from '../components/Vision/Vision.astro';
 import Work from '../components/Work/Work.astro';
+import Design from '@/components/Design/Design.astro';
+import Footer from "../components/ui/footer/Footer.astro";
 ---
 
 <Layout>
@@ -13,4 +15,22 @@ import Work from '../components/Work/Work.astro';
 	<Tech />
 	<Vision/>
 	<Work/>
+	<Design/>
+	<Footer slot="footer" />
 </Layout>
+
+<script>
+  import { scrollToId } from "@/lib/scroll-handler";
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const scrollTarget = urlParams.get('scrollTo');
+
+  if (scrollTarget) {
+    setTimeout(() => {
+      scrollToId(scrollTarget, { behavior: 'smooth' }, 80);
+      
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, '', newUrl);
+    }, 100);
+  }
+</script>

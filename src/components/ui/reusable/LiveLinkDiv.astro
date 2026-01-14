@@ -3,46 +3,26 @@ import Broadcast from "@/components/svg/Broadcast.astro";
 import ArrowSvg from "@/components/svg/ArrowSvg.astro";
 
 interface Props {
-  link?: string;
   class?: string;
   showArrow?: boolean;
   text?: string;
-  asDiv?: boolean;
 }
 
 const {
-  link = "#",
   class: className = "",
   showArrow = true,
   text = "Live",
-  asDiv = false,
 } = Astro.props;
 ---
 
-{!asDiv ? (
-  <a
-    href={link}
-    target="_blank"
-    rel="noopener noreferrer"
-    class={`live-link flex items-center rounded-lg ${className}`}
-  >
-    <div class="text-icon flex items-center rounded-lg bg-black/10 text-white">
-      <p class="text-sm font-medium">{text}</p>
-      {/* <Broadcast /> */}
-    </div>
-
-    {showArrow && <ArrowSvg />}
-  </a>
-) : (
-  <div class={`live-link flex items-center rounded-lg ${className}`}>
-    <div class="text-icon flex items-center rounded-lg bg-black/10 text-white">
-      <p class="text-sm font-medium">{text}</p>
-      {/* <Broadcast /> */}
-    </div>
-
-    {showArrow && <ArrowSvg />}
+<div class={`live-link flex items-center rounded-lg ${className}`}>
+  <div class="text-icon flex items-center rounded-lg bg-black/10 text-white">
+    <p class="text-xs font-medium">{text}</p>
+    {/* <Broadcast /> */}
+    <Broadcast className="w-4 h-4" />
   </div>
-)}
+
+</div>
 
 <style>
 /* Vanilla CSS ONLY where Tailwind becomes unclear */

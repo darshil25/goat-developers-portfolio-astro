@@ -1,0 +1,20 @@
+---
+/* src/components/reusable/BorderWrapper.astro */
+import { cn } from "@/lib/utils";
+
+interface Props {
+  class?: string;
+  gradient?: string; // Allow custom gradient overrides
+}
+
+const { class: className, gradient } = Astro.props;
+
+const defaultGradient = "linear-gradient(to right, #333, #555)"; // Fallback
+---
+
+<div 
+  class={cn("p-[1px] rounded-[4px]", className)}
+  style={{ background: gradient || defaultGradient }}
+>
+  <slot />
+</div>

@@ -1,0 +1,92 @@
+---
+import { cn } from "@/lib/utils";
+// Assuming you have converted these SVGs to Astro components or generic .astro files
+import LogoBig from '../../svg/LogoBig.astro';
+import LocationPin from '../../svg/LocationPin.astro';
+import Aurora from "../aurora/Aurora.astro";
+
+interface Props {
+  bgColor?: string;
+  effectClassName?: string;
+  auroraBlend?: number;
+}
+
+const { bgColor, effectClassName, auroraBlend } = Astro.props;
+
+// Gradient for the logo overlay
+const logoOverlayGradient = "linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.75) 25%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.75) 75%, #000 100%)";
+---
+
+<footer class="relative flex flex-col ">
+  
+  {/* --- MAIN CONTENT --- */}
+  <div class={cn(
+    "flex flex-col z-10",
+    // Padding & Gap Logic
+    "p-[24px] gap-[64px]", // Mobile
+    "min-[700px]:px-[60px] min-[700px]:py-[48px]", // Tablet
+    "min-[1023px]:px-[80px] min-[1023px]:gap-[80px]", // Small Desktop
+    "min-[1260px]:px-[100px] min-[1260px]:gap-[96px]" // Large Desktop
+  )}>
+    
+    {/* Contact Section */}
+    <div class="flex items-center justify-between gap-6 py-4 min-[700px]:py-0">
+      
+      {/* Design Rush Image */}
+      
+    </div>
+
+    {/* Big Logo Wrapper */}
+    <div class="relative flex items-center justify-center w-fit mx-auto">
+      <LogoBig class="w-full max-w-[688px]" />
+      
+      {/* Gradient Overlay */}
+      <span 
+        class="absolute top-0 left-0 w-full h-full pointer-events-none" 
+        style={{ background: logoOverlayGradient }}
+      />
+    </div>
+
+  </div>
+
+  {/* --- FOOTER END --- */}
+  <div class={cn(
+    "flex items-center border-t-[0.5px] border-[#8181814D] z-10",
+    // Mobile
+    "flex-col gap-4 p-[12px_16px_24px]",
+    // Tablet
+    "min-[700px]:flex-row min-[700px]:justify-between min-[700px]:p-[12px_60px_48px]",
+    // Desktop
+    "min-[1023px]:px-[80px]",
+    "min-[1260px]:px-[100px]"
+  )}>
+    <p class="text-[#818181] leading-tight text-[10px] min-[700px]:text-[11px]">
+      Copyright © 2025 Goatdevelopers. All rights reserved.
+    </p>
+    <p class="text-[#818181] leading-tight text-[10px] min-[700px]:text-[11px]">
+      Made with ☕, ⚡ & a bit of AI
+    </p>
+  </div>
+
+  {/* --- AURORA EFFECT --- */}
+  <Aurora
+    class={effectClassName}
+    bgColor={bgColor}
+    colorStops={["#75539C"]}
+    blend={auroraBlend || 2}
+    amplitude={1}
+    speed={0.5}
+  />
+  
+</footer>
+
+<script>
+  import { scrollToId } from "@/lib/scroll-handler"; // Ensure this path is valid in your Astro project
+
+  const btn = document.getElementById('scroll-to-service');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      scrollToId('service', { behavior: 'smooth' }, 80);
+    });
+  }
+</script>

@@ -1,0 +1,270 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  class?: string;
+  colorStops?: string[];
+  colorPositions?: number[];
+  amplitude?: number;
+  blend?: number;
+  height?: number;
+  speed?: number;
+  bgColor?: string;
+}
+
+const {
+  class: className,
+  colorStops = ["#00d8ff", "#7cff67", "#00d8ff"],
+  colorPositions = [],
+  amplitude = 1.0,
+  blend = 0.5,
+  height = 0.2,
+  speed = 1.0,
+  bgColor = "transparent",
+} = Astro.props;
+
+// We pass the configuration to the client-side script via a data attribute
+const config = {
+  colorStops,
+  colorPositions,
+  amplitude,
+  blend,
+  height,
+  speed,
+  bgColor,
+};
+---
+
+<div
+  class={cn(
+    "aurora-container pointer-events-none absolute top-[-100%] left-0 w-full h-full rotate-180 -z-10",
+    className
+  )}
+  data-config={JSON.stringify(config)}
+>
+  </div>
+
+<script>
+  import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
+
+  // --- Shaders (Copied exactly from original) ---
+  const VERT = `#version 300 es
+    in vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }
+  `;
+
+  const FRAG = `#version 300 es
+    precision highp float;
+
+    uniform float uTime;
+    uniform float uAmplitude;
+    uniform float uHeight;
+    uniform vec3 uColorStops[10];
+    uniform float uColorPositions[10];
+    uniform int uColorCount;
+    uniform vec2 uResolution;
+    uniform float uBlend;
+
+    out vec4 fragColor;
+
+    vec3 permute(vec3 x) {
+      return mod(((x * 34.0) + 1.0) * x, 289.0);
+    }
+
+    float snoise(vec2 v){
+      const vec4 C = vec4(
+          0.211324865405187, 0.366025403784439,
+          -0.577350269189626, 0.024390243902439
+      );
+      vec2 i  = floor(v + dot(v, C.yy));
+      vec2 x0 = v - i + dot(i, C.xx);
+      vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz;
+      x12.xy -= i1;
+      i = mod(i, 289.0);
+
+      vec3 p = permute(
+          permute(i.y + vec3(0.0, i1.y, 1.0))
+        + i.x + vec3(0.0, i1.x, 1.0)
+      );
+
+      vec3 m = max(
+          0.5 - vec3(
+              dot(x0, x0),
+              dot(x12.xy, x12.xy),
+              dot(x12.zw, x12.zw)
+          ), 
+          0.0
+      );
+      m = m * m;
+      m = m * m;
+
+      vec3 x = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x) - 0.5;
+      vec3 ox = floor(x + 0.5);
+      vec3 a0 = x - ox;
+      m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+
+      vec3 g;
+      g.x  = a0.x  * x0.x  + h.x  * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+
+    vec3 getGradientColor(float factor) {
+      if (uColorCount == 1) return uColorStops[0];
+      int currentIndex = 0;
+      for (int i = 0; i < 10; i++) {
+        if (i >= uColorCount - 1) break;
+        if (uColorPositions[i] <= factor && factor <= uColorPositions[i + 1]) {
+          currentIndex = i;
+          break;
+        }
+      }
+      float range = uColorPositions[currentIndex + 1] - uColorPositions[currentIndex];
+      float lerpFactor = (factor - uColorPositions[currentIndex]) / range;
+      return mix(uColorStops[currentIndex], uColorStops[currentIndex + 1], lerpFactor);
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / uResolution;
+      vec3 rampColor = getGradientColor(uv.x);
+      float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
+      height = exp(height);
+      height = (uv.y * 2.0 - height + uHeight);
+      float intensity = 0.6 * height;
+      float midPoint = 0.20;
+      float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
+      vec3 auroraColor = intensity * rampColor;
+      fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha);
+    }
+  `;
+
+  // --- Logic Class ---
+  class AuroraEffect {
+    container: HTMLElement;
+    config: any;
+    renderer!: Renderer;
+    gl: any;
+    program: Program | undefined;
+    animateId: number = 0;
+
+    constructor(el: HTMLElement) {
+      this.container = el;
+      this.config = JSON.parse(el.dataset.config || "{}");
+      this.init();
+    }
+
+    init() {
+      const { colorStops, colorPositions, amplitude, blend, height, bgColor } =
+        this.config;
+
+      // Initialize Renderer
+      this.renderer = new Renderer({
+        alpha: true,
+        premultipliedAlpha: true,
+        antialias: true,
+      });
+
+      this.gl = this.renderer.gl;
+      this.gl.clearColor(0, 0, 0, 0);
+      this.gl.enable(this.gl.BLEND);
+      this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
+      this.gl.canvas.style.backgroundColor = bgColor || "transparent";
+      this.gl.canvas.style.width = "100%";
+      this.gl.canvas.style.height = "100%";
+
+      // Append Canvas
+      this.container.appendChild(this.gl.canvas);
+
+      // Prepare Geometry
+      const geometry = new Triangle(this.gl);
+      if (geometry.attributes.uv) {
+        delete (geometry.attributes as any).uv;
+      }
+
+      // Prepare Colors & Positions
+      const colorStopsArray = colorStops.map((hex: string) => {
+        const c = new Color(hex);
+        return [c.r, c.g, c.b];
+      });
+
+      let positions = colorPositions || [];
+      if (!positions.length) {
+        positions = colorStopsArray.map(
+          (_: any, index: number) => index / (colorStopsArray.length - 1)
+        );
+      }
+
+      // Fill arrays to max shader size (10)
+      const maxColors = 10;
+      const filledColorStops = [...colorStopsArray];
+      const filledPositions = [...positions];
+      while (filledColorStops.length < maxColors) {
+        filledColorStops.push([0, 0, 0]);
+        filledPositions.push(1.0);
+      }
+
+      // Initialize Program
+      this.program = new Program(this.gl, {
+        vertex: VERT,
+        fragment: FRAG,
+        uniforms: {
+          uTime: { value: 0 },
+          uAmplitude: { value: amplitude },
+          uHeight: { value: height },
+          uColorStops: { value: filledColorStops },
+          uColorPositions: { value: filledPositions },
+          uColorCount: { value: colorStopsArray.length },
+          uResolution: {
+            value: [this.container.offsetWidth, this.container.offsetHeight],
+          },
+          uBlend: { value: blend },
+        },
+      });
+
+      const mesh = new Mesh(this.gl, { geometry, program: this.program });
+
+      // Resize Handler
+      const resize = () => {
+        const width = this.container.offsetWidth;
+        // The original logic used offsetHeight / 4. Preserving that specific visual ratio.
+        const height = this.container.offsetHeight / 4; 
+        this.renderer.setSize(width, height);
+        if (this.program) {
+          this.program.uniforms.uResolution.value = [width, height];
+        }
+      };
+      window.addEventListener("resize", resize);
+      resize(); // Trigger once
+
+      // Animation Loop
+      let lastTime = 0;
+      const update = (t: number) => {
+        this.animateId = requestAnimationFrame(update);
+        const { speed = 1.0 } = this.config;
+        
+        // Convert milliseconds to 'time' value
+        const time = t * 0.01; 
+        
+        if (this.program) {
+          this.program.uniforms.uTime.value = time * speed * 0.1;
+          this.renderer.render({ scene: mesh });
+        }
+      };
+      this.animateId = requestAnimationFrame(update);
+    }
+  }
+
+  // --- Initializer ---
+  // Finds all aurora containers and initializes them
+  const containers = document.querySelectorAll(".aurora-container");
+  containers.forEach((el) => {
+    // Check if already initialized to prevent duplicates on view transitions
+    if (!el.hasChildNodes()) {
+      new AuroraEffect(el as HTMLElement);
+    }
+  });
+</script>
