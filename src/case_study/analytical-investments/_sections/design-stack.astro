@@ -1,0 +1,240 @@
+---
+// DesignStack.astro
+
+interface DevBlockProps {
+  title: string;
+  description: string;
+  tech: string[];
+}
+
+const devBlockData: DevBlockProps[] = [
+  {
+    title: "Backend Development Stack & Architecture",
+    description: `This platform required a <strong>fast, modular backend</strong> that
+        could scale with educational content, user personalization, and a
+        subscription model. The team used <strong>Supabase</strong> as a BaaS,
+        offering real-time Postgres, auth, and file storage — dramatically
+        reducing backend development time.
+        <br /> <br />
+        The learning section (LMS) was powered by <strong>Strapi</strong>,
+        allowing course creators to dynamically manage content without dev
+        support. <strong>Stripe</strong>
+        handled all payment flows — from $5/mo subscriptions to free tier gating
+        — using its secure checkout and invoicing API.`,
+    tech: [
+      "Supabase (auth, DB, storage)",
+      "Strapi for CMS-based course management",
+      "Stripe for payment + membership control",
+    ],
+  },
+  {
+    title: "Frontend Development Stack",
+    description: `Built with <strong>Next.js</strong> for its hybrid rendering support
+        (SSR + SSG), the frontend offers both speed and SEO-friendliness. The
+        UI is built using <strong>TailwindCSS</strong>, making it modular and
+        scalable. For interactivity, <strong>Framer Motion</strong> powers
+        smooth animations. <strong>Zustand</strong> manages app-wide state
+        with lightweight logic.
+        <br />
+        <br />
+        <strong>GraphQL</strong> was chosen for flexible, efficient data fetching, allowing the
+        dashboard and AI assistant to only request what’s needed. Financial
+        charts are integrated via <strong>TradingView widgets</strong>, delivering
+        professional-grade market visualizations.`,
+    tech: [
+      "Next.js (SSR/SSG), Tailwind CSS",
+      "Zustand for state management",
+      "GraphQL for data queries",
+      "TradingView widgets for charts",
+      "Framer Motion for animation",
+    ],
+  },
+];
+---
+
+<div class="design-stack flex flex-col">
+  <div class="group flex">
+    
+    <div class="design-highlight flex flex-col justify-center items-center">
+      <h2 class="text-center font-semibold text-[20px] leading-tight">
+        Design Highlights
+      </h2>
+      <div class="text-group flex flex-col items-center font-extralight text-[12px] leading-tight">
+        <p>
+          We designed the platform with mobile-first thinking, using Design
+          Thinking + Agile sprints. The onboarding experience personalizes the
+          dashboard based on the user&apos;s expertise (Beginner → Explorer) and
+          interest (Stocks, Crypto, Mutual Funds). The dashboard then evolves
+          dynamically using AI and GraphQL data.
+        </p>
+        <ul class="flex flex-col gap-2 mt-2">
+          <p class="text-[14px] font-semibold">Core Design Features:</p>
+          <li class="list-disc ml-4">
+            Personalized dashboard with 4 key sections: Home, Omega AI,
+            Learning, Trading
+          </li>
+          <li class="list-disc ml-4">
+            Onboarding with interest/goal tagging & weekly AI alert preferences
+          </li>
+          <li class="list-disc ml-4">Realtime market view toggling (US, Global, Crypto)</li>
+          <li class="list-disc ml-4">Embedded AI assistant available across the platform</li>
+          <li class="list-disc ml-4">
+            Learning module UI inspired by Coursera — track modules, video
+            lessons, chapters
+          </li>
+          <li class="list-disc ml-4">
+            Dark mode & accessibility adjustments for visually intensive use
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="image-container flex items-center justify-center">
+      <img
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/analytical-investments/mockup-4.png"
+        alt="image1"
+        width="358"
+        height="196"
+        class="object-cover w-full h-auto"
+        draggable="false"
+      />
+    </div>
+  </div>
+
+  <div class="group flex">
+    {devBlockData.map((item) => (
+      <div class="dev-block flex flex-col">
+        <h2 class="text-center text-[20px] font-thin leading-tight">{item.title}</h2>
+        
+        {/* set:html is used to render the <strong> and <br> tags in the description */}
+        <p class="text-[12px] font-light leading-tight" set:html={item.description} />
+
+        <div class="platform flex flex-col flex-1 gap-2">
+          <h4 class="text-[14px] leading-tight">Technologies Used:</h4>
+          <ul class="tech-list flex flex-col relative overflow-hidden flex-1 rounded-lg bg-[#100f13] p-3 gap-5">
+            {item.tech.map((techItem) => (
+              <li class="relative z-10 list-disc ml-4 text-[12px] font-light leading-tight">
+                {techItem}
+              </li>
+            ))}
+            
+            {/* Background Blur Effect */}
+            <div class="background absolute inset-0 flex items-center justify-center">
+              {[...Array(5)].map(() => (
+                <span class="blur-circle bg-white" />
+              ))}
+            </div>
+          </ul>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* * VANILLA CSS for Exact Layout Control 
+   * Handles precise gaps and breakpoints as per original SCSS
+   */
+
+  /* Defaults (Mobile First < 700px) */
+  .design-stack {
+    gap: 120px;
+    color: #fbfbfb;
+  }
+  
+  .design-stack .group {
+    flex-direction: column;
+    gap: 120px;
+  }
+
+  .design-highlight,
+  .dev-block {
+    width: 90%;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .design-highlight .text-group {
+    gap: 8px;
+  }
+
+  /* DevBlock Specifics */
+  .blur-circle {
+    border-radius: 100%;
+    display: flex;
+    width: 142px;
+    height: 132px;
+  }
+  
+  .background {
+    top: -40%;
+    left: 0;
+    height: fit-content;
+    padding: 0 12px;
+    opacity: 0.2;
+    filter: blur(47.27556610107422px);
+  }
+
+  /* Overlapping circles logic */
+  .background span:not(:first-child) {
+    margin-left: -117px;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Tablet: 700px - 1023px */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .design-stack {
+      gap: 140px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    .design-stack .group {
+      gap: 80px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      flex-direction: row; /* Overwrite mobile column */
+    }
+
+    .image-container {
+      margin: 0 auto;
+      width: 80%;
+    }
+
+    .design-highlight .text-group {
+      align-items: flex-start;
+    }
+  }
+
+  /* Laptop: 1023px - 1260px */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .design-stack {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    .design-stack .group {
+      gap: 120px;
+      flex-direction: row;
+    }
+  }
+
+  /* Desktop: 1260px+ */
+  @media (min-width: 1260px) {
+    .design-stack {
+      max-width: 1080px;
+      margin: 0 auto;
+      gap: 180px;
+    }
+    
+    .design-stack .group {
+      gap: 180px;
+      flex-direction: row;
+    }
+  }
+</style>

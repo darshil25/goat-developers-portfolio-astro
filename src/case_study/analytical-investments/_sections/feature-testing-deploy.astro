@@ -1,0 +1,345 @@
+---
+// FeatureTestingDeploy.astro
+import GradBorderWrapper from '@/components/ui/reusable/border-animator.astro';
+import { Image } from 'astro:assets';
+
+const features = [
+  {
+    title: 'Personalized Onboarding',
+    description: 'Dynamic form logic, data tagging, stored via Supabase',
+  },
+  {
+    title: 'Home Dashboard',
+    description:
+      ' Toggle between Global/US/Crypto; includes watchlist, AI summary, news',
+  },
+  {
+    title: 'Omega AI',
+    description:
+      'Universal chat overlay across platform with financial AI model',
+  },
+  {
+    title: 'Learning System',
+    description:
+      ' Course management via Strapi; user progress tracking and completion',
+  },
+  {
+    title: 'Payment Flow',
+    description:
+      'Stripe API – supports trial, recurring, cancellation, and upgrade',
+  },
+  {
+    title: 'Stock Pages',
+    description:
+      'Click into any asset to view in-depth chart, news, and analysis',
+  },
+  {
+    title: 'Settings & Personalization',
+    description: 'Control AI tone, learning goals, update watchlist focus',
+  },
+  {
+    title: 'Trading View',
+    description:
+      'Clean, clutter-free data output with filterable market screens',
+  },
+];
+
+const testing = [
+  {
+    title: 'Testing: ',
+    items: [
+      'Manual QA across all user roles',
+      'AI testing for prompt consistency',
+      'Visual regression testing for charts & graphs',
+    ],
+  },
+  {
+    title: 'Deployment: ',
+    items: [
+      'Vercel (frontend & Next.js SSR)',
+      'Supabase backend hosting',
+      'Secure Stripe integration',
+      'Monitoring & analytics via Vercel + server logs',
+    ],
+  },
+];
+---
+
+<div class="feature-testing-deploy flex flex-col">
+  <div class="features flex flex-col">
+    <h2 class="text-center font-thin text-[#fbfbfb] leading-tight text-[20px]">Feature Breakdown</h2>
+    <div class="feature-card-group  flex">
+      {features.map((feature, index) => (
+        <GradBorderWrapper className="h-full">
+          <div class="feature-card relative flex flex-col  overflow-hidden h-full">
+            <h3 class="font-semibold opacity-80 text-[10px]">{feature.title}</h3>
+            <p class="opacity-80 text-[12px]">{feature.description}</p>
+            
+            {/* Background Blur Effect */}
+            <div class="background absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+              {Array.from({ length: 5 }).map(() => (
+                <span class="blur-circle bg-white" />
+              ))}
+            </div>
+          </div>
+        </GradBorderWrapper>
+      ))}
+    </div>
+  </div>
+
+  <div class="image-text-layout">
+    <div class="image1 flex items-center justify-center">
+      <img
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/analytical-investments/mockup-5.png"
+        alt="image1"
+        width="358"
+        height="196"
+        class="object-cover"
+        draggable="false"
+      />
+    </div>
+
+    <div class="testing-qa text-[#fbfbfb] flex flex-col">
+      <h2 class="font-thin leading-tight text-[20px]">Testing, QA & Deployment</h2>
+      <div class="testing-qa-detail flex flex-col">
+        {testing.map((item) => (
+          <div class="card flex flex-col text-foreground">
+            <h3 class="leading-tight text-[14px]">{item.title}</h3>
+            <ul class="flex flex-col">
+              {item.items.map((subItem) => (
+                <li class="list-disc ml-4 leading-tight font-extralight text-[12px]">
+                  {subItem}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* * VANILLA CSS 
+   * Exact translation of your SCSS to ensure identical responsiveness
+   */
+
+  .feature-testing-deploy {
+    gap: 180px;
+  }
+
+  .features,
+  .testing-qa {
+    gap: 24px;
+  }
+
+  /* --- Features Section --- */
+  .features .feature-card-group {
+    gap: 16px;
+    /* Default is flex-row (Desktop logic inferred) */
+  }
+
+  .features .feature-card {
+    width: 100%;
+    gap: 8px;
+    padding: 8px;
+    align-items: flex-start;
+    text-align: left;
+    color: #fbfbfb;
+  }
+
+  /* --- Background Blur Logic --- */
+  .features .feature-card .background {
+    top: -125%;
+    width: 358px;
+    height: fit-content;
+    padding: 0 12px;
+    opacity: 0.2;
+    filter: blur(47.27556610107422px);
+  }
+
+  .blur-circle {
+    border-radius: 100%;
+    display: flex;
+    width: 142px;
+    height: 132px;
+  }
+
+  /* Negative margins for overlapping circles */
+  .background span:not(:first-child) {
+    margin-left: -117px;
+  }
+
+  /* --- Image Logic --- */
+  .image1 img {
+    width: 610px;
+    height: auto;
+  }
+
+  /* --- Testing QA Logic --- */
+  .testing-qa-detail {
+    gap: 24px;
+  }
+
+  .testing-qa-detail .card {
+    gap: 8px;
+  }
+
+  .testing-qa-detail ul {
+    gap: 16px;
+  }
+
+  .image-text-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  /* --- MEDIA QUERIES (Exact match) --- */
+
+  /* Desktop Large: 1260px+ */
+  @media (min-width: 1260px) {
+    .feature-testing-deploy {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .image-text-layout {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 100px;
+    }
+
+    .image1 {
+      flex-shrink: 0;
+    }
+
+    .testing-qa {
+      flex: 1;
+    }
+  }
+
+  /* Laptop: 1023px - 1260px */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .feature-testing-deploy {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    .image-text-layout {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 80px;
+    }
+
+    .image1 {
+      flex-shrink: 0;
+    }
+
+    .testing-qa {
+      flex: 1;
+    }
+
+    .features {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .features .feature-card-group {
+      margin: 0 auto;
+      width: fit-content;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+
+    .features .feature-card {
+      padding: 8px 16px;
+    }
+
+    /* Font size override from SCSS */
+    .features .feature-card h3 {
+      font-size: 14px;
+    }
+  }
+
+  /* Tablet: 700px - 1023px */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .features {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .features .feature-card-group {
+      margin: 0 auto;
+      width: fit-content;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+
+    .features .feature-card {
+      padding: 8px 16px;
+    }
+
+    .features .feature-card h3 {
+      font-size: 14px;
+    }
+
+    .testing-qa-detail {
+      flex-direction: row;
+    }
+  }
+
+  /* Mobile: < 700px */
+  @media (max-width: 700px) {
+    .feature-testing-deploy {
+      gap: 120px;
+    }
+
+    /* Center the stack on small screens so it does not hug the left edge */
+    .image-text-layout {
+      align-items: center;
+    }
+
+    .image1 img {
+      width: 90%;
+    }
+
+    .features {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .features .feature-card-group {
+      margin: 0 auto;
+      width: fit-content;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+
+    .features .feature-card {
+      padding: 8px 16px;
+    }
+
+    .features .feature-card h3 {
+      font-size: 14px;
+    }
+
+    .testing-qa {
+      text-align: center;
+      align-items: center;
+    }
+
+    .testing-qa-detail {
+      align-items: center;
+    }
+
+    .testing-qa-detail .card {
+      text-align: left;
+      align-items: flex-start;
+    }
+  }
+</style>

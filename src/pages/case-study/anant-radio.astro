@@ -1,0 +1,65 @@
+---
+// src/pages/work/vanquish.astro
+import Navbar from '@/components/ui/navbar/Navbar.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Footer from '@/components/ui/footer/Footer.astro';
+import ARCaseStudy from '../../case_study/anant-radio/ARCaseStudy.astro';
+
+const metadata = {
+  title: 'AnantRadio Case Study - AI Radiology SaaS by G.O.A.T.',
+  description:
+    'See how G.O.A.T. Developers built AnantRadio—an AI SaaS platform streamlining radiology clinics with automation, analytics, and intuitive UX.',
+  keywords: [
+    'AnantRadio',
+    'radiology software',
+    'AI in healthcare',
+    'radiologist clinic software',
+    'healthcare SaaS',
+    'AI SaaS platform',
+    'radiology case study',
+    'G.O.A.T. Developers case study',
+    'custom healthcare software',
+    'AI-powered healthcare',
+    'medical SaaS development',
+    'digital radiology solution',
+    'AI radiology',
+    'radiology workflow automation',
+    'cloud-based radiology software',
+    'health tech startup',
+    'Next.js healthcare app',
+    'AI software development',
+    'SaaS for doctors',
+    'clinical data analytics',
+    'custom SaaS case study',
+    'frontend for radiology platform',
+    'India health tech innovation',
+    'G.O.A.T. Developers AnantRadio',
+    'enterprise radiology solution',
+  ],
+  openGraph: {
+    title: 'AnantRadio Case Study - AI Radiology SaaS by G.O.A.T.',
+    description:
+      'How G.O.A.T. Developers revolutionized radiologist workflows with AnantRadio — an AI-powered, user-friendly SaaS for radiology clinics.',
+    url: 'https://goatdevelopers.com/case-study/anant-radio',
+    images: [
+      {
+        url: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/front-end-static/portfolio/anantradio-thumbnail.png',
+        width: 1200,
+        height: 630,
+        alt: 'AnantRadio Thumbnail',
+      },
+    ],
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://goatdevelopers.com/case-study/anant-radio',
+  },
+  robots: 'index, follow',
+};
+---
+
+<CaseStudyLayout {...metadata}>
+  <Navbar slot="navbar" />
+   <ARCaseStudy />
+  <Footer slot="footer" />
+</CaseStudyLayout>

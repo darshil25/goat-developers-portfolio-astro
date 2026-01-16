@@ -1,0 +1,330 @@
+---
+// GallerySnapshot.astro
+import ImageSlider from "@/components/ui/reusable/image-slider/image-slider.astro";
+const images = [
+  {
+    src: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/analytical-investments/gallery-1.png",
+    alt: "image1",
+  },
+  {
+    src: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/analytical-investments/gallery-2.png",
+    alt: "image2",
+  },
+  {
+    src: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/analytical-investments/gallery-3.png",
+    alt: "image3",
+  },
+  {
+    src: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/analytical-investments/gallery-4.png",
+    alt: "image4",
+  },
+];
+---
+
+<div class="gallery-snapshot text-[#fbfbfb] flex flex-col">
+  
+  <div class="gallery relative flex flex-col">
+    <h2 class="text-center font-semibold leading-tight">Gallery</h2>
+    <div class="image-slider-container relative">
+      <div class="background absolute inset-0">
+        {Array.from({ length: 5 }).map(() => (
+          <span class="blob bg-white" />
+        ))}
+      </div>
+      
+      <ImageSlider
+        images={images}
+        className="image-slider w-full"
+        imageClassName="image-slide"
+      />
+    </div>
+  </div>
+
+  <div class="next flex flex-col items-center">
+    <h2 class="text-center font-semibold">What&apos;s Next?</h2>
+    <p class="text-center">
+      Omega Suite is evolving into a multi-platform product — adding mobile
+      apps, deep stock screening tools, and AI-curated portfolios. With new
+      models like sentiment analysis, earnings forecasting, and investment
+      path-building, this platform is just getting started.
+    </p>
+  </div>
+
+  <div class="snapshot flex flex-col items-center">
+    <h2 class="text-center font-semibold">Project Snapshot</h2>
+    
+    <div class="details relative flex flex-col w-full">
+      <div class="details-row details-1">
+        <div class="detail-item">
+          <p>Client</p>
+          <p>Analytical Investments LLC</p>
+        </div>
+        <div class="detail-item">
+          <p>Focus</p>
+          <p>Financial intelligence + learning with AI</p>
+        </div>
+      </div>
+
+      <div class="details-row details-2">
+        <div class="detail-item">
+          <p>Stack</p>
+          <p>Next.js, Tailwind, Supabase, GraphQL, Stripe, Zustand</p>
+        </div>
+        <div class="detail-item">
+          <p>Status</p>
+          <p>MVP Live; new modules WIP</p>
+        </div>
+      </div>
+
+      <div class="details-row details-3">
+        <p>Scope</p>
+        <p>UX Research → Design → Frontend → Backend → Testing</p>
+      </div>
+
+      <div class="bg-gradient absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        {Array.from({ length: 5 }).map(() => (
+          <span class="gradient-blob bg-white" />
+        ))}
+      </div>
+    </div>
+
+    <div class="feedback flex flex-col items-center text-center text-foreground font-light">
+      <h4>
+        “We wanted this to feel like the Apple of finance. Your work nailed it
+        — modern, beautiful, and user-first.”
+      </h4>
+      <p>— Client feedback, Analytical Investments LLC</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* * VANILLA CSS 
+   * Strict implementation of SCSS logic for exact responsive matching 
+   */
+
+  /* --- Global Layout --- */
+  .gallery-snapshot {
+    gap: 180px;
+  }
+
+  /* --- Gallery Section --- */
+  .gallery {
+    gap: 48px;
+  }
+
+  .gallery h2 {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+
+  /* Gallery Background Logic */
+  .gallery .background {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: fit-content;
+    padding: 0 16px;
+    opacity: 0.2;
+    filter: blur(47.27556610107422px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+  }
+
+  .blob {
+    border-radius: 100%;
+    display: flex;
+    width: 276px;
+    height: 245px;
+  }
+
+  .background .blob:not(:first-child) {
+    margin-left: -117px;
+  }
+
+  /* Slider sizing (targeting the React component classes via global or direct child) */
+  .image-slider-container :global(.image-slider) {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Default Image width (Desktop) */
+  .image-slider-container :global(.image-slide) {
+    width: 85%;
+  }
+
+  /* --- Next Section --- */
+  .next {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .next h2 {
+    font-size: 24px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  .next p {
+    line-height: 1.25;
+    font-weight: 200;
+  }
+
+  /* --- Snapshot Section --- */
+  .snapshot {
+    gap: 32px;
+  }
+
+  .snapshot h2 {
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  .snapshot .details {
+    gap: 12px;
+  }
+
+  /* Grid Logic for Detail Rows */
+  .details-1,
+  .details-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* Shared Card Styling */
+  .detail-item,
+  .details-3 {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.01);
+    border-radius: 7px;
+    backdrop-filter: blur(12px);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Typography inside cards */
+  .detail-item > :first-child,
+  .details-3 > :first-child {
+    font-size: 12px;
+    font-weight: 100;
+    line-height: 1.2;
+  }
+
+  .detail-item > :last-child,
+  .details-3 > :last-child {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  /* Snapshot Gradient Logic */
+  .snapshot .bg-gradient {
+    display: flex;
+    opacity: 0.2;
+    width: 70%;
+    filter: blur(58.89637756347656px);
+    z-index: 0;
+    justify-content: center;
+  }
+
+  .gradient-blob {
+    border-radius: 100%;
+    display: flex;
+    width: 176px;
+    height: 165px;
+  }
+
+  .bg-gradient .gradient-blob:not(:first-child) {
+    margin-left: -47px;
+  }
+
+  .feedback p {
+    font-size: 12px;
+  }
+
+  /* --- MEDIA QUERIES --- */
+
+  /* Desktop Large: 1260px+ */
+  @media (min-width: 1260px) {
+    .gallery-snapshot {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Laptop: 1023px - 1260px */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .gallery-snapshot {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  /* Tablet: 700px - 1023px */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .gallery-snapshot {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    
+    .image-slider-container :global(.image-slide) {
+      width: 80%;
+    }
+  }
+
+  /* Mobile: < 700px */
+  @media (max-width: 700px) {
+    .gallery-snapshot {
+      gap: 120px;
+    }
+    
+    .gallery h2 {
+      font-size: 24px;
+    }
+
+    .gallery {
+      gap: 16px;
+    }
+
+    .image-slider-container {
+      display: flex;
+    }
+
+    .image-slider-container .background {
+      top: 0%;
+    }
+
+    .image-slider-container :global(.image-slide) {
+      width: 90%;
+    }
+
+    .snapshot {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .snapshot .details {
+      gap: 12px;
+    }
+    
+    .details-1,
+    .details-2 {
+      gap: 12px;
+    }
+
+    .next p {
+      font-size: 12px;
+    }
+  }
+</style>
