@@ -1,0 +1,340 @@
+---
+// ChallengeDeliverables.astro
+import { Image } from 'astro:assets';
+
+// --- MOCK COMPONENTS (Replace with actual imports) ---
+import Ellipse from '@/components/ui/reusable/vs-ellipse.astro';
+// -----------------------------------------------------
+
+const challangeSolution = [
+  {
+    challange: 'Discovery & Research',
+    solution: 'Reviewed competitors like Revolut, Robinhood, and Algo24',
+  },
+  {
+    challange: 'Low-patience user group',
+    solution: 'Introduced animated loaders, AI summaries',
+  },
+  {
+    challange: 'Strategy credibility',
+    solution: 'Built detailed performance views with data clarity',
+  },
+  {
+    challange: 'Compliance',
+    solution: 'Designed license viewer + legal touchpoints without clutter',
+  },
+  {
+    challange: 'Cross-platform parity',
+    solution: 'Unified design language for mobile + web',
+  },
+];
+---
+
+<div class="challange_deliverables flex flex-col w-full text-[#fbfbfb]">
+  
+  {/* --- Top Content Section --- */}
+  <div class="content flex">
+    
+    {/* 1. Challenge & Solution List */}
+    <div class="challange_solution flex flex-col">
+      <h2>Challenges & Solutions</h2>
+      <div class="solution_items flex flex-col gap-6">
+        {challangeSolution.map((item) => (
+          <div class="web_item relative overflow-hidden bg-white/1 rounded-xl backdrop-blur-[10px] p-4">
+            <p class="relative z-10 text-xs font-light opacity-80">
+              <b class="font-semibold">{item.challange}</b>: {item.solution}
+            </p>
+            {/* Blur Blobs */}
+            <span class="blob-left absolute top-1/2 -translate-y-1/2"></span>
+            <span class="blob-right absolute top-1/2 -translate-y-1/2"></span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* 2. Image 2 (Side Image) */}
+    <div class="image2 flex-shrink-0 relative flex items-center">
+      <Image
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-8.png"
+        alt="image2"
+        width={600}
+        height={450}
+        class="object-contain"
+      />
+    </div>
+
+  </div>
+
+  {/* --- Middle Image 1 (Full Width Banner) --- */}
+  <div class="image1 relative flex items-center justify-center">
+    <Image
+      src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-9.png"
+      alt="image3"
+      width={1080}
+      height={624}
+      class="object-cover z-10"
+    />
+    
+    {/* Ellipse */}
+    <div class="ellipse-wrapper absolute pointer-events-none z-0">
+       <Ellipse class="w-full h-full" />
+    </div>
+  </div>
+
+  {/* --- Bottom Deliverables Section --- */}
+  <div class="deliverables flex flex-col relative ">
+    <h2>Deliverables</h2>
+
+    <div class="details relative flex flex-col z-10">
+      
+      {/* Grid Row 1 */}
+      <div class="details_1 grid grid-cols-2 gap-3">
+        <p class="glass-box">65+ high-fidelity mobile app screens</p>
+        <p class="glass-box">63+ high-fidelity web app screens</p>
+        <p class="glass-box">Responsive web app layouts</p>
+        <p class="glass-box">Modular component libraries (Figma + code)</p>
+      </div>
+
+      {/* Grid Row 2 */}
+      <div class="details_2 mt-3">
+        <p class="glass-box">Style guides and tokens (colors, typography, grid)</p>
+      </div>
+
+      {/* Grid Row 3 */}
+      <div class="details_3 mt-3 h-[70px]">
+        <p class="glass-box h-full flex justify-center">Dev-ready handoff files</p>
+      </div>
+
+    </div>
+
+    {/* Background Gradient */}
+    <div class="bg_gradient absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex pointer-events-none -z-0">
+      {Array.from({ length: 5 }).map((_) => (
+        <span></span>
+      ))}
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  /* --------------------------------------------------------- */
+  /* BASE STYLES (Mobile First Defaults)                      */
+  /* --------------------------------------------------------- */
+  .challange_deliverables {
+    gap: 120px;
+  }
+
+  /* --- Top Content Wrapper --- */
+  .content {
+    gap: 120px;
+    flex-direction: column; /* Mobile stack */
+  }
+
+  /* --- Challenge Solution --- */
+  .challange_solution {
+    gap: 24px;
+    padding: 0 16px; /* Mobile padding */
+    order: 2; /* Mobile order (Image2 comes first) */
+  }
+
+  .challange_solution h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  /* Solution Item Styling */
+  .web_item {
+    background: rgba(255, 255, 255, 0.01);
+    box-shadow: 6px 80px 80px 0px rgba(255, 255, 255, 0.01) inset,
+      0px -1px 1px 0px rgba(255, 255, 255, 0.1) inset,
+      0px 1px 1px 0px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  /* Blob Styles */
+  .web_item span {
+    width: 219px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0.5;
+    filter: blur(30px);
+  }
+  .web_item .blob-left { left: -20%; }
+  .web_item .blob-right { right: -33%; }
+
+
+  /* --- Image 2 (Side Image) --- */
+  .image2 {
+    order: 1; /* Mobile order first */
+  }
+  .image2 img {
+    width: 100%; /* Mobile full width */
+  }
+
+
+  /* --- Image 1 (Full Width) --- */
+  .image1 img {
+    width: 100%;
+  }
+
+  .ellipse-wrapper {
+    position: absolute;
+    top: 10%; /* Mobile top */
+    left: 0;
+    transform: translateY(-50%);
+    transform-origin: top center;
+    rotate: -41deg;
+    width: 167px; /* Mobile width */
+    aspect-ratio: 1/2;
+  }
+
+
+  /* --- Deliverables Section --- */
+  .deliverables {
+    gap: 32px;
+  }
+
+  .deliverables h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .details {
+    padding: 0 16px; /* Mobile padding */
+    gap: 12px;
+  }
+
+  /* Glass Box Shared Style */
+  .glass-box {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.01);
+    border-radius: 7px;
+    backdrop-filter: blur(12px);
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  /* Deliverables Background Gradient */
+  .bg_gradient {
+    display: flex;
+    opacity: 0.2;
+    filter: blur(58px); /* Mobile blur */
+  }
+  .bg_gradient span {
+    border-radius: 100%;
+    display: flex;
+    width: 176px; /* Mobile size */
+    height: 165px;
+    background: white;
+  }
+  .bg_gradient span:not(:first-child) {
+    margin-left: -117px;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* TABLET (700px - 1023px)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 700px) {
+    .challange_deliverables { gap: 140px; }
+
+    /* Content Layout Switch */
+    .content {
+      flex-direction: row; /* Side by side */
+      gap: 60px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    
+    .challange_solution {
+      order: unset; /* Reset order */
+      padding: 0;
+    }
+
+    .image2 { order: unset; }
+    .image2 img { width: 420px; }
+
+    /* Image 1 scaling */
+    .image1 img { width: 100svw; height: auto; }
+    .ellipse-wrapper { top: 40%; left: 40%; width: 35%; }
+
+    /* Deliverables Constraints */
+    .deliverables { max-width: 80%; margin: 0 auto; }
+    .details { padding: 0; } /* Remove mobile padding */
+
+    /* Gradient Update */
+    .bg_gradient span { width: 300px; height: 265px; }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* SMALL LAPTOP (1023px - 1259px)                           */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1023px) {
+    .challange_deliverables { gap: 160px; }
+    
+    .content { max-width: 90%; margin: 0 auto; }
+    .image2 img { width: 520px; }
+    
+    .deliverables { max-width: 80%; }
+    .bg_gradient span { width: 320px; height: 285px; }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LAPTOP (1260px - 1440px)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1260px) {
+    .challange_deliverables {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* FIX: Reset Deliverables width to full */
+    .deliverables {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Image 1 specific desktop width */
+    .image1 img { width: 1080px; }
+    .ellipse-wrapper { width: 410px; }
+    
+    /* Gradient Update */
+    .bg_gradient {
+       opacity: 0.15;
+       filter: blur(126px);
+    }
+    .bg_gradient span {
+       width: 380px;
+       height: 355px;
+    }
+    .bg_gradient span:not(:first-child) {
+       margin-left: -253px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LARGE DESKTOP (1281px +)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1281px) {
+    .challange_deliverables {
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 180px;
+    }
+    
+    /* Content Gap Restore */
+    .content { gap: 120px; }
+    .image2 img { width: 600px; }
+  }
+</style>

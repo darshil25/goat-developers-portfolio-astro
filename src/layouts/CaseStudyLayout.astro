@@ -1,0 +1,69 @@
+---
+// src/layouts/CaseStudyLayout.astro
+import Navbar from '../components/ui/navbar/Navbar.astro';
+import Footer from '../components/ui/footer/Footer.astro';
+import '../styles/global.css';
+
+const {
+  title = 'Case Study',
+  description = '',
+  keywords = [],
+  openGraph = {},
+  alternates = {},
+  robots = 'index, follow',
+} = Astro.props;
+
+const og = openGraph || {};
+---
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords.length ? <meta name="keywords" content={keywords.join(', ')} /> : null}
+    <meta name="robots" content={robots} />
+    {alternates.canonical ? <link rel="canonical" href={alternates.canonical} /> : null}
+
+    {/* Open Graph */}
+    <meta property="og:title" content={og.title || title} />
+    <meta property="og:description" content={og.description || description} />
+    <meta property="og:url" content={og.url || ''} />
+    <meta property="og:type" content={og.type || 'article'} />
+    {og.images && og.images[0]?.url ? <meta property="og:image" content={og.images[0].url} /> : null}
+    {og.images && og.images[0]?.width ? <meta property="og:image:width" content={og.images[0].width} /> : null}
+    {og.images && og.images[0]?.height ? <meta property="og:image:height" content={og.images[0].height} /> : null}
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={og.title || title} />
+    <meta name="twitter:description" content={og.description || description} />
+    {og.images && og.images[0]?.url ? <meta name="twitter:image" content={og.images[0].url} /> : null}
+  </head>
+  <body style="font-family: 'Poppins', sans-serif;">
+    <header>
+      <slot name="navbar" />
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <slot name="footer" />
+    </footer>
+  </body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #000000;
+	}
+</style>

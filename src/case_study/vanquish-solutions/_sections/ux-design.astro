@@ -1,0 +1,258 @@
+---
+// UxDesign.astro
+import { Image } from 'astro:assets';
+
+// --- MOCK COMPONENTS (Replace with your actual imports) ---
+// import Ellipse from '../ui/reusable/vs-ellipse.astro';
+// import { SingleStaticWrapper } from '../ui/reusable/border-animator.astro';
+// import ArrowSvg from '../svg/arrow.astro';
+import Ellipse from '@/components/ui/reusable/vs-ellipse.astro';
+import SingleStaticWrapper from '@/components/ui/reusable/border-animator.astro';
+import ArrowSvg from '@/components/svg/ArrowSvg.astro';
+---
+<div class="ux_design text-[#fbfbfb] flex flex-col w-full">
+  
+  {/* --- Process Section --- */}
+  <div class="process flex flex-col items-center">
+    <h2>UX Design Process</h2>
+    
+    <ul class="flex flex-col relative overflow-hidden">
+      <li>
+        <b>Discovery & Research:</b> Reviewed competitors like Revolut, Robinhood, and Algo24
+      </li>
+      <li>
+        <b>User Flows:</b> Crafted mobile-first architecture with 5 core modules
+      </li>
+      <li>
+        <b>Wireframes:</b> Built over 65 High-fidelity layouts
+      </li>
+      <li>
+        <b>UI Design:</b> Designed modular system in Figma with grid + spacing tokens
+      </li>
+      <li>
+        <b>Component Library:</b> Created universal components across platforms
+      </li>
+      <li>
+        <b>Dev Handoff:</b> Detailed Figma handoff with notes, spacing, and API assumptions
+      </li>
+      
+      {/* Ellipse Background */}
+      <div class="ellipse-container process-ellipse absolute pointer-events-none">
+         <Ellipse class="w-full h-full" />
+      </div>
+    </ul>
+
+    {/* Button Wrapper */}
+    <SingleStaticWrapper className="btn_wrapper">
+      <div class="btn-inner flex items-center gap-1 cursor-pointer">
+        <p class="text-xs">Detailed Design Project</p>
+        <ArrowSvg className="size-3" />
+      </div>
+    </SingleStaticWrapper>
+  </div>
+
+  {/* --- Image Section --- */}
+  <div class="image1 relative flex items-end justify-center">
+    <Image
+      src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-7.png"
+      alt="image1"
+      width={716}
+      height={214}
+      class="relative z-10 object-cover"
+    />
+    
+    {/* Background Blur Effect */}
+    <div class="background absolute inset-0 pointer-events-none flex items-center justify-center">
+      {Array.from({ length: 5 }).map((_) => (
+        <span></span>
+      ))}
+    </div>
+  </div>
+
+  {/* --- User Needs Section --- */}
+  <div class="user_needs flex flex-col items-center">
+    <h2>Key User Needs</h2>
+    <ul class="flex flex-col relative overflow-hidden">
+      <li>Effortless KYC onboarding</li>
+      <li>Transparent strategy discovery and analytics</li>
+      <li>Ability to connect/disconnect with one tap</li>
+      <li>Real-time ROI, drawdown, and win-rate tracking</li>
+      <li>Mobile-native performance charts and portfolio control</li>
+      
+      {/* Ellipse Background */}
+      <div class="ellipse-container user-ellipse absolute pointer-events-none">
+        <Ellipse class="w-full h-full" />
+      </div>
+    </ul>
+  </div>
+
+</div>
+
+<style>
+  /* --------------------------------------------------------- */
+  /* BASE STYLES (Mobile First Defaults)                      */
+  /* --------------------------------------------------------- */
+  .ux_design {
+    gap: 120px;
+  }
+
+  /* Shared Container Styles */
+  .process,
+  .user_needs {
+    gap: 24px;
+    padding: 0 16px;
+  }
+
+  .process h2,
+  .user_needs h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  /* Shared List Styles */
+  .process ul,
+  .user_needs ul {
+    width: fit-content; /* Keeps it tight on mobile */
+    max-width: 100%;
+    padding: 12px;
+    gap: 24px;
+    border-radius: 8px;
+    background: #100f13;
+  }
+
+  .process ul li,
+  .user_needs ul li {
+    position: relative;
+    z-index: 10;
+    list-style: disc;
+    margin-left: 16px;
+    line-height: 1.25;
+    font-weight: 200;
+    font-size: 12px;
+  }
+
+  /* --- Button Wrapper --- */
+  .btn_wrapper {
+    padding: 1px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn_wrapper .btn-inner {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* --- Ellipses --- */
+  .process-ellipse {
+    width: 60%;
+    height: 160%;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: blur(12px);
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+  }
+
+  .user-ellipse {
+     width: 258px;
+     height: 501px;
+     rotate: -41deg;
+     transform-origin: bottom center;
+     bottom: 15%;
+     right: -10%;
+     filter: blur(7px);
+     background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+  }
+
+  /* --- Image1 & Gradient --- */
+  .image1 img {
+    width: 100%;
+  }
+  .image1 .background {
+    top: -70%;
+    height: fit-content;
+    padding: 0 16px;
+    opacity: 0.2;
+    filter: blur(47px);
+  }
+  .image1 .background span {
+    border-radius: 100%;
+    display: flex;
+    width: 132px;
+    height: 126px;
+    background: white;
+  }
+  .image1 .background span:not(:first-child) {
+    margin-left: -67px;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* TABLET (700px - 1023px)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 700px) {
+    .ux_design { gap: 140px; }
+
+    /* Fix: Set target width to 1080px, but constrain with max-width */
+    .process ul,
+    .user_needs ul {
+      width: 1080px; 
+      max-width: 80%; /* Constrain on tablet */
+    }
+    
+    .process ul li,
+    .user_needs ul li { font-size: 16px; }
+
+    .image1 img { width: 80%; }
+    .process-ellipse { width: 240px; height: auto; aspect-ratio: 1/2; }
+    .image1 .background { top: -30%; }
+    .image1 .background span { width: 176px; height: 165px; }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LAPTOP (1023px - 1259px)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1023px) {
+    .ux_design { gap: 160px; }
+
+    /* Fix: Constrain width specifically for smaller laptops */
+    .process ul,
+    .user_needs ul {
+      max-width: 768px;
+    }
+    
+    .image1 img { width: 716px; }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* DESKTOP (1260px+) - THIS WAS MISSING                     */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1260px) {
+    .ux_design {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* Fix: RESET the max-width to allow the full 1080px width */
+    .process ul,
+    .user_needs ul {
+      max-width: 1080px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LARGE DESKTOP (1281px+)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1281px) {
+    .ux_design {
+      gap: 180px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  }
+</style>

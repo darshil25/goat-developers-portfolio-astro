@@ -1,0 +1,63 @@
+---
+// src/pages/work/vanquish.astro
+import Navbar from '@/components/ui/navbar/Navbar.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Footer from '@/components/ui/footer/Footer.astro';
+import VSCaseStudy from '../../case_study/vanquish-solutions/VSCaseStudy.astro';
+const metadata = {
+  title:
+    'Vanquish Solutions Case Study - Public Capital Raising, Trading & Compliance SaaS by G.O.A.T.',
+  description:
+    'Discover how G.O.A.T. Developers empowered Vanquish Solutions to efficiently raise capital, ensure compliance, and scale with custom trading, onboarding, and investor access solutions.',
+  keywords: [
+    'Vanquish Solutions',
+    'public capital raising',
+    'trading compliance',
+    'FCA umbrella',
+    'investor onboarding',
+    'algorithmic trading',
+    'custom dashboard',
+    'mobile trading app',
+    'G.O.A.T. Developers',
+    'SaaS case study',
+    'regulated asset management',
+    'business scaling',
+    'white label trading',
+    'financial software',
+    'liquidity networks',
+    'broker setup',
+    'capital raising initiatives',
+    'financial technology',
+    'fintech SaaS',
+    'business branding',
+    'investor access',
+    'trading strategies',
+  ],
+  openGraph: {
+    title:
+      'Vanquish Solutions Case Study - Public Capital Raising, Trading & Compliance SaaS by G.O.A.T.',
+    description:
+      'How G.O.A.T. Developers enabled Vanquish Solutions to raise capital, onboard under FCA licensing, and scale with custom trading solutions.',
+    url: 'https://goatdevelopers.com/case-study/vanquish-solutions',
+    images: [
+      {
+        url: 'https://goatdevelopers.com/images/vanquish-solutions-thumbnail.png', // Replace with actual image URL if available
+        width: 1200,
+        height: 630,
+        alt: 'Vanquish Solutions Thumbnail',
+      },
+    ],
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://goatdevelopers.com/case-study/vanquish-solutions',
+  },
+  robots: 'index, follow',
+};
+---
+
+<CaseStudyLayout {...metadata}>
+  <Navbar slot="navbar" />
+   <VSCaseStudy />
+  <Footer slot="footer" />
+</CaseStudyLayout>

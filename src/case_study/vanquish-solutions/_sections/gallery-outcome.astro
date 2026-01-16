@@ -1,0 +1,276 @@
+---
+import Ellipse from '@/components/ui/reusable/vs-ellipse.astro';
+import ImageSlider from '@/components/ui/reusable/image-slider/image-slider.astro';
+
+const images = [
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-1.png',
+    alt: 'image1',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-2.png',
+    alt: 'image2',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-3.png',
+    alt: 'image3',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-4.png',
+    alt: 'image4',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-5.png',
+    alt: 'image5',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-6.png',
+    alt: 'image6',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-7.png',
+    alt: 'image7',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-8.png',
+    alt: 'image8',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-9.png',
+    alt: 'image9',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/gallery-slider-10.png',
+    alt: 'image10',
+  },
+];
+---
+
+<div class="gallery_outcome flex flex-col w-full text-[#fbfbfb] relative ">
+  <div class="gallery-wrapper relative w-full">
+      
+      <div class="gallery relative flex flex-col w-full z-10">
+        <h2 class="text-center font-semibold">Gallery</h2>
+        
+        <div class="slider-wrapper z-10">
+           <ImageSlider
+             images={images}
+             className="z-1"
+             imageClassName="gallery-image"
+           />
+        </div>
+      </div>
+
+      {/* Ellipse Decor - Moved OUT of .gallery so it can position relative to full width */}
+      <div class="ellipse-wrapper absolute pointer-events-none">
+         <Ellipse class="w-full h-full" />
+      </div>
+
+  </div>
+
+  {/* Gallery Gradient Background */}
+  <!-- <div class="gallery_bg_gradient absolute top-0 left-1/2 -translate-x-1/2 flex pointer-events-none w-full">
+    {Array.from({ length: 5 }).map((_) => (
+      <span></span>
+    ))}
+  </div> -->
+
+  {/* --- Outcome Section --- */}
+  <div class="outcome flex flex-col items-center relative z-10">
+    <h2 class="text-center font-semibold">Outcome</h2>
+    <p class="text-center">
+      The Vanquish app redefines how modern investors engage with copytrading.
+      With a native-feeling mobile app and a scalable web platform, it&apos;s
+      ready for MVP launch, investor demo, and future white-label growth. We
+      balanced AI, data, and ease of use into a single cohesive product.
+    </p>
+
+    {/* Background Gradient */}
+    <div class="bg_gradient absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex pointer-events-none">
+      {Array.from({ length: 5 }).map((_) => (
+        <span></span>
+      ))}
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* --------------------------------------------------------- */
+  /* BASE STYLES (Mobile First Defaults)                      */
+  /* --------------------------------------------------------- */
+  .gallery_outcome {
+    gap: 120px;
+  }
+
+  /* --- Gallery Section --- */
+  .gallery {
+    gap: 16px; /* Mobile gap */
+  }
+
+  .gallery h2 {
+    font-size: 24px; /* Mobile font size */
+    line-height: 1.1;
+  }
+
+  /* Image Size */
+  .gallery :global(.gallery-image) {
+    width: 312px;
+    height: 240px;
+    object-fit: contain;
+  }
+
+  /* Ellipse - Adjusted Positioning */
+  .ellipse-wrapper {
+    position: absolute;
+    top: 0; 
+    right: -20%; /* Push off screen slightly on mobile */
+    transform: translateY(-50%);
+    transform-origin: top center;
+    rotate: -141deg;
+    width: 146px; /* Mobile width */
+    aspect-ratio: 1/2;
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  /* --- Outcome Section --- */
+  .outcome {
+    width: fit-content;
+    margin: 0;
+    padding: 0 16px;
+    gap: 24px;
+  }
+
+  .outcome h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  .outcome p {
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 200;
+  }
+
+  /* Gradient hidden on mobile */
+  .bg_gradient {
+    display: none;
+    opacity: 0.15;
+    filter: blur(126px);
+  }
+  .bg_gradient span {
+    border-radius: 100%;
+    display: flex;
+    width: 320px;
+    height: 255px;
+    background: white;
+  }
+  .bg_gradient span:not(:first-child) {
+    margin-left: -253px;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* TABLET (700px - 1023px)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 700px) {
+    .gallery_outcome { gap: 140px; }
+
+    /* Gallery Updates */
+    .gallery {
+      gap: 48px;
+      width: 80%;
+      margin: 0 auto;
+    }
+    
+    .gallery h2 { font-size: 44px; }
+
+    .gallery :global(.gallery-image) {
+      width: auto; 
+      height: auto;
+      aspect-ratio: 470/361;
+      max-width: 100%;
+    }
+
+    /* Ellipse - Desktop/Tablet Positioning */
+    .ellipse-wrapper {
+      top: 20%;
+      right: -10%; /* Adjust to sit on the edge */
+      width: 35%; /* Relative to full screen width now */
+      max-width: 440px; 
+    }
+
+    /* Outcome Updates */
+    .outcome {
+      width: 80%;
+      margin: 0 auto;
+      padding: 0;
+    }
+    
+    .outcome h2 { font-size: 24px; }
+    .outcome p { font-size: 16px; }
+
+    .bg_gradient { display: flex; }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* SMALL LAPTOP (1023px - 1259px)                           */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1023px) {
+    .gallery_outcome { gap: 160px; }
+
+    .gallery { width: 720px; }
+    
+    .gallery :global(.gallery-image) { width: 680px; }
+
+    .outcome { width: 70%; }
+    
+    /* Fine-tune ellipse for laptop */
+    .ellipse-wrapper {
+        right: 0; /* Align to edge */
+        width: 350px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LAPTOP (1260px - 1440px)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1260px) {
+    /* Center the content container */
+    .gallery_outcome > .outcome, 
+    .gallery_outcome > .gallery-wrapper > .gallery {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .gallery :global(.gallery-image) { width: 720px; }
+    
+    /* Ellipse stays strictly on the right edge */
+    .ellipse-wrapper {
+        right: 0;
+        width: 440px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LARGE DESKTOP (1281px +)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1281px) {
+    .gallery_outcome {
+      gap: 180px;
+      /* We remove max-width on the main container so the ellipse can bleed */
+      /* Content centering is handled above */
+    }
+    
+    .gallery-wrapper {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+  }
+</style>

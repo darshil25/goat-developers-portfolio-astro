@@ -1,0 +1,257 @@
+---
+// TechStack.astro
+
+const techPlatforms = [
+  {
+    title: 'Mobile (Flutter)',
+    items: [
+      'fl_chart, Provider, Shimmer, MVC architecture',
+      'Custom touch-enabled zoom charts',
+      'Animated transitions, dynamic filters',
+      'Real-time backend with Supabase Auth + DB',
+      'Skeleton loaders, custom progress UIs',
+    ],
+  },
+  {
+    title: 'Web (Next.js)',
+    items: [
+      'Next.js for SSR/SSG, TailwindCSS, Framer Motion',
+      'Zustand for API-driven state',
+      'Highcharts & Recharts for visualizations',
+      'Stripe + Supabase for payments and auth',
+      'Future-ready for SEO and performance optimization',
+    ],
+  },
+];
+---
+
+<div class="tech_stack flex flex-col w-full text-[#fbfbfb]">
+  
+  <div class="technology relative z-10 flex flex-col">
+    <h2>Frontend & Backend</h2>
+
+    {/* --- Stack Summary Section 1 --- */}
+    <div class="stack flex flex-col">
+      <h3>Frontend Challenge Summary</h3>
+      <p>
+        We aimed to deliver a native-quality mobile experience while managing
+        heavy financial datasets. On Flutter, custom charting interactions
+        (tooltips, zoom, animations) posed major UX challenges. We solved them
+        with fl_chart, touch-gesture detection, and animation hooks. On web,
+        SSR/SSG was critical for SEO and performance — solved using Next.js
+        and Zustand for efficient API state. Tailored components ensured
+        design consistency across devices.
+      </p>
+    </div>
+
+    {/* --- Stack Summary Section 2 --- */}
+    <div class="stack flex flex-col">
+      <h3>Backend & Integration Insights</h3>
+      <p>
+        To maintain scalability without a traditional backend team, we used
+        Supabase for real-time database, auth, and API generation. For
+        payments, Stripe powered secure billing and subscription flows. This
+        stack allowed us to move fast, stay secure, and focus on user
+        experience rather than server maintenance. We future-proofed the
+        system for integrations with 3rd-party KYC, trading APIs, and
+        notification logic.
+      </p>
+    </div>
+
+    {/* --- Tech Stack Platforms --- */}
+    <h3 class="stack_title">Tech Stack & Architecture</h3>
+    
+    <div class="platform_wrapper flex">
+      {techPlatforms.map((platform) => (
+        <div class="platform flex flex-col">
+          <h4>{platform.title}</h4>
+          <ul class="flex flex-col relative overflow-hidden">
+            {platform.items.map((item) => (
+              <li>{item}</li>
+            ))}
+            
+            {/* Background Blur Effect */}
+            <div class="background absolute inset-0 pointer-events-none">
+              {Array.from({ length: 5 }).map((_) => (
+                <span></span>
+              ))}
+            </div>
+          </ul>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* --------------------------------------------------------- */
+  /* BASE STYLES (Mobile First Defaults)                      */
+  /* --------------------------------------------------------- */
+  .tech_stack {
+    gap: 120px;
+  }
+
+  .technology {
+    gap: 24px;
+    padding: 0 16px;
+  }
+
+  .technology h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  /* --- Stack Text --- */
+  .stack {
+    gap: 8px;
+  }
+  .stack h3 {
+    font-size: 16px; /* Mobile size */
+    line-height: 1.25;
+  }
+  .stack p {
+    font-size: 12px; /* Mobile size */
+    font-weight: 200;
+    line-height: 1.25;
+  }
+
+  /* --- Platform Section --- */
+  .stack_title {
+    margin-top: 0; /* Mobile default */
+    text-align: center; /* Mobile default */
+    font-size: 16px; /* Matching mobile h3 */
+  }
+
+  .platform_wrapper {
+    gap: 24px;
+    flex-direction: column; /* Mobile stack */
+  }
+
+  .platform {
+    flex: 1;
+    gap: 8px;
+  }
+
+  .platform h4 {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .platform ul {
+    padding: 12px;
+    gap: 20px;
+    border-radius: 8px;
+    background: #100f13;
+  }
+
+  .platform ul li {
+    position: relative;
+    z-index: 10;
+    list-style: disc;
+    margin-left: 16px;
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 200;
+  }
+
+  /* --- Background Blur Logic --- */
+  .platform .background {
+    top: -40%;
+    left: 0;
+    height: fit-content;
+    padding: 0 12px;
+    opacity: 0.2;
+    filter: blur(47px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .platform .background span {
+    border-radius: 100%;
+    display: flex;
+    width: 142px;
+    height: 132px;
+    background: white;
+  }
+  .platform .background span:not(:first-child) {
+    margin-left: -117px;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* TABLET (700px - 1023px)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 700px) {
+    .tech_stack {
+      gap: 140px;
+    }
+
+    .technology {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    /* Reset Typography to Desktop sizes */
+    .stack h3, .stack_title {
+      font-size: 18px;
+    }
+    .stack p {
+      font-size: 14px;
+    }
+
+    /* Reset Layouts */
+    .stack_title {
+      margin-top: 56px;
+      text-align: left; /* Reset alignment */
+    }
+
+    .platform_wrapper {
+      flex-direction: row; /* Side by side */
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* SMALL LAPTOP (1023px - 1259px)                           */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1023px) {
+    .tech_stack {
+      gap: 160px;
+    }
+
+    .technology {
+      max-width: 768px;
+      margin: 0 auto;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LAPTOP (1260px - 1440px)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1260px) {
+    .tech_stack {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    
+    .technology {
+      max-width: 100%; /* Release inner constraints */
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LARGE DESKTOP (1281px +)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1281px) {
+    .tech_stack {
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 180px;
+    }
+  }
+</style>

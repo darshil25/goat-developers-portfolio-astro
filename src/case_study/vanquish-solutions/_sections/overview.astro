@@ -1,0 +1,256 @@
+---
+import { Image } from 'astro:assets';
+import Ellipse from '@/components/ui/reusable/vs-ellipse.astro';
+---
+
+<div class="overview flex items-center justify-between w-full">
+  
+  {/* --- Image 2 (Left) --- */}
+  <div class="image2 relative flex-shrink-0">
+    <Image
+      src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-2.png"
+      alt="image2"
+      width={600}
+      height={350}
+      class="object-cover"
+      draggable="false"
+    />
+  </div>
+
+  {/* --- Text Section (Center) --- */}
+  <div class="text text-[#fbfbfb] flex flex-col z-10">
+    <h2>Project Overview</h2>
+    <p>
+      Vanquish is a next-gen mobile and web-based copytrading platform that
+      empowers retail investors to replicate top trader strategies with ease.
+      From intuitive onboarding to AI-powered performance analytics, our goal
+      was to simplify complex trading workflows into beautiful, responsive,
+      and insight-rich user experiences. The product needed to deliver
+      seamless UX across both mobile and desktop platforms, while being
+      scalable for future white-labeling.
+    </p>
+  </div>
+
+  {/* --- Image 1 (Right - Visible on Desktop now) --- */}
+  <div class="image1 relative flex items-center justify-center">
+    {/* Mobile Image */}
+    <img
+      src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-3.png"
+      alt="image3-mobile"
+      class="object-cover z-10 image-mobile"
+      draggable="false"
+    />
+    
+    {/* Gradient Overlay (Mobile Only) */}
+    <span class="gradient-overlay absolute left-1/2 -translate-x-1/2 w-full z-10"></span>
+    
+    {/* Ellipse (Mobile Only) */}
+    <div class="ellipse-wrapper absolute -z-0">
+       <Ellipse class="w-full h-full" />
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .overview {
+    gap: 120px;
+    position: relative;
+  }
+  /* --- Text Styling --- */
+  .text {
+    max-width: 360px;
+    gap: 12px;
+  }
+  .text h2 {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 1.25;
+    opacity: 0.5;
+  }
+  .text p {
+    font-size: 16px;
+    line-height: 1.25;
+    opacity: 0.8;
+  }
+
+  /* --- Image 2 (Phone) Defaults --- */
+  .image2 img {
+    width: 600px;
+    max-width: 100%;
+  }
+
+  /* --- Image 1 (Tablet) Defaults --- */
+  /* By default hidden on "desktop" in original, but we override below */
+  .image1 {
+    display: none; 
+  }
+
+  /* Hide images by default - show based on breakpoint */
+  .image-mobile {
+    display: none;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* DESKTOP & LAPTOP (1024px +)                              */
+  /* */
+  /* This creates the "Next Row" layout for the tablet image  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1024px) {
+    .overview {
+      display: flex;
+      flex-wrap: wrap;       /* Allows items to break to next line */
+      justify-content: space-between;
+      align-items: center;
+      /* Adjust gap: 80px horizontal, 60px vertical (optional refinement) */
+      column-gap: 80px; 
+      row-gap: 60px;
+    }
+
+    .image2 {
+      order: 1; /* First item */
+    }
+
+    .text {
+      order: 2; /* Second item */
+    }
+
+    /* THE FIX: Force Image 1 to next row and center it */
+    .image1 {
+      display: flex;
+      order: 3;              /* Third item */
+      width: 100%;           /* Takes full width to force new line */
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LARGE SCREENS (1281px +)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1281px) {
+    .overview {
+      max-width: 1080px;
+      margin: 0 auto;
+      gap: 120px; /* Restore larger gap for big screens */
+    }
+  }
+
+  /* --------------------------------------------------------- */
+  /* LAPTOP SPECIFIC (1024px - 1280px)                        */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .overview {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* TABLET (700px - 1023px)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .overview {
+      display: flex;
+      flex-wrap: nowrap; /* Keep side-by-side for tablet view if space allows */
+      width: 90%;
+      margin: 0 auto;
+      gap: 40px;
+    }
+    
+    .text p {
+      font-size: 14px;
+    }
+    
+    .image2 {
+      width: 50%;
+    }
+    
+    /* Ensure image1 is hidden or handled for tablet specifically if needed. 
+       Based on original code, it might be hidden here or small. 
+       Let's keep it visible but small like React code implied? 
+       Actually, standard is usually hidden or stacked. 
+       I will set it to hidden here to match "display: none" default unless specified. */
+     .image1 {
+        display: none; 
+     }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* MOBILE (< 700px)                                         */
+  /* --------------------------------------------------------- */
+  @media (max-width: 700px) {
+    .overview {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 120px;
+    }
+
+    .text {
+      gap: 24px;
+      padding: 0 16px;
+      max-width: 100%;
+    }
+    .text h2 {
+      font-size: 20px;
+      opacity: 1;
+    }
+    .text p {
+      font-size: 12px;
+      font-weight: 100;
+      opacity: 1;
+    }
+
+    .image2 {
+      width: 100%;
+    }
+    .image2 img {
+      width: 100%;
+    }
+
+    /* --- MOBILE IMAGE 1 (Visible with Ellipse) --- */
+    .image1 {
+      display: flex;
+      width: 100%;
+      margin-top: 0;
+    }
+    
+    .image-mobile {
+      display: block;
+      width: 310px;
+      height: auto;
+      max-width: 100%;
+    }
+
+    /* Show Decor */
+    .ellipse-wrapper,
+    .gradient-overlay {
+      display: block;
+    }
+    
+    .ellipse-wrapper {
+      top: -8%;
+      left: 0;
+      width: 167px;
+      transform: translateY(-50%);
+      transform-origin: top center;
+      rotate: -41deg;
+      aspect-ratio: 1/2;
+    }
+    
+    .gradient-overlay {
+      bottom: -16px;
+      height: 167px;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgb(0, 0, 0) 93.33%
+      );
+    }
+  }
+</style>

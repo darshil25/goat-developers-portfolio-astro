@@ -1,0 +1,11 @@
+---
+import { cn } from '@/lib/utils'
+
+interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+---
+
+<span class={cn(className, "absolute rounded-[50%] bg-[linear-gradient(179deg,_#fff_3.63%,_rgba(255,255,255,0.5)_18.58%,_#17191e_72.45%)] shadow-[0px_22.46px_12.082px_0px_#fff_inset] filter blur-[16px]")} />

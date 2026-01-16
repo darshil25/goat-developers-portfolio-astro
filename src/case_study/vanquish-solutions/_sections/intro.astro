@@ -1,0 +1,293 @@
+---
+// Import your actual components here. 
+// Since I don't have your file structure, I'm importing Image from Astro
+// and mocking the other components below. Replace these imports with your actual paths.
+import { Image } from 'astro:assets';
+
+// Placeholder imports - REPLACE THESE with your real imports
+import LiveLinkDiv from '@/components/ui/reusable/LiveLinkDiv.astro';
+import Ellipse from '@/components/ui/reusable/vs-ellipse.astro';
+import VanquishLogo from '@/components/ui/reusable/vanquish-logo/vanquish-logo.astro';
+---
+
+<div class="intro relative flex flex-col items-center justify-center">
+  
+  {/* --- Section 1: Header --- */}
+  <div class="first flex flex-col text-white items-center gap-6 relative z-10 px-4 max-[700px]:gap-3">
+    <p class="text-base leading-[1.2] opacity-50 max-[700px]:text-sm">Case Study</p>
+    
+    <div class="my-2">
+      <VanquishLogo brand="vanquish" showText={true} />
+    </div>
+    
+    <p class="leading-[1.4] text-center max-[700px]:text-sm">Unlock Your Trading Potential</p>
+    
+    <a  href="https://www.vanquishholdings.co.uk?utm_source=goatdevelopers&utm_medium=case_study&utm_campaign=vanquish_solutions" >
+      <LiveLinkDiv/>
+    </a>
+    
+    <div class="flex items-center gap-3 mt-2">
+      <p class="p-1 rounded bg-[#100F13]/25 text-[#e8e8e8] text-xs leading-tight">Trading</p>
+      <p class="p-1 rounded bg-[#100F13]/25 text-[#e8e8e8] text-xs leading-tight">Fintech</p>
+    </div>
+  </div>
+
+  {/* --- Section 2: Main Image --- */}
+  <div class="image-wrapper relative flex items-center justify-center w-full">
+    <img
+      src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-1.png"
+      alt="Vanquish Case Study Mockup"
+      width="1080"
+      height="697"
+      draggable="false"
+      class="w-full object-cover h-auto max-w-full md:max-w-180 xl:max-w-270"
+    />
+  </div>
+
+  {/* --- Section 3: Details Grid --- */}
+  <div class="details text-white relative flex items-start justify-between w-full">
+  
+  {/* --- Column 1: Client & Duration --- */}
+  <div class="details_1 flex items-start w-full lg:w-auto">
+    <div class="glass-box">
+      <p>Client</p>
+      <p class="whitespace-nowrap">Vanquish Holdings</p>
+    </div>
+    <div class="glass-box">
+      <p>Duration</p>
+      <p>10 W(Design), Ongoing (Dev)</p>
+    </div>
+  </div>
+
+  {/* --- Column 2: Type, Status, Scope --- */}
+  <div class="details_2 flex items-start w-full">
+    <div class="details_2_1 flex flex-col w-full md:w-auto">
+      <div class="glass-box">
+        <p>Project Type:</p>
+        <p>B2C Copytrading App</p>
+      </div>
+      <div class="glass-box">
+        <p>Status:</p>
+        <p>Design Phase Completed, Development in Progress (MVP Released)</p>
+      </div>
+    </div>
+    
+    <div class="details_2_2 glass-box w-full md:w-auto">
+      <p>Scope:</p>
+      <ul>
+        <li>Strategy</li>
+        <li>UI/UX Design</li>
+        <li>Development</li>
+        <li>QA</li>
+        <li>Deployment</li>
+      </ul>
+    </div>
+  </div>
+
+  {/* --- Column 3: Platform --- */}
+  <div class="details_3 glass-box w-full lg:w-auto">
+    <p>Platform:</p>
+    <p>Mobile (Flutter - iOS & Android), Web App (Next.js)</p>
+  </div>
+
+  {/* --- Gradient Background --- */}
+  <div class="bg_gradient absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10">
+    {Array.from({ length: 5 }).map((_) => (
+      <span></span>
+    ))}
+  </div>
+</div>
+  <div class="ellipse-wrapper absolute z-3">
+    <Ellipse class="w-full h-full " /> 
+  </div>
+
+</div>
+
+<style>
+  /* --- KEEPING YOUR INTRO & ELLIPSE STYLES UNTOUCHED --- */
+  .intro {
+    gap: 120px;
+  }
+  .ellipse-wrapper {
+    top: -32%;
+    left: -10%;
+    width: 272px;
+    aspect-ratio: 1/2;
+    rotate: -41deg;
+  }
+
+  /* --- NEW DETAILS SECTION CSS (Base / Mobile) --- */
+  .details {
+    padding: 0 16px;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .details_1 {
+    display: flex;
+    gap: 12px;
+    flex-direction: row;
+  }
+
+  .details_2 {
+    display: flex;
+    gap: 12px;
+    width: auto;
+    flex-direction: column;
+  }
+
+  .details_2_1 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Glass Box Styling */
+  .glass-box {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.01);
+    border-radius: 7px;
+    backdrop-filter: blur(12px);
+    gap: 8px;
+  }
+
+  .glass-box > :first-child {
+    font-size: 12px;
+    line-height: 1.2;
+    opacity: 0.5;
+  }
+  .glass-box > :last-child {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  /* List Specifics */
+  .glass-box ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .glass-box ul li {
+    list-style: disc;
+    margin-left: 16px;
+    padding-inline-start: 10px;
+    text-indent: -16px;
+  }
+
+  /* Gradient Logic */
+  .bg_gradient {
+    display: flex;
+    opacity: 0.2;
+    filter: blur(58.89px);
+  }
+  .bg_gradient span {
+    border-radius: 100%;
+    display: flex;
+    width: 176px;
+    height: 165px;
+    background: white;
+  }
+  .bg_gradient span:not(:first-child) {
+    margin-left: -117px;
+  }
+
+
+  /* --- BREAKPOINTS --- */
+
+  /* 700 - 1023px */
+  @media (min-width: 700px) {
+    .intro { gap: 140px; }
+    
+    .details {
+      margin: 0 auto;
+      max-width: 80%;
+      /* Reset mobile padding */
+      padding: 0;
+      gap: 40px;
+    }
+
+    /* Details Internal Layout Changes */
+    .details_2 {
+      flex-direction: row;
+      gap: 40px;
+    }
+    .details_2_1 {
+      gap: 24px;
+    }
+    .glass-box ul {
+      gap: 8px;
+    }
+    .bg_gradient span:not(:first-child) {
+      margin-left: -47px;
+    }
+
+    .ellipse-wrapper {
+      top: -50%;
+      width: 420px;
+    }
+  }
+
+  /* 1024 - 1259px */
+  @media (min-width: 1024px) {
+    .intro { gap: 160px; }
+    
+    .details {
+      margin: 0 auto;
+      max-width: 90%;
+      /* Switch to horizontal layout */
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    /* Details Internal Layout Changes */
+    .details_1 {
+      flex-direction: column;
+      gap: 40px;
+    }
+    .details_2 {
+      width: 65%;
+    }
+
+    .ellipse-wrapper {
+      width: 540px;
+    }
+  }
+
+  /* 1260 - 1440px */
+  @media (min-width: 1260px) {
+    .first, .details {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Shrink details_2 width on large screens */
+    .details_2 {
+      width: 40%;
+    }
+  }
+
+  /* 1281px+ */
+  @media (min-width: 1281px) {
+    .intro {
+      gap: 180px;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .ellipse-wrapper {
+      left: -30%;
+      top: -75%;
+      width: 720px;
+    }
+    
+    .details {
+      max-width: 1080px;
+    }
+  }
+</style>

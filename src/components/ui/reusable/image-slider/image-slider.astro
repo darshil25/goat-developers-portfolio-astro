@@ -1,0 +1,116 @@
+---
+// ImageSlider.astro
+import { Image } from 'astro:assets';
+import 'keen-slider/keen-slider.min.css';
+
+// --- Props Interface ---
+interface Props {
+  className?: string;
+  imageClassName?: string;
+  images: { src: string; alt: string }[];
+}
+
+const { className, imageClassName, images } = Astro.props;
+const showButtons = images.length > 1;
+---
+
+<div class:list={["image-slider-wrapper relative w-full mx-auto", className]}>
+  
+  {/* --- Slider Container --- */}
+  {/* If single image, we don't add the 'keen-slider' class to disable logic, 
+      but keep structure consistent. Logic handled in script. */}
+  <div class:list={["slider-container rounded-md overflow-hidden", { "keen-slider": showButtons }]}>
+    {images.map((img, idx) => (
+      <div class:list={["relative flex justify-center items-center", { "keen-slider__slide": showButtons }]}>
+        <Image
+          src={img.src}
+          alt={img.alt || `Slide ${idx + 1}`}
+          width={375}
+          height={281}
+          class:list={["object-contain rounded-md", imageClassName]}
+        />
+        {/* Gradient Overlay */}
+        <span class="slider_gradient absolute bottom-0 left-1/2 -translate-x-1/2 w-full"></span>
+      </div>
+    ))}
+  </div>
+
+  {/* --- Navigation Buttons --- */}
+  {showButtons && (
+    <>
+      <button class="prev-btn navigate_btns z-10 absolute ml-4 bottom-4 left-0 flex items-center justify-center size-16 rounded-full bg-[#100f13] cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rotate-180">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="next-btn navigate_btns z-10 absolute mr-4 bottom-4 right-0 flex items-center justify-center size-16 rounded-full bg-[#100f13] cursor-pointer">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </>
+  )}
+</div>
+
+<style>
+  /* --- Gradient Overlay --- */
+  .slider_gradient {
+    height: 40%;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 12.25%,
+      rgba(0, 0, 0, 1) 94.55%
+    );
+  }
+
+  /* --- Button Styling --- */
+  .navigate_btns svg {
+    width: 40px;
+    height: 40px;
+    stroke: white; /* Ensure visibility */
+  }
+
+  /* --- Mobile Breakpoint (Matching SCSS) --- */
+  @media (max-width: 800px) {
+    .navigate_btns {
+      width: 40px;
+      height: 40px;
+    }
+    .navigate_btns svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+</style>
+
+<script>
+  // Import Keen Slider JS
+  import KeenSlider from 'keen-slider';
+
+  // Find all slider wrappers on the page (supports multiple sliders)
+  const sliders = document.querySelectorAll('.image-slider-wrapper');
+
+  sliders.forEach((wrapper) => {
+    const sliderContainer = wrapper.querySelector('.keen-slider') as HTMLElement;
+    const prevBtn = wrapper.querySelector('.prev-btn');
+    const nextBtn = wrapper.querySelector('.next-btn');
+
+    // Only initialize if the container has the 'keen-slider' class (implying > 1 image)
+    if (sliderContainer) {
+      const slider = new KeenSlider(sliderContainer, {
+        loop: true,
+        mode: 'free',
+        slides: { perView: 1, spacing: 10 },
+      });
+
+      // Bind Buttons
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => slider.prev());
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => slider.next());
+      }
+    }
+  });
+</script>

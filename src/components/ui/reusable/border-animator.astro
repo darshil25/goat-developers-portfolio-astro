@@ -1,0 +1,73 @@
+---
+// SingleStaticWrapper.astro
+interface Props {
+  className?: string;
+  borderRadius?: string;
+  borderWidth?: string;
+  borderBackground?: string;
+  id?: string; // Added ID for script attachment if needed
+}
+
+const {
+  className,
+  borderRadius = 'rounded-md',
+  borderWidth = '1px',
+  borderBackground = 'linear-gradient(90deg, #000000 0%, #eeeeee 17%, #a6a6a6 88%, #000000 100%)',
+  id,
+} = Astro.props;
+
+const style = {
+  '--border-bg': borderBackground,
+  '--border-width': borderWidth,
+};
+---
+
+<button
+  id={id}
+  class:list={["static_wrapper", className, borderRadius]}
+  style={style}
+>
+  <div class="content">
+    <slot />
+  </div>
+</button>
+
+<style>
+  .static_wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    isolation: isolate; /* Prevents bleed-through */
+    background: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer; /* Added because it is a button */
+  }
+
+  .static_wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    padding: var(--border-width); 
+    background: var(--border-bg);
+    border-radius: inherit;
+
+    /* Masking to cut out the inner content area */
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Ensure the child stays transparent and above the border */
+  .content {
+    position: relative;
+    z-index: 1;
+    display: block;
+    text-align: center;
+    background: transparent; 
+  }
+</style>

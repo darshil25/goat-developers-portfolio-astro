@@ -1,0 +1,246 @@
+---
+import { Image } from 'astro:assets';
+// Placeholder for Ellipse component
+import Ellipse from '@/components/ui/reusable/vs-ellipse.astro';
+// const Ellipse = "div"; 
+---
+
+<div class="goal_objective flex flex-col w-full">
+  
+  {/* --- Image 4 (Top Banner - Hidden on Mobile) --- */}
+  <div class="image4 flex items-center justify-center">
+    <Image
+      src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-4.png"
+      alt="image1"
+      width={753}
+      height={320}
+      draggable="false"
+    />
+  </div>
+
+  {/* --- Content Wrapper --- */}
+  <div class="content flex text-[#fbfbfb] items-center justify-between">
+    
+    {/* --- Text Section --- */}
+    <div class="text flex flex-col items-center z-10">
+      <h2>Goals & Objectives</h2>
+      <ul class="flex flex-col relative overflow-hidden w-full">
+        <li>Reimagine copytrading UX for mobile-first users</li>
+        <li>Build a modular, reusable component library</li>
+        <li>Ensure production-readiness with dev-handoff precision</li>
+        <li>Combine real-time data, performance charts, and AI summaries</li>
+        <li>Design for long-term scalability across devices and partners</li>
+        
+        {/* Ellipse inside the list */}
+        <div class="ellipse-wrapper absolute pointer-events-none">
+            <Ellipse class="w-full h-full" />
+        </div>
+      </ul>
+    </div>
+
+    {/* --- Image 1 (Phone Mockup) --- */}
+    <div class="image1 relative flex items-center justify-center flex-shrink-0">
+      <Image
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/vanquish-mockup-6.png"
+        alt="image5"
+        width={480}
+        height={417}
+        class="object-cover"
+        draggable="false"
+      />
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* --------------------------------------------------------- */
+  /* BASE STYLES (Mobile First Defaults)                      */
+  /* --------------------------------------------------------- */
+  
+  /* Layout Gaps */
+  .goal_objective {
+    gap: 120px; /* Mobile gap */
+  }
+  
+  .content {
+    flex-direction: column;
+    gap: 120px;
+    margin: 0 auto;
+  }
+
+  /* Image 4 is hidden on mobile */
+  .image4 {
+    display: none;
+  }
+
+  /* Text Styling */
+  .text {
+    gap: 24px;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  .text h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  /* List Styling */
+  .text ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Mobile gap default (overridden to 2px below <700) */
+    padding: 12px;
+    background: #100f13;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .text ul li {
+    list-style: disc;
+    margin-left: 16px;
+    line-height: 1.25;
+    font-weight: 300;
+    z-index: 10; /* Ensure text is above ellipse */
+  }
+
+  /* Image 1 Styling */
+  .image1 img {
+    object-fit: cover;
+  }
+
+  /* Ellipse Styling */
+  .ellipse-wrapper {
+    width: 258px;
+    aspect-ratio: 1/2;
+    transform-origin: top center;
+    rotate: -41deg;
+    filter: blur(24px);
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0) 70%); /* Mock visual */
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* MOBILE SPECIFIC (< 700px)                                */
+  /* --------------------------------------------------------- */
+  @media (max-width: 700px) {
+    .text ul {
+      gap: 2px;
+    }
+    .text ul li {
+      font-size: 12px;
+      font-weight: 200;
+    }
+    
+    /* Mobile Ellipse Position */
+    .ellipse-wrapper {
+      left: 0;
+      top: 75%;
+    }
+
+    .image1 img {
+      width: 390px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* TABLET (700px - 1023px)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 700px) {
+    /* Reveal Image 4 */
+    .image4 {
+      display: flex;
+    }
+    .image4 img {
+      width: 80%; /* Tablet width */
+    }
+
+    .goal_objective {
+      gap: 140px;
+    }
+
+    .content {
+      flex-direction: row; /* Switch to row */
+      width: 90%;
+      margin: 0 auto;
+      gap: 120px; /* Default gap */
+    }
+    
+    .text ul {
+        gap: 4px;
+    }
+    .text ul li {
+      font-size: 14px;
+    }
+
+    /* Ellipse Position Desktop/Tablet */
+    .ellipse-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 30%;
+    }
+
+    .image1 {
+        width: 45%;
+    }
+    .image1 img {
+      width: 100%;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* SMALL LAPTOP (1023px - 1259px)                           */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1023px) {
+    .goal_objective {
+      gap: 160px;
+    }
+    
+    .content {
+      width: 80%;
+    }
+
+    /* Reset image sizes for larger screens */
+    .image4 img {
+        width: 753px; /* Fixed width */
+    }
+    
+    .image1 {
+        width: auto;
+    }
+    .image1 img {
+        width: 480px; /* Fixed width */
+    }
+    
+    /* Reset text sizes */
+    .text ul {
+        gap: 12px;
+    }
+    .text ul li {
+        font-size: 16px; /* Default inherited or implicit */
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LAPTOP / DESKTOP (1260px +)                              */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1260px) {
+    .goal_objective {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1281px) {
+    .goal_objective {
+      max-width: 1280px;
+      gap: 180px;
+    }
+  }
+</style>

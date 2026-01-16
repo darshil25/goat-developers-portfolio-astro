@@ -1,0 +1,58 @@
+---
+// src/pages/work/vanquish.astro
+import Navbar from '@/components/ui/navbar/Navbar.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Footer from '@/components/ui/footer/Footer.astro';
+import AICaseStudy from '../../case_study/analytical-investments/AICaseStudy.astro';
+
+const metadata = {
+  title:
+    'Analytical Investment Case Study - AI-Powered Financial News, Learning, and Charting by G.O.A.T.',
+  description:
+    'Discover how Analytical Investment delivers AI-summarized financial news, interactive learning resources for all levels, and real-time TradingView chart integration—empowering investors to make timely, informed decisions.',
+  keywords: [
+    'Analytical Investment',
+    'AI financial news',
+    'investment learning',
+    'TradingView charts',
+    'financial education',
+    'investor tools',
+    'G.O.A.T. Developers',
+    'fintech SaaS',
+    'financial analytics',
+    'stock market visualization',
+    'beginner finance',
+    'intermediate investing',
+    'financial reporting',
+    'AI news summarization',
+    'trading strategies',
+    'investment platform',
+  ],
+  openGraph: {
+    title:
+      'Analytical Investment Case Study - AI-Powered Financial News, Learning, and Charting by G.O.A.T.',
+    description:
+      'How Analytical Investment uses AI to summarize financial news, educate investors, and provide advanced charting tools.',
+    url: 'https://goatdevelopers.com/case-study/analytical-investment',
+    images: [
+      {
+        url: 'https://goatdevelopers.com/images/analytical-investment-thumbnail.png', // Replace with actual image URL if available
+        width: 1200,
+        height: 630,
+        alt: 'Analytical Investment Thumbnail',
+      },
+    ],
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://goatdevelopers.com/case-study/analytical-investment',
+  },
+  robots: 'index, follow',
+};
+---
+
+<CaseStudyLayout {...metadata}>
+  <Navbar slot="navbar" />
+   <AICaseStudy />
+  <Footer slot="footer" />
+</CaseStudyLayout>

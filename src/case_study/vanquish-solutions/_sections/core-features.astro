@@ -1,0 +1,301 @@
+---
+import { Image } from 'astro:assets';
+import Ellipse from '@/components/ui/reusable/vs-ellipse.astro';
+import ImageSlider from '@/components/ui/reusable/image-slider/image-slider.astro';
+// ------------------------------
+
+const images = [
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/mobile_slider_1.png',
+    alt: 'image1',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/mobile_slider_2.png',
+    alt: 'image2',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/mobile_slider_4.png',
+    alt: 'image4',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/mobile_slider_5.png',
+    alt: 'image5',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/mobile_slider_6.png',
+    alt: 'image6',
+  },
+  {
+    src: 'https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/vanquish-solutions/mobile_slider_7.png',
+    alt: 'image7',
+  },
+];
+
+const features = {
+  mobile: [
+    'Onboarding + Profile Personalization',
+    'Strategy Marketplace with Filters',
+    'Live Portfolio + Performance Analytics',
+    'ROI / PnL Charts with Tooltips & Zoom',
+    'Notifications + AI Signal Alerts',
+    'Custom Calendars, Progress Bars, and Interactive UI',
+    'Real-time Updates (Supabase)',
+  ],
+  web: [
+    'Public + Logged-in Dashboards',
+    'High-performance strategy pages',
+    'Rich data visualizations (Highcharts + Recharts)',
+    'ROI / PnL Charts with Tooltips & Zoom',
+    'Secure Auth, Payment Gateways',
+    'SEO-optimized pages and transitions',
+  ],
+};
+---
+
+<div class="core_features text-[#fbfbfb] flex flex-col w-full">
+  
+  {/* --- Features Section --- */}
+  <div class="features flex flex-col items-center">
+    <h2>Core Features</h2>
+    
+    <div class="mobile_web flex justify-center w-full">
+      
+      {/* --- Mobile Column --- */}
+      <div class="mobile flex flex-col flex-1 gap-3">
+        <h3>Mobile App (Flutter)</h3>
+        <div class="mobile_features flex flex-col gap-4">
+          {features.mobile.map((feature, idx) => (
+            <div class="mobile-item relative overflow-hidden rounded-xl backdrop-blur-[10px] p-2 pb-4">
+              <p class="relative z-10 text-sm font-semibold opacity-80">{feature}</p>
+              <div class="ellipse-container absolute inset-0 pointer-events-none z-0">
+                 <Ellipse class="vs-ellipse" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* --- Web Column --- */}
+      <div class="web flex flex-col flex-1 gap-3">
+        <h3>Web App</h3>
+        <div class="web_features flex flex-col gap-4">
+          {features.web.map((feature) => (
+            <div class="web-item relative overflow-hidden bg-white/5 rounded-xl backdrop-blur-[10px] p-4">
+              <p class="relative z-10 text-sm font-semibold opacity-80">{feature}</p>
+              <span class="absolute top-1/2 -translate-y-1/2 -left-1/5"></span>
+              <span class="absolute top-1/2 -translate-y-1/2 -right-1/3"></span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {/* --- Image Slider Section --- */}
+  <div class="image_slider_container relative w-full flex justify-center">
+    {/* Background Blur Effect */}
+    <div class="background absolute inset-0 pointer-events-none">
+      {Array.from({ length: 5 }).map((_) => (
+        <span></span>
+      ))}
+    </div>
+
+    {/* Slider Component */}
+    <div class="slider-wrapper">  
+        {/* Replace this div with <ImageSlider images={images} ... /> */}
+        <div class="mock-slider w-full h-full flex gap-2 overflow-hidden">
+            <ImageSlider images={images} client:visible />
+        </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* --------------------------------------------------------- */
+  /* BASE STYLES (Mobile First Defaults)                      */
+  /* --------------------------------------------------------- */
+  .core_features {
+    gap: 120px;
+    padding: 0 16px;
+  }
+
+  .features {
+    gap: 32px;
+  }
+
+  .features h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  /* Layout for columns */
+  .mobile_web {
+    width: fit-content;
+    flex-direction: column; /* Stack on mobile */
+    gap: 32px;
+  }
+
+  .mobile h3, .web h3 {
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  /* --- Mobile Item (Complex Gradient Border) --- */
+  .mobile-item {
+    background: rgba(255, 255, 255, 0.01);
+    /* Internal shadow matches SCSS */
+    box-shadow: 6px 80px 80px 0px rgba(255, 255, 255, 0.01) inset,
+      0px -1px 1px 0px rgba(255, 255, 255, 0.1) inset,
+      0px 1px 1px 0px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  /* The Gradient Border Mask Logic */
+  .mobile-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    padding-bottom: 0.5px; /* The border thickness */
+    background: linear-gradient(90deg, #000000 60%, #eeeeee 75%, #000000 90%);
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Specific Ellipse Positioning (Nth-child logic) */
+  .mobile-item .vs-ellipse {
+    position: absolute;
+    width: 60px;
+    height: 120px;
+    filter: blur(12px);
+    z-index: 0;
+  }
+  
+  .mobile_features > div:nth-child(1) .vs-ellipse { bottom: -32px; left: 24px; }
+  .mobile_features > div:nth-child(2) .vs-ellipse { bottom: -32px; right: 80px; }
+  .mobile_features > div:nth-child(3) .vs-ellipse { bottom: -32px; left: -24px; }
+  .mobile_features > div:nth-child(4) .vs-ellipse { top: 80%; left: 24px; }
+  .mobile_features > div:nth-child(5) .vs-ellipse { top: -30%; left: 24px; }
+  .mobile_features > div:nth-child(6) .vs-ellipse { top: -80%; left: 24px; }
+  .mobile_features > div:nth-child(7) .vs-ellipse { top: -40%; right: 48px; }
+
+
+  /* --- Web Item (Blur Blobs) --- */
+  .web-item {
+    /* Shadow match SCSS */
+    box-shadow: 6px 80px 80px 0px rgba(255, 255, 255, 0.01) inset,
+      0px -1px 1px 0px rgba(255, 255, 255, 0.1) inset,
+      0px 1px 1px 0px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  .web-item span {
+    width: 219px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0.5;
+    filter: blur(30px);
+  }
+
+  /* --- Slider Background --- */
+  .image_slider_container .background {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: fit-content;
+    padding: 0 16px;
+    opacity: 0.2;
+    filter: blur(47px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .image_slider_container .background span {
+    border-radius: 100%;
+    display: flex;
+    width: 176px;
+    height: 165px;
+    background: white;
+  }
+  .image_slider_container .background span:not(:first-child) {
+    margin-left: -117px;
+  }
+
+  /* Slider Width Defaults (Mobile) */
+  .slider-wrapper {
+    width: 100%;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* TABLET (700px - 1023px)                                  */
+  /* --------------------------------------------------------- */
+  @media (min-width: 700px) {
+    .core_features {
+      gap: 140px;
+      padding: 0; /* Reset padding */
+    }
+
+    .mobile_web {
+      max-width: 85%;
+      margin: 0 auto;
+      flex-direction: row; /* Switch to row */
+    }
+
+    .slider-wrapper {
+      width: 680px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* SMALL LAPTOP (1023px - 1259px)                           */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1023px) {
+    .core_features {
+      gap: 160px;
+    }
+
+    .mobile_web {
+      max-width: 768px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LAPTOP (1260px - 1440px)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1260px) {
+    .core_features {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .mobile_web {
+      width: 1080px;
+      max-width: 100%;
+    }
+
+    .slider-wrapper {
+      width: 750px;
+    }
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* LARGE DESKTOP (1281px +)                                 */
+  /* --------------------------------------------------------- */
+  @media (min-width: 1281px) {
+    .core_features {
+      max-width: 1280px;
+      margin: 0 auto; /* Ensure centering */
+    }
+  }
+</style>

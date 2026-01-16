@@ -1,0 +1,69 @@
+
+---
+import { cn } from '@/lib/utils';
+import Intro from './_sections/intro.astro';
+import Overview from './_sections/overview.astro';
+import GoalObjective from './_sections/goal-objective.astro';
+import CoreFeatures from './_sections/core-features.astro';
+import UxDesign from './_sections/ux-design.astro';
+import TechStack from './_sections/tech-stack.astro';
+import ChallengeDeliverables from './_sections/challenge-deliverables.astro';
+import GalleryOutcome from './_sections/gallery-outcome.astro';
+---
+
+
+<main class={cn("main", 'relative flex flex-col overflow-hidden')}>
+  <Intro />
+  <Overview />
+  <GoalObjective />
+  <CoreFeatures />
+  <UxDesign />
+  <TechStack />
+  <ChallengeDeliverables />
+  <GalleryOutcome />
+</main>
+
+
+<style>
+  .main {
+  padding-top: 25%;
+  padding-bottom: 224px;
+  gap: 180px;
+  /* background-color: red; */
+}
+
+/* Media Queries */
+
+/* 1260 - 1440 */
+@media (min-width: 1259px) and (max-width: 1440px) {
+  .main {
+    // padding-top: 320px;
+    padding-bottom: 200px;
+  }
+}
+
+/* 1024 - 1260 */
+@media (min-width: 1023px) and (max-width: 1259px) {
+  .main {
+    // padding-bottom: 160px;
+  }
+}
+
+/* 700 - 1024 */
+@media (min-width: 700px) and (max-width: 1023px) {
+  .main {
+    // padding-top: 200px;
+    padding-bottom: 120px;
+  }
+}
+
+/* Device below 700px */
+@media (max-width: 700px) {
+  .main {
+    padding-top: 96px;
+    padding-bottom: 100px;
+    gap: 120px;
+  }
+}
+
+</style>
