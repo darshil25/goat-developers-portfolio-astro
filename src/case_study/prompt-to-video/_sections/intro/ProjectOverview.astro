@@ -1,0 +1,41 @@
+---
+// components/ProjectOverview.astro
+---
+
+<div class="overview text-[#fbfbfb]/80 flex flex-col items-center">
+  <h2>Project Overview</h2>
+  <p>
+    We partnered with an AI-focused company to design and implement the
+    frontend of a prompt-to-video generation tool. Our team created the user
+    experience, interface design system, and responsive frontend
+    development, ensuring seamless handoff and integration with the client’s
+    backend.
+  </p>
+</div>
+
+<style>
+  .overview {
+    width: 90%;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .overview h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  .overview p {
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 200;
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .overview p {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,332 @@
+---
+// Intro.astro
+import LiveLinkDiv from '@/components/ui/reusable/LiveLinkDiv.astro';
+import AiSparkle from '@/components/svg/ai-sparkle.astro';
+import DesignInfo from '@/design/_sections/veltrix-page.astro';
+
+// Data Object for DesignInfo
+const info = {
+  block1: {
+    items: [
+      {
+        label: 'Industry',
+        value: 'Health-Tech',
+      },
+      {
+        label: 'Duration',
+        value: '32 Weeks',
+      },
+    ],
+  },
+  block2: {
+    items: [
+      {
+        label: 'Status:',
+        value: 'Live – anantradio.com',
+      },
+      {
+        label: 'Project Type:',
+        value: 'Internal SaaS Product',
+      },
+    ],
+    scope: {
+      label: 'Scope',
+      // In Astro, we can pass HTML strings or slots. 
+      // For this specific React component prop, passing the raw React node 
+      // might require the component to handle children or a specific prop format.
+      // Assuming DesignInfo can accept a standard list or you adapt it.
+      // Here we pass it as a simple object to match the prop structure.
+      customScopeNode: true, 
+    },
+  },
+};
+---
+
+<div class="intro-wrapper">
+  <div class="intro flex flex-col">
+    
+    <div class="first flex flex-col items-center">
+      <p>Case Study</p>
+      <img
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/front-end-static/anant-radio-logo.svg"
+        alt="logo"
+        width="313"
+        height="52"
+        class="logo object-contain"
+      />
+      <p class="intro-text text-center">
+        Anantradio&apos;s Leap into the Future of Health-Tech
+      </p>
+      
+      <a href="https://anantradio.com/" target="_blank" rel="noopener noreferrer">
+        <LiveLinkDiv client:visible />
+      </a>
+      
+      <div class="tags flex items-center justify-center flex-wrap max-w-[262px]">
+        <span class="flex items-center gap-1">
+          <AiSparkle class="size-4" />
+          <p>AI</p>
+        </span>
+        <p>Health-Tech</p>
+        <p>SAAS</p>
+        <p>Cloud Based</p>
+        <p>In-House</p>
+        <p>React</p>
+      </div>
+    </div>
+
+    <div class="image1 relative z-1 flex items-center justify-center">
+      <img
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-design-1.png"
+        alt="image1"
+        width="960"
+        height="540"
+        class="object-cover"
+        draggable="false"
+      />
+      
+      <div class="bg-gradient absolute top-0 left-1/2 -translate-x-1/2 flex items-center">
+        {Array.from({ length: 5 }).map(() => (
+          <span class="bg-white rounded-[50%] aspect-[1.07]" />
+        ))}
+      </div>
+    </div>
+
+    <div class="info-wrapper relative">
+      <DesignInfo {...info} bg="#FFFFFF03" client:visible>
+        <ul slot="scope" class=" text-[#fbfbfb">
+          <li>Full-cycle</li>
+          <li>Strategy</li> 
+          <li>Design</li>
+          <li>Development</li>
+          <li>QA</li>
+          <li>Deployment</li>
+        </ul>
+      </DesignInfo>
+
+      <div class="bg-gradient z-10 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+        <span class="bg-[#ea87a2]" />
+        <span class="bg-[#e3b26d]" />
+        <span class="bg-white" />
+        <span class="bg-[#8e7fe6]" />
+        <span class="bg-[#f0b3ba]" />
+      </div>
+    </div>
+  </div>
+
+  <img
+    src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/aradio-case-study-bg.svg"
+    alt=""
+    width="860"
+    height="1232"
+    class="bg-overlay absolute top-0 left-1/2 -translate-x-1/2"
+  />
+</div>
+
+<style>
+  /* * VANILLA CSS 
+   * Exact Responsive Logic from SCSS
+   */
+
+  .intro-wrapper {
+    position: relative;
+    padding-top: 20%;
+  }
+
+  /* Target the background overlay image specifically */
+  .intro-wrapper > .bg-overlay {
+    width: 70%;
+  }
+
+  .intro {
+    gap: 180px;
+  }
+
+  /* --- First Section --- */
+  .first {
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .first > p:first-child {
+    font-size: 16px;
+    line-height: 1.2;
+    opacity: 0.5;
+  }
+
+  .first .intro-text {
+    line-height: 1.4;
+    width: 65%;
+    max-width: 222px;
+  }
+
+  .first .logo {
+    aspect-ratio: 6.019;
+    width: 313px;
+  }
+
+  .first .tags {
+    gap: 12px;
+  }
+
+  .first .tags > * {
+    padding: 4px;
+    border-radius: 4px;
+    background: rgba(16, 15, 19, 0.25);
+    color: #e8e8e8;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  /* --- Image1 Section --- */
+  .image1 {
+    margin-top: 100px;
+  }
+
+  .image1 img {
+    position: relative;
+    z-index: 1;
+    width: 960px;
+  }
+
+  /* Complex Gradient Logic */
+  .image1 .bg-gradient {
+    opacity: 0.15;
+    top: -30%;
+    filter: blur(126.77246856689453px);
+  }
+
+  .image1 .bg-gradient span {
+    width: 380px;
+  }
+
+  /* Negative Margin Overlap */
+  .image1 .bg-gradient span:not(:first-child) {
+    margin-left: -253px;
+  }
+
+  /* --- Info Wrapper Section --- */
+  .info-wrapper .bg-gradient {
+    display: flex;
+    opacity: 0.3;
+    filter: blur(81.77246856689453px);
+  }
+
+  .info-wrapper .bg-gradient span {
+    aspect-ratio: 1.07;
+    border-radius: 50%;
+    width: 244.39px;
+  }
+
+  .info-wrapper .bg-gradient span:not(:first-child) {
+    margin-left: -163px;
+  }
+
+  /* --- MEDIA QUERIES --- */
+
+  /* Desktop Large: 1260px+ */
+  @media (min-width: 1260px) {
+    .intro {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Extra Large Screens */
+  @media (min-width: 1920px) {
+    .intro-wrapper {
+      padding-top: 26%;
+    }
+  }
+
+  /* Laptop: 1023px - 1260px */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .intro {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    
+    .image1 {
+      margin-top: 64px;
+    }
+  }
+
+  /* Tablet: 700px - 1023px */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .intro-wrapper > .bg-overlay {
+      height: 920px;
+    }
+    
+    .intro {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .image1 {
+      margin-top: 32px;
+    }
+
+    .image1 .bg-gradient {
+      top: -20%;
+    }
+
+    .image1 .bg-gradient span {
+      width: 280px;
+    }
+
+    .image1 .bg-gradient span:not(:first-child) {
+      margin-left: -180px;
+    }
+  }
+
+  /* Mobile: < 700px */
+  @media (max-width: 700px) {
+    .intro-wrapper {
+      padding-top: 25%;
+    }
+
+    .intro-wrapper > .bg-overlay {
+      width: auto;
+      height: 820px;
+    }
+
+    .intro {
+      gap: 120px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .first .logo {
+      width: 225px;
+    }
+
+    .first .intro-text {
+      font-size: 14px;
+    }
+
+    .image1 {
+      margin-top: 0;
+    }
+
+    /* Hide gradient on mobile per SCSS */
+    .image1 .bg-gradient {
+      display: none;
+    }
+
+    /* Adjust blur and sizes for Info gradient on mobile */
+    .info-wrapper .bg-gradient {
+      filter: blur(58.89637756347656px);
+    }
+
+    .info-wrapper .bg-gradient span {
+      width: 176px;
+    }
+
+    .info-wrapper .bg-gradient span:not(:first-child) {
+      margin-left: -117px;
+    }
+  }
+</style>

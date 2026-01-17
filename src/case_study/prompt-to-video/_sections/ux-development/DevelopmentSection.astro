@@ -1,0 +1,31 @@
+---
+// components/DevelopmentSection.astro
+import UXDevelopmentImage1 from './UXDevelopmentImage1.astro';
+import DevelopmentText from './DevelopmentText.astro';
+---
+
+<div class="development flex">
+  <UXDevelopmentImage1 />
+  <DevelopmentText />
+</div>
+
+<style>
+  .development {
+    gap: 80px;
+  }
+
+  /* Responsive Layout */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .development {
+      gap: 120px;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .development {
+      gap: 120px;
+      flex-direction: column;
+    }
+  }
+</style>

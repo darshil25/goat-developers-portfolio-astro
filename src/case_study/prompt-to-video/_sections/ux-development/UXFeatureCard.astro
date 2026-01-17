@@ -1,0 +1,49 @@
+---
+// components/UxFeatureCard.astro
+interface Props {
+  title: string;
+  points: string[];
+}
+
+const { title, points } = Astro.props;
+---
+
+<div class="ux-feature-card flex flex-col">
+  <h4>{title}</h4>
+  <ul class="flex flex-col gap-4 p-4 rounded-xl border-[0.5px] border-[#ebe6e2]">
+    {points.map((point) => (
+      <li>{point}</li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .ux-feature-card {
+    gap: 12px;
+    color: #fbfbfb;
+    font-size: 12px;
+  }
+
+  .ux-feature-card h4 {
+    font-weight: 600;
+  }
+
+  .ux-feature-card ul {
+    flex: 1;
+  }
+
+  .ux-feature-card ul li {
+    list-style: disc;
+    margin-left: 16px;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 700px) {
+    .ux-feature-card {
+      gap: 8px;
+    }
+    .ux-feature-card ul {
+      padding: 16px 8px;
+    }
+  }
+</style>

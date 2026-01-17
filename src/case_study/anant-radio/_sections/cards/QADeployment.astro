@@ -1,0 +1,135 @@
+---
+// QADeployment.astro
+import { Image } from 'astro:assets';
+---
+
+<div class="qa-deployment">
+  <div class="card flex items-center">
+    <div class="image flex items-center justify-center">
+      <Image
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-design-grid-2.png"
+        alt="aradio-challenge"
+        width={417}
+        height={314}
+      />
+    </div>
+    <div class="content flex flex-col">
+      <h3 class="font-thin leading-tight text-[#fbfbfb] text-xl">
+        Testing, QA & Deployment
+      </h3>
+      <div class="content-custom flex flex-col text-[#fbfbfb] text-xs font-light leading-tight">
+        <p class="text-sm font-normal mt-3">Testing:</p>
+        <ul class="flex flex-col">
+          <li>Pytest for API and business logic</li>
+          <li>Jest for UI unit and snapshot testing</li>
+          <li>Manual QA for UAT across roles (Doctor/Admin/Reception)</li>
+        </ul>
+        <p class="text-sm font-normal mt-4">Deployment:</p>
+        <ul class="flex flex-col">
+          <li>CI/CD pipeline for staging and production</li>
+          <li>ASGI & Daphne for real-time support</li>
+          <li>Redis-backed queue management for smooth operations</li>
+          <li>Hosted on secure VPS with HTTPS, backups, and audit logs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* QA Deployment Specific overrides */
+  .qa-deployment .card {
+    justify-content: flex-start;
+  }
+  .qa-deployment .card .image {
+    margin: 0;
+  }
+  .qa-deployment .card .content {
+    margin: 0 auto;
+  }
+
+  /* Base Card Styles (Shared) */
+  .card {
+    gap: 120px;
+  }
+
+  .card .image {
+    padding: 24px;
+    border-radius: 10px;
+    background: #100f13;
+    background-image: url(https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-case-study-card-bg.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .card .image img {
+    max-width: 417px;
+    aspect-ratio: 1.328;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  .content-custom ul {
+    gap: 12px;
+  }
+  .content-custom ul li {
+    list-style: disc;
+    margin-left: 16px;
+  }
+
+  /* Media Queries */
+  @media (min-width: 1260px) {
+    .qa-deployment {
+      width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .qa-deployment {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    .card {
+      flex-direction: column;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .qa-deployment {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      gap: 60px;
+      flex-direction: column;
+    }
+    .card .content {
+      max-width: 465px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .qa-deployment {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      width: 100%;
+      flex-direction: column;
+    }
+    .card .image {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 14px;
+      border-radius: 7px;
+    }
+    .card .image img {
+      max-width: 278px;
+      border-radius: 7px;
+    }
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import Intro from './_sections/intro.astro';
+import Cards from './_sections/cards/cards.astro';
+---
+
+<main class="main relative flex flex-col overflow-hidden mb-40 min-h-[300svh]">
+    <Intro />
+    <Cards />
+    <!-- 
+  <DesignHighlight />
+  <StackInfo />
+  <QADeployment />
+  <Numbers />
+  <End />
+   -->
+</main>
+
+<style>
+
+  .main {
+    gap: 180px;
+    /* padding-top: 396px; (Commented out in source) */
+  }
+
+  /* * Targeting the .end class inside the End component.
+   * We use :global(.end) to ensure styles apply even if End is a scoped Astro component.
+   */
+  .main :global(.end h3) {
+    font-size: 24px;
+  }
+
+  .main :global(.end p) {
+    max-width: 800px;
+  }
+
+  /* --- MEDIA QUERIES --- */
+
+  /* Laptop: 1023px - 1260px */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .main {
+      gap: 160px;
+    }
+  }
+
+  /* Tablet: 700px - 1023px */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .main {
+      gap: 140px;
+    }
+
+    .main :global(.end p) {
+      max-width: 600px;
+    }
+  }
+
+  /* Mobile: < 700px */
+  @media (max-width: 700px) {
+    .main {
+      gap: 120px;
+    }
+
+    .main :global(.end h3) {
+      font-size: 20px;
+    }
+
+    .main :global(.end p) {
+      max-width: 320px;
+      font-size: 14px;
+    }
+  }
+</style>

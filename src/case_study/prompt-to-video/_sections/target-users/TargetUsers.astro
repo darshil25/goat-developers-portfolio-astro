@@ -1,0 +1,49 @@
+---
+// components/TargetUsers.astro
+import PromptToVideoTargetUsersImage1 from './PromptToVideoTargetUsersImage1.astro';
+import OurGoals from './OurGoals.astro';
+---
+
+<div class="discovery-strategy flex">
+  <PromptToVideoTargetUsersImage1 />
+  <OurGoals />
+</div>
+
+<style>
+  .discovery_strategy {
+    gap: 80px;
+  }
+
+  /* Desktop Large */
+  @media (min-width: 1260px) {
+    .discovery-strategy {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Laptop */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .discovery-strategy {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .discovery-strategy {
+      max-width: 90%;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 700px) {
+    .discovery-strategy {
+      gap: 120px;
+      flex-direction: column;
+    }
+  }
+</style>

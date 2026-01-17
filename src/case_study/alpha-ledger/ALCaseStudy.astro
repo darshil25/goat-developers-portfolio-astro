@@ -1,0 +1,67 @@
+---
+// ALCaseStudy.astro
+import TopGradient from "@/design/_sections/TopGradient.astro"
+// import Intro from './_sections/01-intro/intro.astro'; // Assuming you have converted Intro
+// import Section2 from './_sections/02-section-2/section-2.astro'; // Assuming you have converted Section2
+---
+
+<TopGradient
+  class="al-gradient"
+  colors={['#848484', '#000', '#1b1b1b', '#E0E0E0CC']}
+/>
+
+<main class="main relative flex flex-col overflow-hidden">
+  <!-- <Intro />
+  <Section2 /> -->
+</main>
+
+<style>
+  .main {
+    padding-top: 25%;
+    padding-bottom: 224px;
+    gap: 180px;
+  }
+
+
+  /* Desktop Override for Gradient */
+  @media (min-width: 1259px) {
+    /* Using :global() to style the external component */
+    :global(.al-gradient) {
+      top: -820px !important;
+    }
+  }
+
+  /* 1260 - 1440 */
+  @media (min-width: 1259px) and (max-width: 1440px) {
+    .main {
+      padding-bottom: 200px;
+    }
+  }
+
+  /* 1024 - 1260 */
+  @media (min-width: 1023px) and (max-width: 1259px) {
+    .main {
+      /* Padding bottom was commented out in source, left as default or 224px */
+    }
+  }
+
+  /* 700 - 1024 */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .main {
+      padding-bottom: 120px;
+    }
+
+    :global(.al-gradient) {
+      filter: blur(100px) !important;
+    }
+  }
+
+  /* Device below 700px */
+  @media (max-width: 700px) {
+    .main {
+      padding-top: 96px;
+      padding-bottom: 100px;
+      gap: 64px;
+    }
+  }
+</style>

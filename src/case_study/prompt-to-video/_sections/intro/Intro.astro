@@ -1,0 +1,93 @@
+---
+// Intro.astro
+import First from './First.astro';
+import CaseStudyImage from './CaseStudyImage.astro';
+import Bg from '@/assets/rawfiles/prompt-to-video/page-bg.svg';
+import Details from './Details.astro';
+import ProjectOverview from './ProjectOverview.astro';
+import P2VChallenge  from './P2VChallenge.astro';
+---
+
+<div class="intro-wrapper" style={`--intro-bg: url(${Bg.src})`}>
+  <div class="intro flex flex-col">
+    <First />
+    <CaseStudyImage />
+    <Details />
+    <ProjectOverview />
+<P2VChallenge /> 
+  </div>
+</div>
+
+<style>
+  .intro-wrapper {
+    padding-top: 20%;
+    position: relative;
+  }
+
+  .intro-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-height: 1120px;
+    height: 100%;
+    background-image: var(--intro-bg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: contain;
+    z-index: 0;
+  }
+
+  .intro {
+    gap: 180px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Responsive Breakpoints */
+  @media (min-width: 1260px) {
+    .intro {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .intro-wrapper {
+      padding-top: 26%;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .intro {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .intro-wrapper::before {
+      width: 80%;
+    }
+    .intro {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .intro-wrapper {
+      padding-top: 25%;
+    }
+    .intro-wrapper::before {
+      width: 100%;
+    }
+    .intro {
+      gap: 120px;
+    }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+// components/First.astro
+import AiSparkle from '@/components/svg/ai-sparkle.astro';
+import LimitedNDA from '@/components/ui/reusable/limited-nda.astro';
+---
+
+<div class="first text-[#fbfbfb] flex flex-col items-center">
+  <p>Case Study</p>
+  <p class="intro-text text-center">
+    Prompt-to-Video Generation Platform (Module)
+  </p>
+  
+  <LimitedNDA client:visible />
+  
+  <div class="tags flex items-center">
+    <span class="flex items-center gap-1">
+      <AiSparkle class="size-4" />
+      <p>AI</p>
+    </span>
+    <p>LMS</p>
+    <p>B2B</p>
+    <p>VideoEditor</p>
+  </div>
+</div>
+
+<style>
+  .first {
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .first > p:first-child {
+    font-size: 16px;
+    line-height: 1.2;
+    opacity: 0.5;
+  }
+
+  .first .intro-text {
+    line-height: 1.4;
+    max-width: 90%;
+  }
+
+  .first .tags {
+    gap: 12px;
+  }
+
+  .first .tags > * {
+    padding: 4px;
+    border-radius: 4px;
+    background: rgba(16, 15, 19, 0.25);
+    color: #e8e8e8;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  @media (max-width: 700px) {
+    .first .intro-text {
+      font-size: 14px;
+    }
+  }
+</style>

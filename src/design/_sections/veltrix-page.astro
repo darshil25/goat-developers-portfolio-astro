@@ -1,0 +1,168 @@
+---
+// src/components/DesignInfo.astro
+
+interface InfoItem {
+  label: string;
+  value?: string;
+  valueHtml?: string;
+  // In Astro, complex React nodes like 'customScopeNode' are usually passed as Slots, 
+  // but for simple text/html, valueHtml works best.
+}
+
+interface Props {
+  block1: {
+    items: InfoItem[];
+  };
+  block2: {
+    items: InfoItem[];
+    scope: InfoItem;
+  };
+  bg?: string;
+}
+
+const { block1, block2, bg = '#FFFFFF03' } = Astro.props;
+---
+
+<div class="design-info text-[#fbfbfb] relative z-1 flex flex-1 justify-center">
+  <div class="info-1 flex flex-col">
+    {block1.items.map((item) => (
+      <div style={{ backgroundColor: bg }}>
+        <p>{item.label}</p>
+        {item.valueHtml ? (
+          <p set:html={item.valueHtml} />
+        ) : (
+          <p>{item.value}</p>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <div class="info-2 flex">
+    <div class="info-2-1 flex flex-col">
+      {block2.items.map((item) => (
+        <div style={{ backgroundColor: bg }}>
+          <p>{item.label}</p>
+          {item.valueHtml ? (
+            <p set:html={item.valueHtml} />
+          ) : (
+            <p>{item.value}</p>
+          )}
+        </div>
+      ))}
+    </div>
+    
+    <div class="info-2-2" style={{ backgroundColor: bg }}>
+      <p>{block2.scope.label}</p>
+      <slot name="scope">
+        {block2.scope.valueHtml ? (
+          <p set:html={block2.scope.valueHtml} />
+        ) : (
+          <p>{block2.scope.value}</p>
+        )}
+      </slot>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* * VANILLA CSS 
+   * extracted specifically for DesignInfo 
+   */
+
+  .design-info {
+    gap: 40px;
+  }
+
+  .info-1,
+  .info-2,
+  .info-2-1 {
+    gap: 40px;
+  }
+
+  /* Shared styling for info boxes */
+  .info-2-2,
+  .info-1 > div,
+  .info-2-1 > div {
+    padding: 8px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+    color: #fbfbfb;
+  }
+
+  /* Labels */
+  .info-2-2 p:nth-of-type(1),
+  .info-1 > div p:nth-of-type(1),
+  .info-2-1 > div p:nth-of-type(1) {
+    opacity: 0.5;
+    line-height: 1.2;
+    font-size: 14px;
+  }
+
+  /* Values */
+  .info-2-2 p:nth-of-type(2),
+  .info-1 > div p:nth-of-type(2),
+  .info-2-1 > div p:nth-of-type(2) {
+    line-height: 1.25;
+  }
+
+  /* Specific width for Scope */
+  .info-2-2 p {
+    width: 208px;
+  }
+
+  /* List Styling */
+  .design-info :global(ul) {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .design-info :global(li) {
+    font-size: 14px;
+    line-height: 1.25;
+    list-style: disc;
+    margin-left: 16px;
+  }
+
+  /* --- MEDIA QUERIES --- */
+  
+  /* Mobile: < 700px */
+  @media (max-width: 700px) {
+    .design-info {
+      width: 90%;
+      margin: 0 auto;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .info-1 {
+      flex-direction: row;
+    }
+
+    .info-1 div:nth-of-type(1) {
+      flex: 1;
+    }
+
+    .info-2-2 p:nth-of-type(1),
+    .info-1 > div p:nth-of-type(1),
+    .info-2-1 > div p:nth-of-type(1) {
+      font-size: 12px;
+    }
+
+    .info-2-2 p:nth-of-type(2),
+    .info-1 > div p:nth-of-type(2),
+    .info-2-1 > div p:nth-of-type(2) {
+      font-size: 14px;
+    }
+
+    .info-1,
+    .info-2-1,
+    .info-2 {
+      gap: 12px;
+    }
+
+    .info-2-2 p {
+      width: 114px;
+    }
+  }
+</style>

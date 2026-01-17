@@ -1,0 +1,62 @@
+---
+// components/DevelopmentText.astro
+---
+
+<div class="text flex flex-col items-center justify-center order-2 lg:order-1">
+  <h2>Development Implementation</h2>
+  <div class="list relative overflow-hidden flex flex-col gap-2 text-[#FBFBFB]">
+    <ul class="relative z-2 flex flex-col">
+      <li>
+        A fully functional frontend delivered for backend integration.
+      </li>
+      <li>
+        Responsive, scalable design system implemented for future growth.
+      </li>
+      <li>Smooth user flows from prompt entry to video preview/export.</li>
+      <li>
+        A production-ready UI layer aligning with modern creative platforms.
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .text {
+    gap: 24px;
+  }
+
+  .text h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+    text-align: center;
+    color: #fbfbfb;
+  }
+
+  .list {
+    padding: 32px;
+    border-radius: 16px;
+  }
+
+  .list ul {
+    gap: 16px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  .list ul li {
+    list-style: disc;
+    margin-left: 16px;
+  }
+
+  /* Mobile Adjustments */
+  @media (max-width: 700px) {
+    .list {
+      padding: 12px;
+    }
+    .list ul {
+      font-size: 12px;
+    }
+  }
+</style>

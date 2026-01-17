@@ -1,0 +1,200 @@
+---
+// StackInfo.astro
+import { Image } from 'astro:assets';
+
+const techData = [
+  {
+    id: 1,
+    title: "Backend Development Stack & Architecture",
+    description: "The system architecture needed to support both synchronous hospital workflows (e.g., fetching records) and asynchronous tasks (e.g., generating reports, reminders). Our backend team chose Django for its scalability, security, and rapid development capabilities.",
+    cards: [
+      {
+        title: "Technologies Used:",
+        items: [
+          { title: "Framework:", text: "Django" },
+          { title: "API Layer:", text: "Django Rest Framework (DRF)" },
+          { title: "Live Dashboards:", text: "Django Channels + Socket.IO" },
+          { title: "Server Handling:", text: "ASGI, Daphne, WSGI" },
+          { title: "Task Queues:", text: "Celery + Redis + Celery Beat" },
+          { title: "PDF Reports:", text: "FPDF2" },
+          { title: "Testing", text: "Pytest for unit, integration, and API testing" },
+        ],
+        image: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_1.svg",
+      },
+      {
+        title: "Key Solutions & Innovations:",
+        items: [
+          { title: "Real-time queues", text: "using Django Channels + WebSockets" },
+          { title: "Async & Sync support", text: "for seamless multi-user interaction" },
+          { title: "Distributed task processing", text: "with Celery for reports, reminders, and billing" },
+          { title: "Standardized reports", text: "with server-side PDF generation" },
+          { title: "Secure REST APIs", text: "for scalable frontend and third-party integration" },
+        ],
+        image: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_2.svg",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Frontend Development Stack & Features",
+    description: "The frontend needed to be responsive, fast, and clean — enabling users with varying tech literacy to complete tasks confidently. Built with React and Vite, the interface delivers instant feedback and elegant transitions.",
+    cards: [
+      {
+        title: "Technologies Used:",
+        items: [
+          { title: "Core Stack:", text: "Vite + ReactJS" },
+          { title: "Styling:", text: "TailwindCSS + Module CSS" },
+          { title: "State Management:", text: "Redux" },
+          { title: "API Layer & Caching:", text: "Redux Toolkit Query (RTK Query)" },
+          { title: "Animations:", text: "Framer Motion" },
+          { title: "Graphs:", text: "Chart.js for analytics" },
+          { title: "Text Editor:", text: "TinyMCE" },
+          { title: "Screenshot Tools:", text: "Html2Canvas for live previews" },
+          { title: "Testing:", text: "Jest" },
+        ],
+        image: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_1.svg",
+      },
+      {
+        title: "Key Solutions & Innovations:",
+        items: [
+          { title: "Role-based dynamic UI", text: "for doctor vs. admin vs. staff" },
+          { title: "Modular page system", text: "with 60+ componentized screens" },
+          { title: "Live analytics", text: "via Chart.js and caching with RTK Query" },
+          { title: "Animated transitions", text: "with Framer for a premium UX" },
+          { title: "Rich document editing", text: "with TinyMCE and Html2Canvas previews" },
+        ],
+        image: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/bg_grd_2.svg",
+      },
+    ],
+  },
+];
+---
+
+<div class="stack-info flex flex-col">
+  {techData.map((tech) => (
+    <div class="tech-section flex flex-col gap-6 items-center text-[#fbfbfb]">
+      <h3 class="font-thin leading-tight text-xl">{tech.title}</h3>
+      <p class="text-xs font-light leading-tight text-center">
+        {tech.description}
+      </p>
+      <div class="tech-card-section flex">
+        {tech.cards.map((card, cardIndex) => (
+          <div class="tech-card flex flex-col gap-2 relative">
+            <h4 class="text-sm leading-tight">{card.title}</h4>
+            <ul class="relative overflow-hidden flex flex-col gap-4 p-3 rounded-lg bg-[#100f13] flex-1">
+              {card.items.map((item) => (
+                <li class="relative z-1">
+                  <strong>{item.title}</strong> {item.text}
+                </li>
+              ))}
+              {card.image && (
+                <Image
+                  class={`absolute object-contain tech-bg-img`}
+                  data-card={`${tech.id}-${cardIndex}`}
+                  src={card.image}
+                  alt="tech-card-bg"
+                  width={120}
+                  height={100}
+                />
+              )}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stack-info {
+    gap: 180px;
+  }
+
+  .tech-section > p {
+    max-width: 812px;
+  }
+
+  .tech-card-section {
+    gap: 40px;
+  }
+
+  .tech-card ul {
+    width: 380px;
+  }
+
+  .tech-card ul li {
+    list-style: disc;
+    margin-left: 16px;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  .tech-card ul li strong {
+    font-weight: 600;
+  }
+
+  .tech-bg-img {
+    position: absolute;
+    width: 120px;
+    filter: blur(4px);
+  }
+
+  /* Specific Positioning for tech background images */
+  .tech-bg-img[data-card='1-0'] { top: -65%; left: 12px; }
+  .tech-bg-img[data-card='1-1'] { top: -25%; left: 25%; }
+  .tech-bg-img[data-card='2-0'] { top: -35%; left: 30%; }
+  .tech-bg-img[data-card='2-1'] { top: -15%; right: 0; }
+
+  /* Media Queries */
+  @media (min-width: 1260px) {
+    .stack-info {
+      width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .stack-info {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .stack-info {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    .tech-section > p {
+      max-width: 600px;
+    }
+    .tech-card-section {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .tech-card, .tech-card ul {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .stack-info {
+      gap: 120px;
+      width: 90%;
+      margin: 0 auto;
+    }
+    .tech-section > p {
+      text-align: left;
+    }
+    .tech-card-section {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .tech-card, .tech-card ul {
+      width: 100%;
+    }
+  }
+</style>

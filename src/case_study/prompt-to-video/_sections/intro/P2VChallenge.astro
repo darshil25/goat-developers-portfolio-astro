@@ -1,0 +1,59 @@
+---
+// components/P2VChallange.astro
+import { cn } from '@/lib/utils';
+---
+
+<div class={cn('text-content text-[#fbfbfb] flex flex-col items-center justify-center order-1 lg:order-2')}>
+  <h2 class="text-center font-semibold">Challenge</h2>
+  <div class="text-group flex flex-col">
+    <ul class="flex flex-col">
+      <li>Simplifying AI-heavy workflows into intuitive user journeys.</li>
+      <li>Building a modular, scalable frontend for evolving features.</li>
+      <li>Ensuring cross-device responsiveness and performance.</li>
+      <li>Delivering a pixel-perfect implementation of our design.</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .text-content {
+    width: 90%;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .text-content h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  .text-group {
+    gap: 8px;
+    font-weight: 200;
+    line-height: 1.25;
+  }
+
+  .text-group ul {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .text-group ul li {
+    list-style: disc;
+    margin-left: 16px;
+  }
+
+  /* Responsive Alignment */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .text-content .text-group {
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .text-group p {
+      font-size: 12px;
+    }
+  }
+</style>

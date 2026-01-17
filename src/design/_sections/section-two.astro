@@ -1,0 +1,168 @@
+---
+// SectionTwo.astro
+import SingleStaticWrapper from '@/components/ui/reusable/border-animator.astro';
+import { Image } from 'astro:assets';
+import ArrowSvg from '@/components/svg/ArrowSvg.astro';
+const gridData = [
+  {
+    text: 'AI-powered forecast dashboard projecting future revenue, gross margin, sales quantity, and other KPIs—enabling data-driven planning and scenario analysis',
+    imgNum: 1
+  },
+  {
+    text: 'Interactive simulation interface where users can tweak variables like price, cost, demand, and inventory—watching real-time impact across financial and operational KPIs',
+    imgNum: 2
+  },
+  {
+    text: 'AI-powered vendor performance dashboard showcasing real-time supplier health, risk categorization, and intelligent suggestions for alternate vendors to explore.',
+    imgNum: 3
+  },
+  {
+    text: 'Dual-panel interface showcasing live AI interaction alongside real-time dashboard updates — enabling users to ask questions, receive insights, and watch the metrics respond instantly, just like a smart financial copilot.',
+    imgNum: 4
+  },
+];
+---
+
+<div class="section-two flex flex-col">
+  <div class="grid-container grid gap-10">
+    {gridData.map((item) => (
+      <div class="image-card flex flex-col">
+        <img
+          alt={`image-${item.imgNum}`}
+          src={`https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/veltrix/grid-image-${item.imgNum}.png`}
+          width="496"
+          height="303"
+        />
+        <p class="text-[#fbfbfb] font-light leading-tight">{item.text}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="why-it-matter flex flex-col gap-10 items-center">
+    <div class="why-it-matter-card relative flex flex-col gap-2 rounded-xl bg-white/5 backdrop-blur-md">
+      <h3 class="opacity-50 leading-[1.2] text-xs">Why It Matters</h3>
+      <p class="text-sm opacity-80 leading-tight">
+        We turned a loose concept into a full, scalable platform
+        experience—designed for clarity, speed, and smart decisions. Built
+        with AI flows in mind, and crafted for users who need insights, not
+        complexity.
+      </p>
+      <img
+        alt="why-it-matter-card-gradient"
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/veltrix/why-it-matter-card-gradient.svg"
+        width="351"
+        height="76"
+        class="absolute bottom-0 left-0"
+      />
+    </div>
+
+    <SingleStaticWrapper client:visible>
+      <a
+        href="/design/analytical-investments"
+        class="flex items-center gap-1 py-1 px-2 rounded-sm"
+      >
+        <p class="text-xm">Next Case Study</p>
+        <ArrowSvg className="size-4 rotate-45" />
+      </a>
+    </SingleStaticWrapper>
+  </div>
+
+</div>
+
+<style>
+  /* * VANILLA CSS 
+   * Exact layout matching SCSS
+   */
+
+  .section-two {
+    gap: 200px;
+  }
+
+  /* --- Grid Logic --- */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .image-card {
+    padding: 12px;
+    border-radius: 19.2px;
+    background-image: url('https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/veltrix/image-card-gradient.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    gap: 24px;
+  }
+
+  .image-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* --- Why It Matters Logic --- */
+  .why-it-matter-card {
+    padding: 24px;
+    /* bg-white/1 isn't standard, using rgba equivalent or closest tailwind in HTML */
+    background-color: rgba(255, 255, 255, 0.01);
+  }
+
+  .why-it-matter-card img {
+    height: 100%; /* Height constraint from SCSS */
+    width: auto;
+  }
+
+  /* --- MEDIA QUERIES --- */
+
+  /* Desktop Large: 1260px+ */
+  @media (min-width: 1260px) {
+    .section-two {
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  /* Laptop: 1024px - 1260px */
+  @media (min-width: 1024px) and (max-width: 1260px) {
+    .section-two {
+      gap: 160px;
+    }
+  }
+
+  /* Tablet: 700px - 1023px */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .section-two {
+      gap: 140px;
+    }
+  }
+
+  /* Mobile: < 700px */
+  @media (max-width: 700px) {
+    .section-two {
+      gap: 120px;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .grid-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .image-card {
+      padding: 16px;
+      border-radius: 12px;
+      gap: 16px;
+    }
+
+    .image-card p {
+      font-size: 14px;
+    }
+
+    .why-it-matter-card {
+      padding: 8px 16px;
+    }
+
+    .why-it-matter-card img {
+      left: -5%;
+      height: 100%;
+    }
+  }
+</style>

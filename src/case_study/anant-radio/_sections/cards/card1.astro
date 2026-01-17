@@ -1,0 +1,141 @@
+---
+// Cards1.astro
+import { Image } from 'astro:assets';
+
+const card1Data = [
+  {
+    img: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-design-grid-1.png",
+    title: "The Challenge",
+    description:
+      "India’s small and mid-sized diagnostic clinics often rely on legacy desktop software that’s clunky, disconnected, and poorly designed. These tools create bottlenecks in patient handling, data management, and billing — especially when real-time updates, multi-role access, and cloud compatibility are essential. We envisioned a modern platform that empowers radiologists, improves operational clarity, and puts the patient experience first.",
+  },
+  {
+    img: "https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-design-grid-3.png",
+    title: "Research, Discovery",
+    description:
+      "Before we wrote a line of code, we spoke directly with radiologists and clinic managers. We uncovered the need for a centralized yet modular system that could handle OPD, patient queues, report generation, and billing — all from a single dashboard. The opportunity wasn’t just to rebuild old tools — it was to rethink radiology workflows with the user at the center.",
+  },
+];
+---
+
+<div class="cards1 flex flex-col">
+  {card1Data.map((card) => (
+    <div class="card flex items-center flex-row">
+      <div class="image flex items-center justify-center scale-100">
+        <Image 
+          src={card.img} 
+          alt="aradio-challenge" 
+          width={417} 
+          height={314} 
+        />
+      </div>
+      <div class="content flex flex-col">
+        <h3 class="font-thin leading-tight text-[#fbfbfb] opacity-60 text-xl">
+          {card.title}
+        </h3>
+        <p class="opacity-80 leading-tight text-[#fbfbfb]">{card.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  /* Base Layout */
+  .cards1 {
+    gap: 180px;
+  }
+  
+  /* Card Styles */
+  .card {
+    gap: 120px;
+  }
+
+  .card .image {
+    margin: 0 auto;
+    padding: 24px;
+    border-radius: 10px;
+    background: #100f13;
+    background-image: url(https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-case-study-card-bg.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .card .image img {
+    max-width: 417px;
+    aspect-ratio: 1.328;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  .card .content {
+    gap: 12px;
+  }
+
+  /* Media Queries */
+  @media (min-width: 1260px) {
+    .cards1 {
+      width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .cards1 {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    .card {
+      gap: 80px;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .cards1 {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      gap: 60px;
+      flex-direction: column;
+    }
+    .card .content {
+      max-width: 465px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .cards1 {
+      gap: 120px;
+      width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      width: 100%;
+      flex-direction: column;
+    }
+    .card .image {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 14px;
+      border-radius: 7px;
+    }
+    .card .image img {
+      max-width: 278px;
+      border-radius: 7px;
+    }
+    .card .content {
+      gap: 24px;
+    }
+    .card .content p {
+      max-width: 306px;
+      opacity: 1;
+      font-size: 12px;
+      font-weight: 300;
+    }
+  }
+</style>

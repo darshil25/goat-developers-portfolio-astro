@@ -1,0 +1,56 @@
+---
+// src/pages/work/vanquish.astro
+import Navbar from '@/components/ui/navbar/Navbar.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Footer from '@/components/ui/footer/Footer.astro';
+import PromptToVideoCaseStudy from '../../case_study/prompt-to-video/PromptToVideoCaseStudy.astro';
+
+const metadata = {
+  title:
+    'AI Prompt-to-Video Case Study – Internal Course Builder & Training Module',
+  description:
+    'A case study on designing an AI-assisted prompt-to-video creation module for internal training. Includes UX strategy, UI design, transcript tools, chapter modularity, and AI-driven personalization features.',
+  keywords: [
+    'AI video generation',
+    'prompt to video',
+    'internal training tool',
+    'course builder',
+    'AI-assisted authoring',
+    'transcript editor',
+    'chapter-based video creation',
+    'UI UX case study',
+    'AI creative tools',
+    'enterprise learning tools',
+    'AI prompt design',
+    'video course creation',
+    'L&D tools',
+    'creative workflow AI',
+  ],
+  openGraph: {
+    title:
+      'AI Prompt-to-Video Case Study – Internal Course Builder & Training Module',
+    description:
+      'How we designed an AI-assisted platform for creating structured video courses using prompts, templates, and transcript-based editing.',
+    url: 'https://goatdevelopers.com/case-study/prompt-to-video',
+    images: [
+      {
+        url: 'https://goatdevelopers.com/images/prompt-to-video-thumbnail.png',
+        width: 1200,
+        height: 630,
+        alt: 'AI Prompt-to-Video Case Study Thumbnail',
+      },
+    ],
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://goatdevelopers.com/case-study/prompt-to-video',
+  },
+  robots: 'index, follow',
+};
+---
+
+<CaseStudyLayout {...metadata}>
+  <Navbar slot="navbar" />
+    <PromptToVideoCaseStudy />
+  <Footer slot="footer" />
+</CaseStudyLayout>

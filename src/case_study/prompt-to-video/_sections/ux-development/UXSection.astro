@@ -1,0 +1,75 @@
+---
+// components/UXSection.astro
+import UXFeatureCard from "./UXFeatureCard.astro";
+
+const features = [
+  {
+    title: 'Research & IA',
+    points: [
+      'Mapped essential workflows from idea → prompt → preview → export.',
+      'Structured information architecture for creators to manage projects with minimal effort.',
+    ],
+  },
+  {
+    title: 'UX & Visual Design',
+    points: [
+      'Designed a modern, minimal interface inspired by leading creative SaaS tools.',
+      'Focused on clarity and efficiency with a clean dark/light theme system.',
+      'Created chapter-based layouts for easy navigation and editing.',
+    ],
+  },
+  {
+    title: 'Frontend Development',
+    points: [
+      'Built with modular, reusable components for scalability.',
+      'Implemented drag-and-drop interactions (chapters, thumbnails).',
+      'Developed real-time syncing UI with editor and preview.',
+    ],
+  },
+];
+---
+
+<div class="ux flex flex-col">
+  <h2>Process</h2>
+  <div class="ux-features flex">
+    {features.map((feature) => (
+      <UXFeatureCard
+        title={feature.title}
+        points={feature.points}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .ux {
+    gap: 24px;
+  }
+
+  .ux h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+    text-align: center;
+    color: #fbfbfb;
+  }
+
+  .ux-features {
+    gap: 24px;
+  }
+
+  /* Responsive Layout */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .ux-features {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .ux-features {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+</style>

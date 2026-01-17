@@ -1,0 +1,31 @@
+---
+// CaseStudyImage.astro
+import { Image } from 'astro:assets';
+import Img1 from '@/assets/rawfiles/prompt-to-video/mockup-1-1.png';
+---
+
+<div class="image1 relative flex items-center justify-center">
+  <Image
+    src={Img1}
+    alt="Prompt to video mockup"
+    width={1080}
+    height={637}
+    class="object-cover"
+    draggable="false"
+    loading="eager"
+  />
+</div>
+
+<style>
+  .image1 {
+    width: 90%;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  /* Target the img tag rendered by Astro */
+  .image1 img {
+    width: 100%;
+    height: auto;
+  }
+</style>

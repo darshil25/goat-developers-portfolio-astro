@@ -1,0 +1,40 @@
+---
+import Intro from "./_sections/intro/Intro.astro"
+import TargetUsers from "./_sections/target-users/TargetUsers.astro"
+import UXDevelopment from "./_sections/ux-development/UXDevelopment.astro"
+---
+
+<main class="main relative flex flex-col overflow-hidden pb-40 bg-[#161616]">
+  <Intro />
+  <TargetUsers />
+  {/* <GoalFeatures /> */}
+  <UXDevelopment />
+  {/* <ChallengeOutcome /> */}
+</main>
+
+<style>
+  .main {
+    gap: 180px;
+    /* padding-top: 396px; (Commented out in source) */
+  }
+  /* Laptop: 1023px - 1260px */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .main {
+      gap: 160px;
+    }
+  }
+
+  /* Tablet: 700px - 1023px */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .main {
+      gap: 140px;
+    }
+  }
+
+  /* Mobile: < 700px */
+  @media (max-width: 700px) {
+    .main {
+      gap: 120px;
+    }
+  }
+</style>

@@ -1,12 +1,16 @@
 ---
+// NDA.astro
+import LockSvg from '@/components/svg/LockSvg.astro';
+import { cn } from '@/lib/utils';
+
 interface Props {
-  class?: string;
+  className?: string;
 }
 
-const { class: className } = Astro.props;
+const { className } = Astro.props;
 ---
 
-<div class:list={["flex items-center rounded-sm bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-medium tracking-wide", className]}>
-  <div class="w-1.5 h-1.5 rounded-full bg-purple-400 mr-1"></div>
-  NDA Protected
+<div class={cn("py-1 px-2 gap-2 text-white rounded-lg bg-black/10 flex items-center", className)}>
+  <p class="opacity-50 text-[10px] leading-[1.2]">Limited Visuals (NDA)</p>
+  <LockSvg />
 </div>

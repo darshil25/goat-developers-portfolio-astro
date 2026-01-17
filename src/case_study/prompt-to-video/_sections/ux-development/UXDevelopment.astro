@@ -1,0 +1,50 @@
+---
+// components/UXDevelopment.astro
+import UXSection from './UXSection.astro';
+import DevelopmentSection from './DevelopmentSection.astro';
+---
+
+<div class="ux-development flex flex-col">
+  <UXSection />
+  <DevelopmentSection />
+</div>
+
+<style>
+  .ux-development {
+    gap: 180px;
+  }
+
+  /* Desktop Large */
+  @media (min-width: 1260px) {
+    .ux-development {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Laptop */
+  @media (min-width: 1024px) and (max-width: 1260px) {
+    .ux-development {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .ux-development {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 700px) {
+    .ux-development {
+      gap: 120px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+</style>

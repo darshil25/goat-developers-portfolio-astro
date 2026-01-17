@@ -1,0 +1,129 @@
+---
+// Numbers.astro
+import { Image } from 'astro:assets';
+
+const numbersData = [
+  { title: "Administrative Time", result: "30% Reduction" },
+  { title: "Report Generation", result: "50% Faster" },
+  { title: "Patient Throughput", result: "20% Increase" },
+  { title: "Referring Doctor Satisfaction", result: "25% Increase" },
+  { title: "Billing Errors", result: "40% Reduction" },
+  { title: "Data Retrieval Time", result: "60% Reduction" },
+];
+---
+
+<div class="numbers">
+  <div class="card flex items-center justify-end">
+    <div class="image flex items-center justify-center">
+      <Image
+        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-design-grid-6.png"
+        alt="aradio-challenge"
+        width={417}
+        height={314}
+      />
+    </div>
+    <div class="number-content flex flex-col gap-10">
+      <div class="flex flex-col items-center justify-center leading-tight text-[#fbfbfb] text-[32px]">
+        <h3 class="font-thin">Improved Care for:</h3>
+        <h3>10,000+ Lives</h3>
+      </div>
+      <div class="grid grid-cols-2 text-[#fbfbfb]">
+        {numbersData.map((item) => (
+          <div class="flex flex-col items-center justify-center text-sm text-center">
+            <h4 class="font-thin">{item.title}</h4>
+            <h4 class="font-medium">{item.result}</h4>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Numbers specific overrides */
+  .numbers .card {
+    justify-content: flex-start;
+  }
+  .numbers .card .image {
+    margin: 0;
+  }
+  .numbers .number-content {
+    margin: 0 auto;
+    max-width: 360px;
+  }
+  .numbers .grid {
+    row-gap: 40px;
+  }
+
+  /* Base Card Style */
+  .card {
+    gap: 120px;
+  }
+  .card .image {
+    padding: 24px;
+    border-radius: 10px;
+    background: #100f13;
+    background-image: url(https://anantradio.blr1.cdn.digitaloceanspaces.com/goatdevelopers/anant-radio/aradio-case-study-card-bg.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .card .image img {
+    max-width: 417px;
+    aspect-ratio: 1.328;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  /* Media Queries */
+  @media (min-width: 1260px) {
+    .numbers {
+      width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .numbers {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .numbers {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      gap: 60px;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .numbers {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      width: 100%;
+      flex-direction: column;
+    }
+    .card .image {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 14px;
+      border-radius: 7px;
+    }
+    .card .image img {
+      max-width: 278px;
+      border-radius: 7px;
+    }
+    .number-content {
+      max-width: 320px;
+    }
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+import ArrowSvg from "@/components/svg/ArrowSvg.astro"
+---
+
+<div class="design-footer flex mt-32">
+  <div class="nav-buttons w-full px-5 flex items-center justify-between">
+    <button id="footer-back-btn" class="cursor-pointer" aria-label="Go Back">
+      <ArrowSvg className="size-5 -rotate-135" />
+    </button>
+
+    <button id="footer-scroll-up-btn" class="cursor-pointer" aria-label="Scroll to Top">
+      <ArrowSvg className="size-5 -rotate-45" />
+    </button>
+  </div>
+</div>
+
+<script>
+  // Handle Back Navigation
+  const backBtn = document.getElementById('footer-back-btn');
+  backBtn?.addEventListener('click', () => {
+    window.history.back();
+  });
+
+  // Handle Scroll to Top
+  const scrollBtn = document.getElementById('footer-scroll-up-btn');
+  scrollBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  });
+</script>
+
+<style>
+  /* * VANILLA CSS 
+   * Exact button styling from your SCSS module 
+   */
+  
+  .nav-buttons button {
+    aspect-ratio: 1;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #100f13;
+    border-radius: 100%;
+    box-shadow: 0 4px 16px -4px rgba(255, 255, 255, 0.25);
+    border: none;
+    color: inherit; /* Ensures icon inherits colors if needed */
+  }
+</style>
