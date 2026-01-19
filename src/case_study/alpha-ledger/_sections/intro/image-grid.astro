@@ -1,0 +1,161 @@
+---
+// components/ALImageGrid.astro
+import { Image } from 'astro:assets';
+
+// Import images (ensure these paths are correct for your project structure)
+import Image1 from '@/assets/rawfiles/alpha-ledger/cr-1.png';
+import Image2 from '@/assets/rawfiles/alpha-ledger/cr-2.png';
+import Image3 from '@/assets/rawfiles/alpha-ledger/cr-3.png';
+import Image4 from '@/assets/rawfiles/alpha-ledger/cr-4.png';
+import Image5 from '@/assets/rawfiles/alpha-ledger/cr-5.png';
+import Image6 from '@/assets/rawfiles/alpha-ledger/cr-6.png';
+
+const IMAGES = [Image1, Image3, Image2, Image4, Image5, Image6];
+const AREAS = ['a', 'b', 'c', 'd', 'e', 'f'];
+
+// Helper to determine if an image should be hidden on mobile
+const shouldHideOnMobile = (src: ImageMetadata) => src === Image2 || src === Image6;
+---
+
+<section class="container" aria-label="Alpha Ledger gallery">
+  <div class="grid gap-x-6 gap-y-6 md:gap-y-10">
+    {IMAGES.map((src, idx) => {
+      const hideClass = shouldHideOnMobile(src) ? 'hideMobile' : '';
+      const areaClass = AREAS[idx]; // 'a', 'b', 'c', etc.
+      
+      return (
+        <div class={`item ${areaClass} ${hideClass}`}>
+          <Image
+            src={src}
+            alt={`Alpha Ledger screenshot ${idx + 1}`}
+            width={src.width} 
+            height={src.height}
+            class="object-cover"
+          />
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  /* --- Base Container --- */
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 8px 16px;
+  }
+
+  /* --- Grid Layout --- */
+  .grid {
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto auto;
+    
+    /* Grid Areas Logic:
+      Row 1: Image 1 (a, 5 cols) + Image 2 (b, 7 cols)
+      Row 2: Image 3 (c, 5 cols) + Image 2 (b, continues)
+      Row 3: Image 4 (d, 4 cols) + Image 5 (e, 4 cols) + Image 6 (f, 4 cols)
+    */
+    grid-template-areas:
+      'a b b'
+      'c b b'
+      'd e f';
+    align-items: stretch;
+  }
+
+  /* --- Item Styles --- */
+  .item {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Image Fill Logic mimicking Next.js 'fill' + object-cover */
+  .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* --- Grid Area Assignments & Aspect Ratios --- */
+  .a {
+    grid-area: a;
+    aspect-ratio: 1.69/1;
+    grid-column: span 5;
+  }
+  .b {
+    grid-area: b;
+    aspect-ratio: 1.11/1;
+    grid-column: span 7;
+  }
+  .c {
+    grid-area: c;
+    aspect-ratio: 1.69/1;
+    grid-column: span 5;
+  }
+  .d {
+    grid-area: d;
+    aspect-ratio: 1.33/1;
+    grid-column: span 4;
+  }
+  .e {
+    grid-area: e;
+    aspect-ratio: 1.33/1;
+    grid-column: span 4;
+  }
+  .f {
+    grid-area: f;
+    aspect-ratio: 1.33/1;
+    grid-column: span 4;
+  }
+
+  /* --- Hover Effects --- */
+  @media (hover: hover) and (pointer: fine) {
+    .item img {
+      transition: transform 360ms cubic-bezier(0.22, 0.8, 0.2, 1);
+      will-change: transform;
+    }
+
+    .item:hover img,
+    .item:focus-within img {
+      transform: scale(1.1);
+    }
+  }
+
+  /* --- Mobile Styles (< 600px) --- */
+  @media (max-width: 600px) {
+    .grid {
+      grid-template-columns: 1fr;
+      /* Reordering for mobile stack based on screenshot requirement:
+         Shows A, B, E, D stacked vertically.
+         C and F are usually hidden or fall into flow if not hidden.
+      */
+      grid-template-areas:
+        'a'
+        'b'
+        'e'
+        'd';
+    }
+
+    /* Reset columns for mobile flow */
+    .a, .b, .c, .d, .e, .f {
+      grid-column: span 1;
+    }
+
+    .item {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* Utility to hide specific images on mobile */
+    .hideMobile {
+      display: none !important;
+    }
+  }
+</style>

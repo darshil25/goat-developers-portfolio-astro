@@ -1,0 +1,46 @@
+---
+// components/ALTextLogo.astro
+import AlphaLedgerLogo from './alpha-ledger-logo.astro';
+---
+
+<div class="logo">
+  <AlphaLedgerLogo />
+  <h1>Alpha Ledger</h1>
+</div>
+
+<style>
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: space-between;
+    color: #fbfbfb; /* Assuming white text from context */
+  }
+
+  /* Target the SVG rendered by the child component */
+  .logo :global(svg) {
+    width: 37px;
+    height: 40px;
+  }
+
+  .logo h1 {
+    font-weight: 400;
+    font-size: 31px;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 700px) {
+    .logo {
+      gap: 4px;
+    }
+
+    .logo :global(svg) {
+      width: 28px;
+      height: 30px;
+    }
+
+    .logo h1 {
+      font-size: 25px;
+    }
+  }
+</style>

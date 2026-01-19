@@ -1,0 +1,74 @@
+---
+// components/First.astro
+import LiveLinkDiv from '@/components/ui/reusable/LiveLinkDiv.astro';
+import ALTextLogo from '@/case_study/reusable/ALTextLogo.astro';
+---
+
+<div class="first flex flex-col items-center">
+  <p class="label">Case Study</p>
+  <ALTextLogo />
+  <p class="tagline">Your trading Companion</p>
+  
+  <a
+    href="https://www.alphaledger.ai?utm_source=goatdevelopers&utm_medium=case_study&utm_campaign=alphaledger"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <LiveLinkDiv  />
+  </a>
+  
+  <div class="tags flex items-center">
+    <p>Trading</p>
+    <p>Fintech</p>
+  </div>
+</div>
+
+<style>
+  .first {
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+    /* Font color inheritance */
+    color: #fbfbfb; 
+  }
+
+  .label {
+    font-size: 16px;
+    line-height: 1.2;
+    opacity: 0.5;
+  }
+
+  .tagline {
+    line-height: 1.4;
+  }
+
+  .tags {
+    gap: 12px;
+  }
+
+  .tags p {
+    padding: 4px;
+    border-radius: 4px;
+    background: rgba(16, 15, 19, 0.25);
+    color: #e8e8e8;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 1259px) and (max-width: 1440px) {
+    .first {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .first {
+      gap: 12px;
+      padding: 0 16px;
+    }
+    .label {
+      font-size: 14px;
+    }
+  }
+</style>

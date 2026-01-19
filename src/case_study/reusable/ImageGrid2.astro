@@ -1,0 +1,27 @@
+---
+import Image from 'astro:assets';
+
+interface ImageProp{
+    src: any,
+    alt: string
+}
+
+interface Props{
+    Image1: ImageProp,
+    Image2: ImageProp,
+    Image3: ImageProp,
+    Image4: ImageProp,
+    Image5: ImageProp,
+    class?: string
+}
+
+const {Image1, Image2, Image3, Image4, Image5, class: className = ''} = Astro.props;
+
+---
+<div>
+
+</div>
+
+<style>
+
+</style>

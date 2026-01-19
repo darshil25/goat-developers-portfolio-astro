@@ -1,0 +1,59 @@
+---
+import TextRow from '@/case_study/reusable/TextRow.astro';
+import { Image } from 'astro:assets';
+
+const data = [
+  {
+    title: "The Challenge",
+    description:
+      "India’s small and mid-sized diagnostic clinics often rely on legacy desktop software that’s clunky, disconnected, and poorly designed. These tools create bottlenecks in patient handling, data management, and billing — especially when real-time updates, multi-role access, and cloud compatibility are essential. We envisioned a modern platform that empowers radiologists, improves operational clarity, and puts the patient experience first.",
+  },
+ 
+];
+---
+
+<div class="cards1 flex flex-col">
+  {data.map((item) => (
+    <TextRow title={item.title}>
+      <p>{item.description}</p>
+    </TextRow>
+  ))}
+</div>
+
+<style>
+  .cards1 {
+    gap: 180px;
+  }
+
+  /* Media Queries */
+  @media (min-width: 1260px) {
+    .cards1 {
+      width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .cards1 {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .cards1 {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .cards1 {
+      gap: 120px;
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+</style>

@@ -1,19 +1,23 @@
 ---
 // ALCaseStudy.astro
 import TopGradient from "@/design/_sections/TopGradient.astro"
-// import Intro from './_sections/01-intro/intro.astro'; // Assuming you have converted Intro
-// import Section2 from './_sections/02-section-2/section-2.astro'; // Assuming you have converted Section2
+import Intro from "./_sections/intro/intro.astro"
+import Section2 from "./_sections/section2/Section2.astro"
 ---
 
-<TopGradient
-  class="al-gradient"
-  colors={['#848484', '#000', '#1b1b1b', '#E0E0E0CC']}
-/>
+<div class="relative w-full min-h-screen bg-[#0a0a0a] ">
+  
+  <TopGradient
+    class="bg-gradient z-0"
+    colors={['#848484', '#000', '#1b1b1b', '#E0E0E0CC']}
+  />
 
-<main class="main relative flex flex-col overflow-hidden">
-  <!-- <Intro />
-  <Section2 /> -->
-</main>
+  <main class="main relative flex flex-col z-10">
+    <Intro />
+    <Section2 /> 
+  </main>
+
+</div>
 
 <style>
   .main {
@@ -22,12 +26,10 @@ import TopGradient from "@/design/_sections/TopGradient.astro"
     gap: 180px;
   }
 
-
-  /* Desktop Override for Gradient */
+  /* Desktop Override for Gradient Position */
   @media (min-width: 1259px) {
-    /* Using :global() to style the external component */
-    :global(.al-gradient) {
-      top: -820px !important;
+    :global(.bg-gradient) {
+      top: -574px !important; /* Adjusted to match your screenshot visual */
     }
   }
 
@@ -38,21 +40,14 @@ import TopGradient from "@/design/_sections/TopGradient.astro"
     }
   }
 
-  /* 1024 - 1260 */
-  @media (min-width: 1023px) and (max-width: 1259px) {
-    .main {
-      /* Padding bottom was commented out in source, left as default or 224px */
-    }
-  }
-
   /* 700 - 1024 */
   @media (min-width: 700px) and (max-width: 1023px) {
     .main {
       padding-bottom: 120px;
     }
-
-    :global(.al-gradient) {
-      filter: blur(100px) !important;
+    :global(.bg-gradient) {
+      top: -360px !important;
+      filter: blur(80px) !important;
     }
   }
 
@@ -62,6 +57,9 @@ import TopGradient from "@/design/_sections/TopGradient.astro"
       padding-top: 96px;
       padding-bottom: 100px;
       gap: 64px;
+    }
+    :global(.bg-gradient) {
+      top: -120px !important;
     }
   }
 </style>

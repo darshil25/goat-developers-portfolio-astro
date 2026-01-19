@@ -1,0 +1,98 @@
+---
+import LiveLinkDiv from '@/components/ui/reusable/LiveLinkDiv.astro';
+import AiSparkle from '@/components/svg/ai-sparkle.astro';
+
+interface Tag {
+  label: string;
+  hasIcon?: boolean;
+}
+
+interface Props {
+  logoSrc: string;
+  logoAlt?: string;
+  logoWidth?: number;
+  logoHeight?: number;
+  introText: string;
+  liveLink?: string;
+  tags: Tag[];
+}
+
+const {
+  logoSrc,
+  logoAlt = 'logo',
+  logoWidth = 313,
+  logoHeight = 52,
+  introText,
+  liveLink,
+  tags,
+} = Astro.props;
+---
+
+<div class="first flex flex-col items-center">
+  <p>Case Study</p>
+  <img
+    src={logoSrc}
+    alt={logoAlt}
+    width={logoWidth}
+    height={logoHeight}
+    class="logo object-contain"
+  />
+  <p class="intro-text text-center">
+    {introText}
+  </p>
+  
+  <slot name="link-section" />
+  
+  <div class="tags flex items-center justify-center flex-wrap max-w-[262px]">
+    {tags.map((tag) => (
+      <span class="flex items-center gap-1">
+        {tag.hasIcon && <AiSparkle class="size-4" />}
+        <p>{tag.label}</p>
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .first {
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .first > p:first-child {
+    font-size: 16px;
+    line-height: 1.2;
+    opacity: 0.5;
+  }
+
+  .first .intro-text {
+    line-height: 1.4;
+    width: 65%;
+    max-width: 222px;
+  }
+
+  .first .logo {
+    aspect-ratio: 6.019;
+    width: 180px;
+  }
+
+  .first .tags {
+    gap: 12px;
+  }
+
+  .first .tags > * {
+    padding: 4px;
+    border-radius: 4px;
+    background: rgba(16, 15, 19, 0.25);
+    color: #e8e8e8;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 700px) {
+    .first .logo {
+      width: 313px;
+    }
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+// components/Details.astro
+---
+
+<div class="details relative flex flex-col gap-6 text-[#fbfbfb]">
+  <h3 class="text-xl font-extralight">The Project</h3>
+  
+  <div class="flex flex-col md:flex-row gap-6">
+    <div class="min-w-3/10 flex flex-col gap-6">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex flex-col gap-3 px-4 py-2">
+          <p class="opacity-50 leading-[1.2] text-xs md:text-sm">Platform Type:</p>
+          <p class="leading-tight text-sm md:text-base">Web</p>
+        </div>
+        <div class="flex flex-col gap-3 px-4 py-2">
+          <p class="opacity-50 leading-[1.2] text-xs md:text-sm">Project Type:</p>
+          <p class="leading-tight text-sm md:text-base">B2B, B2C</p>
+        </div>
+      </div>
+      <div class="flex flex-col whitespace-nowrap gap-3 px-4 py-2 md:w-3/5">
+        <p class="opacity-50 leading-[1.2] text-xs md:text-sm">Duration</p>
+        <p class="leading-tight text-sm md:text-base flex items-center gap-1">
+          <span class="text-2xl md:text-[40px]">16W +</span> Ongoing
+        </p>
+      </div>
+    </div>
+
+    <p class="text-xs md:text-base opacity-80">
+      Alpha Ledger is a fintech platform built to help traders understand
+      their trading behaviour with clear analytics, shareable performance
+      insights, and a community-driven leaderboard. The platform focuses on
+      giving users a better view of their trading journey and helping them
+      compare their performance within a verified environment.
+    </p>
+  </div>
+
+  <div class="bg_gradient absolute top-2/3 md:top-1/5 left-1/2 -translate-x-1/2">
+    {Array.from({ length: 5 }).map(() => (
+      <span />
+    ))}
+  </div>
+</div>
+
+<style>
+  /* Gradient Styles */
+  .bg_gradient {
+    display: flex;
+    opacity: 0.15;
+    filter: blur(100px);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .bg_gradient span {
+    border-radius: 100%;
+    display: flex;
+    width: 380px;
+    height: 355px;
+    background: #ffffff80;
+  }
+
+  .bg_gradient span:not(:first-child) {
+    margin-left: -253px;
+  }
+
+  @media (max-width: 700px) {
+    .bg_gradient {
+      filter: blur(50px);
+    }
+    .bg_gradient span {
+      width: 176px;
+      height: 165px;
+    }
+    .bg_gradient span:not(:first-child) {
+      margin-left: -117px;
+    }
+  }
+</style>

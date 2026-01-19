@@ -1,0 +1,114 @@
+---
+// components/section2/Section2.astro
+import Objectives from './objective.astro';
+import DesignProcess from './DesignProcess.astro';
+import UXDesign from './UXDesign.astro';
+import Outcome from './Outcome.astro';
+import ImageSlider from '@/components/ui/reusable/image-slider/image-slider.astro';
+import GalleryImage from '../../../../assets/rawfiles/alpha-ledger/gallery-slider-1.png';
+
+
+const images = [
+  {
+    src: GalleryImage,
+    alt: 'image1',
+  }
+];
+---
+
+<div class="section2 flex flex-col items-center">
+  <Objectives />
+  <DesignProcess />
+  
+  <div class="gallery relative flex flex-col w-full z-10">
+    <ImageSlider
+      images={images}
+      className="z-1"
+      imageClassName="slider-image" 
+    />
+  </div>
+
+  <UXDesign />
+  <Outcome />
+</div>
+
+<style>
+  .section2 {
+    gap: 180px;
+  }
+
+  /* Gallery Styles */
+  .gallery {
+    gap: 48px;
+  }
+
+  /* Targeting the slider image via global class passed to React component */
+  .gallery :global(.slider-image) {
+    aspect-ratio: 470/361;
+    width: 720px;
+    object-fit: cover;
+  }
+
+  /* Responsive Layout */
+  @media (min-width: 1281px) {
+    .section2 {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1259px) and (max-width: 1440px) {
+    .section2 {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Laptop */
+  @media (min-width: 1023px) and (max-width: 1259px) {
+    .section2 {
+      max-width: 85%;
+      margin: 0 auto;
+      gap: 160px;
+    }
+    .gallery {
+      width: 720px;
+      margin: 0 auto;
+    }
+    .gallery :global(.slider-image) {
+      width: 680px;
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .section2 {
+      max-width: 85%;
+      margin: 0 auto;
+      gap: 140px;
+    }
+    .gallery {
+      width: 80%;
+      margin: 0 auto;
+    }
+    .gallery :global(.slider-image) {
+      width: auto;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 700px) {
+    .section2 {
+      max-width: 90%;
+      margin: 0 auto;
+      gap: 64px;
+    }
+    .gallery {
+      gap: 16px;
+    }
+    .gallery :global(.slider-image) {
+      width: 312px;
+      height: 240px;
+    }
+  }
+</style>

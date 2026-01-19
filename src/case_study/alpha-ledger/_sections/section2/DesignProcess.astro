@@ -1,0 +1,106 @@
+---
+// components/section2/DesignProcess.astro
+import Ellipse from "@/components/ui/reusable/vs-ellipse.astro"
+---
+
+<div class="design-process w-full flex flex-col md:flex-row justify-between text-[#fbfbfb]">
+  <h2>Design Process</h2>
+  <div class="item relative bg-white/1 overflow-hidden rounded-xl backdrop-blur-[10px] md:w-1/2">
+    <p>
+      We began by conducting a complete audit of Alpha Ledger&apos;s
+      existing design files and backend-driven UI. The visual design was
+      refined to reflect a professional, finance-grade aesthetic while
+      staying minimal and data-focused.
+    </p>
+    <p>
+      We restructured layouts with proper hierarchy, auto-layout systems,
+      and componentization to make the design scalable for future updates.
+      Each module was redesigned with improved chart readability, cleaner
+      tables, and refined navigation.
+    </p>
+    <Ellipse class="process-ellipse" />
+  </div>
+</div>
+
+<style>
+  .design-process {
+    gap: 24px;
+  }
+
+  .design-process h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  /* --- Item Container & Borders --- */
+  .item {
+    box-shadow: 6px 80px 80px 0px rgba(255, 255, 255, 0.01) inset,
+      0px -1px 1px 0px rgba(255, 255, 255, 0.1) inset,
+      0px 1px 1px 0px rgba(255, 255, 255, 0.1) inset;
+    padding: 8px 8px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Added gap for paragraphs */
+  }
+
+  .item p {
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  /* Bottom Gradient Border Mask */
+  .item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    padding-bottom: 0.5px;
+    background-image: linear-gradient(90deg, #000000 60%, #eeeeee 75%, #000000 90%);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 320px 0.5px;
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Right Gradient Border Mask */
+  .item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    padding-right: 0.5px;
+    background-image: linear-gradient(180deg, #000000 10%, #eeeeee 50%, #000000 90%);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 0.5px 80px;
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Ellipse Positioning */
+  .design-process :global(.process-ellipse) {
+    position: absolute;
+    z-index: 0;
+    rotate: 180deg;
+    width: 60px;
+    height: 120px;
+    filter: blur(12px);
+    top: -2rem; /* -top-8 */
+    left: 40%; /* left-2/5 */
+  }
+
+  @media (max-width: 700px) {
+    .item p {
+      font-size: 14px;
+    }
+  }
+</style>

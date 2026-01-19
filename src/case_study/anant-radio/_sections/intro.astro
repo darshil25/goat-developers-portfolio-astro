@@ -1,79 +1,73 @@
 ---
 // Intro.astro
+import CaseStudyIntro from '@/case_study/reusable/CaseStudyIntro.astro';
 import LiveLinkDiv from '@/components/ui/reusable/LiveLinkDiv.astro';
-import AiSparkle from '@/components/svg/ai-sparkle.astro';
 import DesignInfo from '@/design/_sections/veltrix-page.astro';
+import ProjectSpecs from '@/case_study/reusable/ProjectSpecs.astro';
 
 // Data Object for DesignInfo
-const info = {
+const projectData = {
   block1: {
     items: [
-      {
-        label: 'Industry',
-        value: 'Health-Tech',
+      { 
+        label: 'Industry', 
+        value: 'HealthTech' 
       },
-      {
-        label: 'Duration',
-        value: '32 Weeks',
+      { 
+        label: 'Duration', 
+        // Using HTML for the large "16W" styling
+        valueHtml: '<span style="font-size: 1.75rem; font-weight: 600;">16W</span> <span style="font-size: 0.9rem; opacity: 0.8;">+ Ongoing</span>' 
       },
     ],
   },
   block2: {
     items: [
-      {
-        label: 'Status:',
-        value: 'Live – anantradio.com',
+      { 
+        label: 'Status:', 
+        value: 'Live – anantradio.com' 
       },
-      {
-        label: 'Project Type:',
-        value: 'Internal SaaS Product',
+      { 
+        label: 'Project Type:', 
+        value: 'Internal SaaS Product' 
       },
     ],
     scope: {
       label: 'Scope',
-      // In Astro, we can pass HTML strings or slots. 
-      // For this specific React component prop, passing the raw React node 
-      // might require the component to handle children or a specific prop format.
-      // Assuming DesignInfo can accept a standard list or you adapt it.
-      // Here we pass it as a simple object to match the prop structure.
-      customScopeNode: true, 
+      items: ['Full-cycle', 'Strategy', 'Design', 'Development', 'QA', 'Deployment']
     },
   },
 };
+
+const tags = [
+  { label: 'AI', hasIcon: true },
+  { label: 'Health-Tech' },
+  { label: 'SAAS' },
+  { label: 'Cloud Based' },
+  { label: 'In-House' },
+  { label: 'React' },
+];
 ---
 
 <div class="intro-wrapper">
   <div class="intro flex flex-col">
-    
-    <div class="first flex flex-col items-center">
-      <p>Case Study</p>
-      <img
-        src="https://anantradio.blr1.cdn.digitaloceanspaces.com/front-end-static/anant-radio-logo.svg"
-        alt="logo"
-        width="313"
-        height="52"
-        class="logo object-contain"
-      />
-      <p class="intro-text text-center">
-        Anantradio&apos;s Leap into the Future of Health-Tech
-      </p>
-      
-      <a href="https://anantradio.com/" target="_blank" rel="noopener noreferrer">
-        <LiveLinkDiv client:visible />
+
+    <CaseStudyIntro
+      logoSrc="https://anantradio.blr1.cdn.digitaloceanspaces.com/front-end-static/anant-radio-logo.svg"
+      introText="Anantradio's Leap into the Future of Health-Tech"
+      tags={tags}
+    >
+      <a
+        slot="link-section"
+        href="https://anantradio.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="live-link text-center"
+      >
+      <LiveLinkDiv/>
       </a>
-      
-      <div class="tags flex items-center justify-center flex-wrap max-w-[262px]">
-        <span class="flex items-center gap-1">
-          <AiSparkle class="size-4" />
-          <p>AI</p>
-        </span>
-        <p>Health-Tech</p>
-        <p>SAAS</p>
-        <p>Cloud Based</p>
-        <p>In-House</p>
-        <p>React</p>
-      </div>
-    </div>
+    </CaseStudyIntro>
+
+
 
     <div class="image1 relative z-1 flex items-center justify-center">
       <img
@@ -92,26 +86,32 @@ const info = {
       </div>
     </div>
 
-    <div class="info-wrapper relative">
-      <DesignInfo {...info} bg="#FFFFFF03" client:visible>
-        <ul slot="scope" class=" text-[#fbfbfb">
-          <li>Full-cycle</li>
-          <li>Strategy</li> 
-          <li>Design</li>
-          <li>Development</li>
-          <li>QA</li>
-          <li>Deployment</li>
-        </ul>
-      </DesignInfo>
+    <section class="info-wrapper flex flex-col items-start gap-16 relative">
+  
+  <div class="header-left ">
+    <h3 class="font-thin pb-4">The Project</h3>
+    <ProjectSpecs 
+      block1={projectData.block1} 
+      block2={projectData.block2} 
+    />
+  </div>
 
-      <div class="bg-gradient z-10 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+  <div class="description-right text-[#fbfbfb]  p-4 ">
+    <p>
+      India’s small and mid-sized diagnostic clinics often rely on legacy desktop software that’s clunky, disconnected, and poorly designed. These tools create bottlenecks in patient handling, data management, and billing — especially when real-time updates, multi-role access, and cloud compatibility are essential.
+    </p>
+    <p>
+      We envisioned a modern platform that empowers radiologists, improves operational clarity, and puts the patient experience first.
+    </p>
+  </div>
+<div class="bg-gradient z-10 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
         <span class="bg-[#ea87a2]" />
         <span class="bg-[#e3b26d]" />
         <span class="bg-white" />
         <span class="bg-[#8e7fe6]" />
         <span class="bg-[#f0b3ba]" />
       </div>
-    </div>
+</section>
   </div>
 
   <img
@@ -207,6 +207,13 @@ const info = {
   }
 
   /* --- Info Wrapper Section --- */
+  .info-wrapper {
+    border-radius: 8px;
+    padding: 40px;
+    margin-top: 60px;
+    flex-direction: row;
+  }
+
   .info-wrapper .bg-gradient {
     display: flex;
     opacity: 0.3;
@@ -251,6 +258,11 @@ const info = {
     .image1 {
       margin-top: 64px;
     }
+
+    .info-wrapper {
+      padding: 32px;
+      flex-direction: column;
+    }
   }
 
   /* Tablet: 700px - 1023px */
@@ -279,6 +291,12 @@ const info = {
 
     .image1 .bg-gradient span:not(:first-child) {
       margin-left: -180px;
+    }
+
+    .info-wrapper {
+      padding: 28px;
+      margin-top: 40px;
+      flex-direction: column;
     }
   }
 
@@ -314,6 +332,12 @@ const info = {
     /* Hide gradient on mobile per SCSS */
     .image1 .bg-gradient {
       display: none;
+    }
+
+    .info-wrapper {
+      padding: 20px;
+      margin-top: 30px;
+      flex-direction: column;
     }
 
     /* Adjust blur and sizes for Info gradient on mobile */

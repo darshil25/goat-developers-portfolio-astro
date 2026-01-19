@@ -1,0 +1,59 @@
+---
+import TextRow from '@/case_study/reusable/TextRow.astro';
+---
+<div class="cards1 flex flex-col">
+    <TextRow title="Discovery & Strategy">
+      <p>Our UX team worked in sprints using the Design Thinking framework. After mapping clinic workflows, we designed interfaces for every user type: radiologists, technicians, admins, and reception staff.</p>
+      <h3>Key UX Wins:</h3>
+      <ul>
+        <li>Realtime dashboards for patients, queues, and scans</li>
+        <li>Color-coded patient states and quick actions</li>
+        <li>Role-based UIs for staff (Doctor, Admin, Receptionist)</li>
+        <li>Dark/light mode and low-bandwidth optimization</li>
+        <li>Mobile-friendly design for clinic staff on the go</li>
+      </ul>
+      <p>We focused on clarity, hierarchy, and speed — interfaces that reduce clicks, minimize errors, and work in low-connectivity clinics.</p>
+    </TextRow>
+
+</div>
+
+
+
+
+<style>
+  .cards1 {
+    gap: 180px;
+  }
+
+  /* Media Queries */
+  @media (min-width: 1260px) {
+    .cards1 {
+      width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .cards1 {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .cards1 {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .cards1 {
+      gap: 120px;
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+</style>

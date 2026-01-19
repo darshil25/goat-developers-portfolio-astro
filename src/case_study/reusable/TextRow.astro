@@ -1,0 +1,71 @@
+---
+// Define the props the component accepts
+interface Props {
+  title: string;
+  id?: string; // Optional ID if you want to link to this section
+}
+
+const { title, id } = Astro.props;
+---
+
+<section id={id} class="section-container">
+  <div class="left-col">
+    <h2>{title}</h2>
+  </div>
+
+  <div class="right-col">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: white; 
+    
+  }
+
+  @media (min-width: 768px) {
+    .section-container {
+      grid-template-columns: 1.5fr 1.9fr; 
+      gap: 4rem;
+    }
+  }
+
+  .left-col h2 {
+    font-size: 20px;
+    font-weight: 250; 
+    opacity: 0.9;
+    letter-spacing: -1px;
+  }
+
+  .right-col {
+    font-size: 16px;
+    line-height:150%;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: #cccccc;
+  }
+
+  .right-col :global(ul) {
+    margin-top: 1rem;
+    padding-left: 1.2rem;
+  }
+  
+  .right-col :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .right-col :global(strong), 
+  .right-col :global(h3), 
+  .right-col :global(h4) {
+    color: white;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    display: block;
+  }
+</style>

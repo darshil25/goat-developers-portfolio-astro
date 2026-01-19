@@ -23,7 +23,8 @@ interface Props {
 const { block1, block2, bg = '#FFFFFF03' } = Astro.props;
 ---
 
-<div class="design-info text-[#fbfbfb] relative z-1 flex flex-1 justify-center">
+<div class="design-info text-[#fbfbfb] bg-red-500 relative z-1 flex flex-1 justify-start">
+  <!-- <h1>the project</h1> -->
   <div class="info-1 flex flex-col">
     {block1.items.map((item) => (
       <div style={{ backgroundColor: bg }}>

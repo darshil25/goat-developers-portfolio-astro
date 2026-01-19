@@ -1,5 +1,6 @@
 ---
-import { cn } from "../../lib/utils"; // Assuming you have a standard cn utility
+// components/TopGradient.astro
+import { cn } from "@/lib/utils";
 
 interface Props {
   colors: string[];
@@ -11,12 +12,12 @@ const { colors, class: className } = Astro.props;
 
 <div
   class={cn(
-    "absolute left-1/2 -translate-x-1/2 -z-10 flex -rotate-90 pointer-events-none",
+    "absolute left-1/2 -translate-x-1/2 z-0 flex -rotate-90 pointer-events-none",
     // Mobile styles
     "top-[-120px] blur-[68px]", 
     // Tablet (700px+)
     "min-[700px]:top-[-360px] min-[700px]:blur-[80px]",
-    // Desktop (Default/Large) - matching your -574px top
+    // Desktop (Default/Large)
     "min-[1260px]:top-[-574px] min-[1260px]:blur-[218px]",
     className
   )}

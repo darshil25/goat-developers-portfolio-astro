@@ -1,0 +1,88 @@
+---
+// components/section2/Outcome.astro
+---
+
+<div class="outcome relative flex flex-col items-center text-[#fbfbfb]">
+  <h2>Outcome</h2>
+  <ul class="flex flex-col relative z-10 p-3 gap-3 md:gap-6 rounded-lg md:w-2/3">
+    <li>
+      Users started making better decisions thanks to clearer analytics and
+      easy-to-read performance breakdowns.
+    </li>
+    <li>
+      Community activity went up as traders began sharing results and
+      competing on the leaderboard.
+    </li>
+    <li>
+      Overall user engagement improved as the platform delivered a more
+      modern, polished, and easy-to-use experience.
+    </li>
+  </ul>
+  
+  <div class="bg_gradient absolute -translate-y-1/2 left-1/2 -translate-x-1/2">
+    {Array.from({ length: 5 }).map(() => (
+      <span />
+    ))}
+  </div>
+</div>
+
+<style>
+  .outcome {
+    gap: 24px;
+  }
+
+  .outcome h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  .outcome ul li {
+    list-style: disc;
+    margin-left: 16px;
+    line-height: 1.25;
+    font-weight: 300;
+  }
+
+  /* Gradient Styles */
+  .bg_gradient {
+    top: -50%;
+    display: flex;
+    opacity: 0.15;
+    filter: blur(126.9px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg_gradient span {
+    border-radius: 100%;
+    display: flex;
+    width: 320px;
+    height: 255px;
+    background: white;
+  }
+
+  .bg_gradient span:not(:first-child) {
+    margin-left: -253px;
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .outcome ul li {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .bg_gradient {
+      filter: blur(58px);
+    }
+    .bg_gradient span {
+      width: 220px;
+      height: 206px;
+    }
+    .outcome ul li {
+      font-size: 12px;
+      font-weight: 200;
+    }
+  }
+</style>

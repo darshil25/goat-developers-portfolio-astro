@@ -1,0 +1,73 @@
+---
+// components/section2/Objectives.astro
+import Ellipse from "@/components/ui/reusable/vs-ellipse.astro"
+---
+
+<div class="objectives w-full flex flex-col md:flex-row justify-between text-[#fbfbfb]">
+  <h2>Objectives</h2>
+  <ul class="flex flex-col relative overflow-hidden bg-[#100f13] p-3 gap-3 rounded-lg md:w-1/2">
+    <li>
+      Give traders a clearer, deeper view of their trading performance
+      across all their accounts in one place.
+    </li>
+    <li>
+      Help users share their trading journey and compare with others through
+      a verified leaderboard.
+    </li>
+    <li>
+      Offer detailed insights into each trading metric so users can
+      understand what&apos;s working and what&apos;s holding them back.
+    </li>
+    <Ellipse class="custom-ellipse" />
+  </ul>
+</div>
+
+<style>
+  .objectives {
+    gap: 24px;
+  }
+
+  .objectives h2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.25;
+  }
+
+  .objectives ul li {
+    list-style: disc;
+    margin-left: 16px;
+    line-height: 1.25;
+    font-weight: 300;
+  }
+
+  /* Deep selector to target the child component's class if needed, 
+     or just rely on the passed class name being scoped by Astro if using class:list correctly. 
+     Here we style the class passed to props. */
+  .objectives :global(.custom-ellipse) {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    width: 258px;
+    transform-origin: top center;
+    rotate: -41deg;
+    aspect-ratio: 1/2;
+    filter: blur(24px);
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .objectives ul li {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .objectives ul li {
+      font-size: 12px;
+      font-weight: 200;
+    }
+    .objectives :global(.custom-ellipse) {
+      left: 0;
+      top: 75%;
+    }
+  }
+</style>

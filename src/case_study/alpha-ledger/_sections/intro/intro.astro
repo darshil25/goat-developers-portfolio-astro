@@ -1,0 +1,57 @@
+---
+// Intro.astro
+import First from './First.astro';
+import ALCaseStudyImage1 from './ALCaseStudyImage1.astro';
+import Details from './Details.astro';
+import Role from './Role.astro';
+import ALImageGrid from './image-grid.astro';
+---
+
+<div class="intro relative flex flex-col">
+  <First />
+  <ALCaseStudyImage1 />
+  <Details />
+  <Role />
+  <ALImageGrid />
+</div>
+
+<style>
+  .intro {
+    gap: 180px;
+  }
+
+  /* Desktop Large */
+  @media (min-width: 1281px) {
+    .intro {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Laptop */
+  @media (min-width: 1023px) and (max-width: 1259px) {
+    .intro {
+      max-width: 85%;
+      margin: 0 auto;
+      gap: 160px;
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .intro {
+      max-width: 85%;
+      margin: 0 auto;
+      gap: 140px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 700px) {
+    .intro {
+      max-width: 90%;
+      margin: 0 auto;
+      gap: 64px;
+    }
+  }
+</style>

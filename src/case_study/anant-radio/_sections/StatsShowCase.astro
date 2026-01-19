@@ -1,0 +1,163 @@
+---
+import { Image } from "astro:assets";
+import dashboardImage from '@/assets/rawfiles/anant-radio/aradio-studio-display.png'; 
+
+const stats = [
+  { label: "Administrative Time", value: "30% Reduction" },
+  { label: "Report Generation", value: "50% Faster" },
+  { label: "Administrative Time", value: "30% Reduction" }, 
+  { label: "Ref. Doctor Satisfaction", value: "25% Increase" },
+  { label: "Patient Throughput", value: "20% Increase" },
+  { label: "Data Retrieval Time", value: "60% Reduction" },
+  { label: "Billing Errors", value: "40% Reduction" },
+];
+---
+
+<div class="stats-showcase">
+  <div class="card flex items-center">
+    <div class="image flex items-center justify-center relative group">
+        <Image 
+          src={dashboardImage} 
+          alt="Analytics Dashboard Interface" 
+          width={800}
+          height={600}
+          class="object-contain"
+        />
+    </div>
+
+    <div class="content flex flex-col text-white relative">
+      
+      <h2 class="text-[32px] font-light mb-12 tracking-wide text-gray-200 leading-tight">
+        Improved Care for: <br />
+        <span class="font-bold text-white drop-shadow-md">10,000+ Lives</span>
+      </h2>
+
+      <div class="stats-grid relative grid grid-cols-2 gap-y-12 gap-x-4">
+        {stats.map((stat, index) => (
+          <div class={`flex flex-col ${index % 2 !== 0 ? 'items-end text-right md:items-start md:text-left' : ''}`}>
+            <span class="text-gray-500 mb-1 text-[10px] tracking-[0.15em]">
+              {stat.label}
+            </span>
+            <span class="text-xl md:text-2xl font-semibold text-gray-100 tracking-tight">
+              {stat.value}
+            </span>
+          </div>
+        ))}
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .stats-showcase .card {
+    align-items: center; 
+    gap: 120px; 
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .stats-showcase .card .image {
+    padding: 24px;
+    border-radius: 20px;
+    /* max-width: 730px; */
+  }
+
+
+  @media (min-width: 1260px) {
+    .stats-showcase {
+      width: 100%;
+      max-width: 1280px; /* Slight increase for 50/50 split breathing room */
+      margin: 0 auto;
+    }
+    .stats-showcase .card {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .stats-showcase .card .image {
+        flex: 1;
+    }
+    .stats-showcase .card .content {
+        flex: 1;
+        padding-left: 2rem;
+    }
+  }
+
+  /* 2. Laptop/Tablet Landscape (1023px - 1260px) */
+  /* Snippet logic: Switches to column here */
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .stats-showcase {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    .card {
+      flex-direction: column;
+      text-align: center;
+      gap: 60px;
+    }
+    /* Center the grid items in column mode if desired, or keep left aligned */
+    .stats-grid {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+    }
+    .content h2 {
+        text-align: center;
+        font-size: 32px;
+    }
+    .card .image{
+        max-width: 730px;
+        width: 100%;
+    }
+ 
+  }
+
+  /* 3. Tablet Portrait (700px - 1023px) */
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .stats-showcase {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      gap: 60px;
+      flex-direction: row;
+    }
+    .card .content {
+      max-width: 600px; /* Increased slightly for stats grid */
+      margin: 0 auto;
+    }
+    .stats-grid {
+        text-align: left;
+    }
+    .content h2 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 250;
+
+    }
+  }
+
+  @media (max-width: 700px) {
+    .stats-showcase {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .card {
+      width: 100%;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .card .image {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+    .content h2 {
+        font-size: 32px; 
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+  }
+</style>
