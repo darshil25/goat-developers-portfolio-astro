@@ -1,0 +1,61 @@
+---
+import TextRow from '@/case_study/reusable/TextRow.astro';
+import { Image } from 'astro:assets';
+
+const data = [
+  {
+    title: "Our Role",
+    description:
+      "GOAT developers has been working with Vanquish since 2025, helping the company build its technology and products both in their B2B and D2C segments. GOAT has worked on building Analytics platform, Copy-trading platform and White label Investment Management suite. We have worked in developing Web, IOS and Android Apps for every product mentioned.",
+  },
+ 
+];
+---
+
+<div class="cards1 flex flex-col">
+  {data.map((item) => (
+    <TextRow title={item.title}>
+      <p>{item.description}</p>
+    </TextRow>
+  ))}
+</div>
+
+<style>
+  .cards1 {
+    gap: 180px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Media Queries */
+  @media (min-width: 1260px) {
+    .cards1 {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1023px) and (max-width: 1260px) {
+    .cards1 {
+      gap: 160px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .cards1 {
+      gap: 140px;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .cards1 {
+      gap: 120px;
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+</style>

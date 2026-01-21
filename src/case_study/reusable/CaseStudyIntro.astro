@@ -8,11 +8,12 @@ interface Tag {
 }
 
 interface Props {
-  logoSrc: string;
+  logoSrc?: string;
   logoAlt?: string;
   logoWidth?: number;
   logoHeight?: number;
-  introText: string;
+  logoText?: string;
+  introText?: string;
   liveLink?: string;
   tags: Tag[];
 }
@@ -22,6 +23,7 @@ const {
   logoAlt = 'logo',
   logoWidth = 313,
   logoHeight = 52,
+  logoText,
   introText,
   liveLink,
   tags,
@@ -30,16 +32,24 @@ const {
 
 <div class="first flex flex-col items-center">
   <p>Case Study</p>
-  <img
-    src={logoSrc}
-    alt={logoAlt}
-    width={logoWidth}
-    height={logoHeight}
-    class="logo object-contain"
-  />
-  <p class="intro-text text-center">
-    {introText}
-  </p>
+  <slot name="logo">
+    {logoSrc ? (
+      <img
+        src={logoSrc}
+        alt={logoAlt}
+        width={logoWidth}
+        height={logoHeight}
+        class="logo object-contain"
+      />
+    ) : logoText ? (
+      <h2 class="logo-text">{logoText}</h2>
+    ) : null}
+  </slot>
+  {introText && (
+    <p class="intro-text text-center">
+      {introText}
+    </p>
+  )}
   
   <slot name="link-section" />
   
@@ -57,7 +67,7 @@ const {
   .first {
     gap: 24px;
     position: relative;
-    z-index: 1;
+    z-index: 100;
   }
 
   .first > p:first-child {
@@ -77,6 +87,13 @@ const {
     width: 180px;
   }
 
+  .first .logo-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: -1%;
+  }
+
   .first .tags {
     gap: 12px;
   }
@@ -93,6 +110,12 @@ const {
   @media (min-width: 700px) {
     .first .logo {
       width: 313px;
+    }
+    .first .logo-text {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: -1%;
+      line-height: 140%;
     }
   }
 </style>

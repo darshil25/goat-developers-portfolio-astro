@@ -2,27 +2,44 @@
 ---
 import { cn } from '@/lib/utils';
 import Intro from './_sections/intro.astro';
-import Overview from './_sections/overview.astro';
 import GoalObjective from './_sections/goal-objective.astro';
 import CoreFeatures from './_sections/core-features.astro';
 import UxDesign from './_sections/ux-design.astro';
 import TechStack from './_sections/tech-stack.astro';
 import ChallengeDeliverables from './_sections/challenge-deliverables.astro';
 import GalleryOutcome from './_sections/gallery-outcome.astro';
+import ImageGrid from '../reusable/image-grid.astro';
+import ImageGrid1 from '../reusable/ImageGrid1.astro';
+import image1 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-1.png';
+import image2 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-2.png';
+import image3 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-3.png';
+import image4 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-4.png';
+import image5 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-5.png';
+import OurRole from './_sections/our-role.astro';
+import ImageGrid2 from '../reusable/ImageGrid2.astro';
+import Image1 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-2-1.png';
+import Image2 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-2-2.png';
+import Image3 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-2-3.png';
+import Image4 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-2-4.png';
+import Image5 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-2-5.png';
+import Image6 from '@/assets/rawfiles/vanquish-solutions/vanquish-design-grid-2-6.png';
+import Obj from './_sections/obj.astro';
+
+const images = [Image1,Image2,Image3,Image4,Image5,Image6];
 ---
 
 
 <main class={cn("main", 'relative flex flex-col overflow-hidden')}>
   <Intro />
-  <Overview />
-  <GoalObjective />
-  <CoreFeatures />
+    <ImageGrid1 image1={{src:image1 , alt:"Design Grid 1"}} image2={{src:image2 , alt:"Design Grid 2"}} image3={{src:image3 , alt:"Design Grid 3"}} image4={{src:image4 , alt:"Design Grid 4"}} image5={{src:image5 , alt:"Design Grid 5"}}/> 
+    <OurRole/>
+    <ImageGrid images={images} spans={[4,8,4,4,4,4]} hideOnMobileIndices={[0,5]} ariaLabel="Vanquish Solutions Design Grid"/>
+<Obj/>
   <UxDesign />
   <TechStack />
   <ChallengeDeliverables />
   <GalleryOutcome />
 </main>
-
 
 <style>
   .main {
@@ -32,13 +49,13 @@ import GalleryOutcome from './_sections/gallery-outcome.astro';
   /* background-color: red; */
 }
 
-/* Media Queries */
-
 /* 1260 - 1440 */
 @media (min-width: 1259px) and (max-width: 1440px) {
   .main {
     // padding-top: 320px;
     padding-bottom: 200px;
+    max-width: 1080px;
+    margin: 0 auto;
   }
 }
 

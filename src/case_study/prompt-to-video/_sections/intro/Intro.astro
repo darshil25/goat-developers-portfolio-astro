@@ -3,18 +3,49 @@
 import First from './First.astro';
 import CaseStudyImage from './CaseStudyImage.astro';
 import Bg from '@/assets/rawfiles/prompt-to-video/page-bg.svg';
-import Details from './Details.astro';
+import DetailsMobile from './DetailsMobile.astro';
+import DetailsDesktop from './DetailsDesktop.astro';
 import ProjectOverview from './ProjectOverview.astro';
 import P2VChallenge  from './P2VChallenge.astro';
+import CaseStudyIntro from '@/case_study/reusable/CaseStudyIntro.astro';
+import LimitedNda from '@/components/ui/reusable/limited-nda.astro';
+
+const tags = [
+  { label: 'AI', hasIcon: true },
+  { label: 'LMS' },
+  { label: 'B2B' },
+  { label: 'Video Editor' },
+];
 ---
 
 <div class="intro-wrapper" style={`--intro-bg: url(${Bg.src})`}>
   <div class="intro flex flex-col">
-    <First />
+<CaseStudyIntro
+      logoText="Prompt-to-Video Generation Platform (Module)"
+      tags={tags}
+    >
+      <a
+        slot="link-section"
+        href="https://anantradio.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="live-link text-center"
+      >
+      <LimitedNda/>
+      </a>
+    </CaseStudyIntro>
     <CaseStudyImage />
-    <Details />
+
+    <div class="mobile-only">
+      <DetailsMobile />
+    </div>
+
+    <div class="desktop-only">
+      <DetailsDesktop />
+    </div>
+
     <ProjectOverview />
-<P2VChallenge /> 
+    <P2VChallenge /> 
   </div>
 </div>
 
@@ -46,7 +77,31 @@ import P2VChallenge  from './P2VChallenge.astro';
     z-index: 1;
   }
 
-  /* Responsive Breakpoints */
+  /* --- VISIBILITY TOGGLE LOGIC --- */
+  
+  /* Default: Show Mobile, Hide Desktop */
+  .mobile-only {
+    display: block;
+    width: 100%;
+  }
+  .desktop-only {
+    display: none;
+    width: 100%;
+  }
+
+  /* Desktop Breakpoint (> 700px): Swap visibility */
+  @media (min-width: 700px) {
+    .mobile-only {
+      display: none;
+    }
+    .desktop-only {
+      display: block;
+    }
+  }
+
+  /* --- LAYOUT ADJUSTMENTS --- */
+
+  /* Large Desktop */
   @media (min-width: 1260px) {
     .intro {
       max-width: 1080px;
@@ -54,12 +109,14 @@ import P2VChallenge  from './P2VChallenge.astro';
     }
   }
 
+  /* Ultra Wide */
   @media (min-width: 1920px) {
     .intro-wrapper {
       padding-top: 26%;
     }
   }
 
+  /* Laptop */
   @media (min-width: 1023px) and (max-width: 1260px) {
     .intro {
       gap: 160px;
@@ -68,6 +125,7 @@ import P2VChallenge  from './P2VChallenge.astro';
     }
   }
 
+  /* Tablet */
   @media (min-width: 700px) and (max-width: 1023px) {
     .intro-wrapper::before {
       width: 80%;
@@ -79,6 +137,7 @@ import P2VChallenge  from './P2VChallenge.astro';
     }
   }
 
+  /* Mobile */
   @media (max-width: 700px) {
     .intro-wrapper {
       padding-top: 25%;

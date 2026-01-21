@@ -1,18 +1,51 @@
 ---
 // Intro.astro
-import First from './First.astro';
 import ALCaseStudyImage1 from './ALCaseStudyImage1.astro';
-import Details from './Details.astro';
+import Details from '@/case_study/reusable/Details.astro';
 import Role from './Role.astro';
-import ALImageGrid from './image-grid.astro';
+import ALImageGrid from '@/case_study/reusable/image-grid.astro'
+import CaseStudyIntro from '@/case_study/reusable/CaseStudyIntro.astro';
+import ALTextLogo from '@/case_study/reusable/ALTextLogo.astro';
+import LiveLinkDiv from '@/components/ui/reusable/LiveLinkDiv.astro';
+
+import Image1 from '@/assets/rawfiles/alpha-ledger/cr-1.png';
+import Image2 from '@/assets/rawfiles/alpha-ledger/cr-2.png';
+import Image3 from '@/assets/rawfiles/alpha-ledger/cr-3.png';
+import Image4 from '@/assets/rawfiles/alpha-ledger/cr-4.png';
+import Image5 from '@/assets/rawfiles/alpha-ledger/cr-5.png';
+import Image6 from '@/assets/rawfiles/alpha-ledger/cr-6.png';
+
+const tags = [
+  { label: 'Trading', hasIcon: true },
+  { label: 'Fintech' },
+];
+
+const images = [Image1, Image2, Image3, Image4, Image5, Image6];
 ---
 
 <div class="intro relative flex flex-col">
-  <First />
+  <CaseStudyIntro tags={tags} introText='Your trading Companion'>
+    <ALTextLogo slot="logo" />
+    <a
+    href="https://www.alphaledger.ai?utm_source=goatdevelopers&utm_medium=case_study&utm_campaign=alphaledger"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <LiveLinkDiv  />
+  </a>
+  </CaseStudyIntro>
   <ALCaseStudyImage1 />
-  <Details />
+  <Details
+    title="The Project"
+  description="Alpha Ledger is a fintech platform built to help traders understand their trading behaviour with clear analytics, shareable performance insights, and a community-driven leaderboard. The platform focuses on giving users a better view of their trading journey and helping them compare their performance within a verified environment."
+  details={[
+    { label: 'Platform Type:', value: 'Web' },
+    { label: 'Project Type:', value: 'B2B, B2C' },
+    { label: 'Duration', value: '16W +', largeValue: true, secondary: 'Ongoing' }
+  ]}  />
   <Role />
-  <ALImageGrid />
+  <ALImageGrid  images={images} hideOnMobileIndices={[1,5]}
+  ariaLabel='My Gallery'/>
 </div>
 
 <style>
@@ -31,7 +64,7 @@ import ALImageGrid from './image-grid.astro';
   /* Laptop */
   @media (min-width: 1023px) and (max-width: 1259px) {
     .intro {
-      max-width: 85%;
+      max-width: 80%;
       margin: 0 auto;
       gap: 160px;
     }

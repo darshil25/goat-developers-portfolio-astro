@@ -1,0 +1,123 @@
+---
+// components/Details.astro
+---
+
+<div class="details-wrapper text-[#fbfbfb] relative">
+  
+  <div class="desktop-grid">
+    <div class="card">
+      <p class="label">Industry</p>
+      <p class="value">AI & Creative Tools</p>
+    </div>
+
+    <div class="card">
+      <p class="label">Project Type:</p>
+      <p class="value">Internal Tool – B2B SaaS (B2C In future)</p>
+    </div>
+
+    <div class="card">
+      <p class="label">Scope:</p>
+      <p class="value">UX Design + Frontend Development (Module only)</p>
+    </div>
+
+    <div class="card">
+      <p class="label">Duration</p>
+      <p class="value">6 Week</p>
+    </div>
+
+    <div class="card">
+      <p class="label">Platform Type</p>
+      <p class="value">Web Application (React + Notion-like editor)</p>
+    </div>
+
+    <div class="card">
+      <p class="label">Status:</p>
+      <p class="value">
+        Design & Frontend Complete (Under active development by client team)
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-gradient absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+    {Array.from({ length: 5 }).map(() => (
+      <span />
+    ))}
+  </div>
+</div>
+
+<style>
+  .details-wrapper {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.01); 
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+  }
+
+  .label {
+    font-size: 14px;
+    line-height: 1.2;
+    opacity: 0.5; 
+    margin: 0;
+  }
+
+  .value {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .bg-gradient {
+    display: flex;
+    opacity: 0.2;
+    filter: blur(80px); 
+    z-index: -1; 
+    pointer-events: none;
+  }
+
+  .bg-gradient span {
+    border-radius: 100%;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background: white;
+  }
+
+  .bg-gradient span:not(:first-child) {
+    margin-left: -80px;
+  }
+
+  
+  @media (max-width: 1024px) {
+    .desktop-grid {
+      grid-template-columns: 1fr 1fr; 
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .desktop-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>
